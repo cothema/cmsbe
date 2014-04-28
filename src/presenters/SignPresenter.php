@@ -13,9 +13,6 @@ use Nette\Application\UI\Form;
 class SignPresenter extends BasePresenter
 {
 
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
-
     public function renderChangePass()
     {
 

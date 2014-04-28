@@ -14,9 +14,6 @@ use App;
 class UsersPresenter extends BasePresenter
 {
 
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
-
     public function renderList()
     {
         $usersDao = $this->em->getDao(App\User::getClassName());

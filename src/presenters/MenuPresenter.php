@@ -9,13 +9,10 @@ use Nette\DateTime;
 use App\RestMenu;
 
 /**
- * Homepage presenter.
+ * Menu presenter.
  */
 class MenuPresenter extends BasePresenter
 {
-
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
 
     public function renderDefault()
     {

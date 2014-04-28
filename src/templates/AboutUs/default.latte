@@ -5,6 +5,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                #
+            </th>
             <th style="width: 190px;text-align:center;">
                 Nadpis
             </th>
@@ -19,6 +22,9 @@
     <tbody>
         {foreach $articles as $articleOne}
             <tr>
+                <td>
+                    {$articleOne->id}
+                </td>
                 <td style="text-align:center;vertical-align:top;font-weight:bold;">
                     {$articleOne->heading}
                 </td>
@@ -26,7 +32,7 @@
                     {$articleOne->shortText}
                 </td>
                 <td style="padding-top: 0.5em;text-align:center;vertical-align:top;font-weight:bold;">
-                    <a class="btn btn-sm btn-primary" n:href="edit editId => $articleOne->id">Upravit text</a>
+                    <a class="btn btn-sm btn-primary" n:href="edit id => $articleOne->id">Upravit text</a>
                 </td>
             </tr>
         {/foreach}

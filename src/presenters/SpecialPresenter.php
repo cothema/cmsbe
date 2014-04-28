@@ -12,9 +12,6 @@ use App;
 class SpecialPresenter extends BasePresenter
 {
 
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
-
     public function renderDefault()
     {
         $offersDao = $this->em->getDao(App\SpecialOffer::getClassName());

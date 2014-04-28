@@ -14,16 +14,12 @@ use App;
 class AboutUsPresenter extends BasePresenter
 {
 
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
-
     public function renderDefault()
     {
         $articlesDao = $this->em->getDao(App\AboutUs::getClassName());
 
         $loadArticles = $articlesDao->findAll();
         foreach ($loadArticles as $loadArticlesOne) {
-
             $mapped = [];
             $mapped['heading'] = $loadArticlesOne->getHeading();
             $mapped['shortText'] = $loadArticlesOne->getShortText();
@@ -37,11 +33,11 @@ class AboutUsPresenter extends BasePresenter
 
     public function renderEdit()
     {
-        if (!isset($this->params['editId'])) {
+        if (!isset($this->params['id'])) {
             $this->redirect('AboutUs:');
         } else {
             $textDao = $this->em->getDao(App\AboutUs::getClassName());
-            $text = $textDao->find($this->params['editId']);
+            $text = $textDao->find($this->params['id']);
             if (!$text) {
                 $this->flashMessage('Požadovaný text se nenachází v databázi.');
                 $this->redirect('AboutUs:');
@@ -53,9 +49,17 @@ class AboutUsPresenter extends BasePresenter
     {
         $form = new Form;
 
-        $textDao = $this->em->getDao(App\AboutUs::getClassName());
-        $text = $textDao->find($this->params['editId']);
+        if (isset($this->params['id']))
+            $id = $this->params['id'];
+        else
+            $id = intval($this->request->post['id']);
 
+        $textDao = $this->em->getDao(App\AboutUs::getClassName());
+        $text = $textDao->find($id);
+
+        $form
+                ->addHidden('id')
+                ->setValue($id);
         $form
                 ->addText('heading', 'Nadpis:')
                 ->setDefaultValue($text->heading)
@@ -79,14 +83,15 @@ class AboutUsPresenter extends BasePresenter
         $values = $form->getValues(true);
 
         $menu = $this->em->getDao(App\AboutUs::getClassName());
-        $menuEntity = $menu->find(1);
-        $menuEntity->setIntro($values['intro']);
+        $menuEntity = $menu->find($values['id']);
+        $menuEntity->setHeading($values['heading']);
+        $menuEntity->setShortText($values['shortText']);
 
         $this->em->persist($menuEntity);
         $this->em->flush();
 
-        $this->flashMessage('Popisek denních menu byl úspěšně upraven.');
-        $this->redirect('Menu:');
+        $this->flashMessage('Text byl úspěšně uložen.', 'success');
+        $this->redirect('AboutUs:');
     }
 
 }

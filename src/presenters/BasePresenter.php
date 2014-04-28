@@ -32,8 +32,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->template->actualUser = null;
         }
 
-        $this->template->companyName = 'Buena Vista';
-        $this->template->companyWebsite = 'http://www.buena-vista.cz';
+        $webinfoDao = $this->em->getDao(App\Webinfo::getClassName());
+        $webinfo = $webinfoDao->find(1);
+
+        $this->template->companyName = $webinfo->webName;
+        $this->template->companyWebsite = $webinfo->website;
     }
 
     /*
