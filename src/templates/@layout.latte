@@ -1,0 +1,139 @@
+{**
+ * My Application layout template.
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+*}
+{if $user->isLoggedIn() && $user->isInRole('superadmin')}
+    {? $isSA = true}
+{else}
+    {? $isSA = false}
+{/if}
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+        <title>Administrace Buna Vista - {block title|striptags}{/block}</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
+        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        {block head}{/block}
+
+    </head>
+
+    <body>
+        <script> document.documentElement.className += ' js'</script>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid fullw">
+                <div class="navbar-header">
+                    {if !$isSA}<a class="navbar-brand" n:href="Homepage:">{else}<a class="navbar-brand" data-toggle="dropdown" href="#">{/if}Administrace {$companyName}{if $isSA} <b class="caret"></b>{/if}</a>
+                        <ul class="dropdown-menu">
+                            <li><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>
+                        </ul>
+                </div>
+                {if $user->isLoggedIn()}
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Další weby <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Club XANADU</li>
+                                <li><a href="http://www.clubxanadu.cz">Web - www.clubxanadu.cz</a></li>
+                                <li class="dropdown-header">Pivní ráj</li>
+                                <li><a href="http://www.pivniraj.com">Web - www.pivniraj.com</a></li>
+                                <li class="dropdown-header">Villa Eden</li>
+                                <li><a href="http://www.villa-eden.cz">Web - www.villa-eden.cz</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                {/if}
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{$companyWebsite}">Přejít na web</a></li>
+                            {if !$user->isLoggedIn()}
+                            <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
+                                <a n:href="Sign:in">Přihlášení</a>
+                            </li>
+                        {else}
+                            <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášen: {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a n:href="Sign:in">Profilové informace</a></li>
+                                    <li><a n:href="Sign:changePass">Změnit heslo</a></li>
+                                    <li><a n:href="Sign:out">Odhlásit se</a></li>
+                                </ul>
+                            </li>
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagewrap">
+            <div class="mainlogo-wrap">
+                <a href="/">
+                    <img src="/img/logo/logo.png" class="mainlogo" />
+                </a>
+            </div>
+            <div class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" n:href="Homepage:">Administrace</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            {if $user->isLoggedIn()}
+                                <li{ifCurrent AboutUs:} class="active"{/ifCurrent}><a n:href="AboutUs:">O nás</a></li>
+                                <li{ifCurrent Menu:} class="active"{/ifCurrent}><a n:href="Menu:">Denní menu</a></li>
+                                <li{ifCurrent Special:} class="active"{/ifCurrent}><a n:href="Special:">Speciální nabídka</a></li>
+                                <li{ifCurrent Sign:in} class="active"{/ifCurrent} class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Uživatelé <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a n:href="Sign:in">Přihlášený uživatel</a></li>
+                                        <li><a n:href="Users:list">Správce uživatelů</a></li>
+                                    </ul>
+                                </li>
+                                {if $user->isLoggedIn() && $user->isInRole('stats')}
+                                    <li><a href="http://stats.buena-vista.cz">Statistiky návštěvnosti</a></li>
+                                    {/if}
+                                {else}
+                                <li{ifCurrent Sign:in} class="active"{/ifCurrent}><a n:href="Sign:in">Přihlášení</a></li>
+                                {/if}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="maincontent">
+                <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
+
+                {include content}
+            </div>
+
+            <div class="footer">
+                &copy; {time()|date:'Y'} UDANAX, s.r.o.
+            </div>
+        </div>
+
+        {block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        {/block}
+    </body>
+</html>

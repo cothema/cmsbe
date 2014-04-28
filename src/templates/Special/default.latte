@@ -1,0 +1,60 @@
+{block content}
+
+<h1 n:block=title>Speciální nabídka</h1>
+
+{foreach $offers as $offersOne}
+    {first}
+        <a href="#" class="btn btn-success">Nová speciální nabídka</a>
+        <p>
+        <div style="display:inline-block;border-radius:5px;background-color:#fcf8e3;color:#000;padding:0.3em 0.5em;">Uplynulé</div>
+        <div style="display:inline-block;border-radius:5px;background-color:#dff0d8;color:#000;padding:0.3em 0.5em;">Aktuální</div>
+        <div style="display:inline-block;border-radius:5px;background-color:#d9edf7;color:#000;padding:0.3em 0.5em;">Budoucí</div>
+        <div style="display:inline-block;border-radius:5px;background-color:#f2dede;color:#000;padding:0.3em 0.5em;">Nepovoleno zveřejnění</div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Zveřejnění od</th>
+                    <th>Zveřejnění do</th>
+                    <th>Nadpis</th>
+                    <th>Zveřejnění</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {/first}
+            <tr class="{if !$offersOne->publicable}danger{elseif $offersOne->timeTo < new DateTime}warning{elseif $offersOne->timeFrom > new DateTime}info{else}success{/if}">
+                <td>
+                    {$offersOne->id}
+                </td>
+                <td>
+                    {$offersOne->timeFrom|date:'j.n.Y H:i:s'}
+                </td>
+                <td>
+                    {$offersOne->timeTo|date:'j.n.Y H:i:s'}
+                </td>
+                <td>
+                    {$offersOne->heading}
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="btn dropdown-toggle {if $offersOne->publicable}btn-success">Povoleno{else}btn-danger">Zakázáno{/if} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {if $offersOne->publicable}
+                                <li><a n:href="disable! offerId=>$offersOne->id">Zakázat</a></li>
+                                {else}
+                                <li><a n:href="enable! offerId=>$offersOne->id">Povolit</a></li>
+                                {/if}
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-success">Upravit</a>
+                </td>
+            </tr>
+            {last}
+            </tbody>
+        </table>
+    {/last}
+{/foreach}

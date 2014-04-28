@@ -1,0 +1,25 @@
+{block content}
+
+<h1>{$user->identity->data['username']}</h1>
+<p>
+    Aktuálně přihlášený uživatel
+</p>
+<table class="table table-striped" style="width: 300px;">
+    {if $profileUser->firstName || $profileUser->lastName}
+        <tr>
+            <th>Jméno:</th>
+            <td>{$profileUser->firstName} {$profileUser->lastName}</td>
+        </tr>
+    {/if}
+    {if $profileUser->email}
+        <tr>
+            <th>Email:</th>
+            <td>{$profileUser->email}</td>
+        </tr>
+    {/if}
+</table>
+<p>
+    <a class="btn btn-primary" n:href="changeProfile">Upravit údaje</a>
+    <a class="btn btn-primary" n:href="changePass">Změnit heslo</a>
+    <a class="btn btn-danger" n:href="out">Odhlásit se</a>
+</p>
