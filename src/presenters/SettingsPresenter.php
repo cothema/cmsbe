@@ -41,6 +41,10 @@ class SettingsPresenter extends BasePresenter
                 ->setDefaultValue($res->webAdmin)
                 ->getControlPrototype()
                 ->class("form-control morewidth");
+        $form->addText('urlStats', 'URL statistik návštěvnosti')
+                ->setDefaultValue($res->urlStats)
+                ->getControlPrototype()
+                ->class("form-control morewidth");
         $form->addSubmit('send', 'Uložit')->getControlPrototype()->class('btn btn-success');
 
         $form->onSuccess[] = $this->basicSettingsFormSucceeded;
@@ -55,10 +59,16 @@ class SettingsPresenter extends BasePresenter
         $settingsDao = $this->em->getDao(\App\Webinfo::getClassName());
         $settings = $settingsDao->find(1);
 
-        $settings->webName = $val['webName'];
-        $settings->company = $val['company'];
-        $settings->website = $val['website'];
-        $settings->webAdmin = $val['webAdmin'];
+        $settings->webName = trim($val['webName']);
+        $settings->company = trim($val['company']);
+        $settings->website = trim($val['website']);
+        $settings->webAdmin = trim($val['webAdmin']);
+
+        if (trim($val['urlStats']) === '') {
+            $settings->urlStats = null;
+        } else {
+            $settings->urlStats = trim($val['urlStats']);
+        }
 
         $this->em->persist($settings);
         $this->em->flush();

@@ -1,0 +1,37 @@
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" n:href="Homepage:">Administrace</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {if $user->isLoggedIn()}
+
+                    {foreach $menu as $menuOne}
+                        <li{ifCurrent $menuOne->nLink} class="active"{/ifCurrent}>
+                            {if $menuOne->nLink}<a n:href="$menuOne->nLink">{else}<a href="#"{if $menuOne->childs} class="dropdown-toggle" data-toggle="dropdown"{/if}>{/if}{$menuOne->name}{if $menuOne->childs} <b class="caret"></b>{/if}</a>
+                                    {foreach $menuOne->childs as $menuOneChild}
+                                        {first}<ul class="dropdown-menu">{/first}
+                                        <li><a n:href="{$menuOneChild->nLink}">{$menuOneChild->name}</a></li>
+                                        {last}</ul>{/last}
+                                    {/foreach}
+                        </li>
+                    {/foreach}
+
+                    <li{ifCurrent Sign:in} class="active"{/ifCurrent} class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"></a>
+
+                    </li>
+
+
+                    {if $user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null}
+                        <li><a href="{$urlStats}">Statistiky návštěvnosti</a></li>
+                        {/if}
+                    {else}
+                    <li{ifCurrent Sign:in} class="active"{/ifCurrent}><a n:href="Sign:in">Přihlášení</a></li>
+                    {/if}
+            </ul>
+        </div>
+    </div>
+</div>

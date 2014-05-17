@@ -6,6 +6,7 @@ use Nette,
     App\Model;
 use App;
 use App\Cothema\Admin;
+use Pomeranc\Model as PModel;
 
 /**
  * Base presenter for all application presenters.
@@ -62,7 +63,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         if ($this->user->isLoggedIn()) {
-            $actualUserDao = $this->em->getDao(App\User::getClassName());
+            $actualUserDao = $this->em->getDao(PModel\User\User::getClassName());
             $actualUser = $actualUserDao->find($this->getUser()->id);
 
             $custDao = $this->em->getDao(App\Cothema\Admin\Custom::getClassName());
@@ -101,9 +102,79 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->companyName = $webinfo->webName;
         $this->template->companyFullName = $webinfo->company;
         $this->template->companyWebsite = $webinfo->website;
+        $this->template->urlStats = $webinfo->urlStats;
+
+        $this->template->otherWebsites = [];
+        $otherWebsitesDao = $this->em->getDao(App\BEMenu::getClassName());
+        $otherWebsites = $otherWebsitesDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
+
+        $this->template->menu = [];
+        $beMenuDao = $this->em->getDao(App\BEMenu::getClassName());
+        $beMenu = $beMenuDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
+
+        // TODO: recursive - be careful - cycle!
+        foreach ($beMenu as $beMenuOne) {
+            $menuHandle = [];
+            $menuHandle['id'] = $beMenuOne->id;
+            $menuHandle['nLink'] = $beMenuOne->nLink;
+            $menuHandle['name'] = $beMenuOne->name;
+            $menuHandle['orderLine'] = $beMenuOne->orderLine;
+            $menuHandle['parent'] = $beMenuOne->parent;
+            $menuHandle['module'] = $beMenuOne->module;
+
+            // Find childs
+            $beSubmenuDao = $this->em->getDao(App\BEMenu::getClassName());
+            $beSubmenu = $beSubmenuDao->findBy(['parent' => $beMenuOne->id], ['orderLine' => 'ASC']);
+
+            $menuHandle['childs'] = $beSubmenu;
+
+            $this->template->menu[] = (object) $menuHandle;
+        }
+
+        $this->template->otherWebsites = [];
+        $otherWebsitesDao = $this->em->getDao(App\OtherWebsite::getClassName());
+        $otherWebsites = $otherWebsitesDao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
+
+        $c = 0;
+        foreach ($otherWebsites as $otherWebsitesOne) {
+            $c++;
+
+            if ($c == 1) {
+                $handleOtherW = [];
+                $handleOtherW['groupName'] = 'Nezařazené';
+                $handleOtherW['items'] = [];
+            }
+
+            $handleOtherW['items'][] = $otherWebsitesOne;
+        }
+
+        if ($c > 0) {
+            $this->template->otherWebsites[] = (object) $handleOtherW;
+        }
+
+        $otherWebsitesGroupDao = $this->em->getDao(App\OtherWebsiteGroup::getClassName());
+        $otherWebsitesGroup = $otherWebsitesGroupDao->findBy([], ['orderLine' => 'ASC']);
+
+        foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
+            $otherWebsitesBDao = $this->em->getDao(App\OtherWebsite::getClassName());
+            $otherWebsitesB = $otherWebsitesBDao->findBy(['groupLine' => $otherWebsitesGroupOne->id], ['orderLine' => 'ASC']);
+
+            $handleOtherWB = [];
+            $handleOtherWB['groupName'] = $otherWebsitesGroupOne->name;
+
+            $handleOtherWB['items'] = [];
+            foreach ($otherWebsitesB as $otherWebsitesBOne) {
+                $handleOtherWB['items'][] = $otherWebsitesBOne;
+            }
+
+            $this->template->otherWebsites[] = (object) $handleOtherWB;
+        }
+
+        $this->template->mainLayoutBeforePath = __DIR__ . '/../templates/@layout-before.latte';
+        $this->template->mainLayoutAfterPath = __DIR__ . '/../templates/@layout-after.latte';
 
         if ($this->getUser()->id) {
-            $user = $this->em->getDao(App\User::getClassName());
+            $user = $this->em->getDao(PModel\User\User::getClassName());
             $profileUser = $user->find($this->getUser()->id);
 
             $this->template->gravatar = $this->getGravatar($profileUser->email);

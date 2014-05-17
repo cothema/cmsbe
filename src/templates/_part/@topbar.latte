@@ -1,0 +1,61 @@
+{if $user->isLoggedIn() && $user->isInRole('superadmin')}
+    {? $isSA = true}
+{else}
+    {? $isSA = false}
+{/if}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid fullw">
+        <div class="navbar-header">
+            <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-briefcase"></span> {$companyName} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a n:href="Homepage:">Hlavní strana</a></li>
+                {if $isSA}<li><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>{/if}
+                <li><a n:href="AboutWebapp:">O aplikaci</a></li>
+            </ul>
+        </div>
+        {if $user->isLoggedIn() && $otherWebsites}
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Další weby <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {foreach $otherWebsites as $otherWebsitesOne}
+                            <li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
+                                {foreach $otherWebsitesOne->items as $oneOWItem}
+                                    {if is_object($oneOWItem)}
+                                    <li>
+                                        <a href="{$oneOWItem->url}">{$oneOWItem->name}</a>
+                                    </li>
+                                {/if}
+                            {/foreach}
+                        {/foreach}
+                    </ul>
+                </li>
+            </ul>
+        {/if}
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a target="_blank" href="{$companyWebsite}">Přejít na web &nbsp; <span class="glyphicon glyphicon-new-window"></span></a></li>
+                        {if !$user->isLoggedIn()}
+                    <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
+                        <a n:href="Sign:in">Přihlášení</a>
+                    </li>
+                {else}
+                    <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a n:href="Custom:">Přizpůsobení</a></li>
+                            <li><a n:href="Sign:in">Profilové informace</a></li>
+                            <li><a n:href="Sign:changePass">Změnit heslo</a></li>
+                            <li><a n:href="Sign:out">Odhlásit se</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a title="Odhlásit se" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="glyphicon glyphicon-off"></span></a>
+                    </li>
+                {/if}
+            </ul>
+        </div>
+    </div>
+</div>

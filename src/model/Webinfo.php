@@ -31,6 +31,21 @@ class Webinfo extends \Kdyby\Doctrine\Entities\IdentifiedEntity
      */
     protected $company;
 
+    /**
+     * @ORM\Column(name="urlstats",type="text")
+     */
+    protected $urlStats;
+
+    public function getUrlStats()
+    {
+        return $this->urlStats;
+    }
+
+    public function setUrlStats($in)
+    {
+        $this->urlStats = $in;
+    }
+
     public function getCompany()
     {
         return $this->company;
@@ -56,7 +71,7 @@ class Webinfo extends \Kdyby\Doctrine\Entities\IdentifiedEntity
         return $this->website;
     }
 
-    public function seWebsite($in)
+    public function setWebsite($in)
     {
         $this->website = $in;
     }
