@@ -1,6 +1,6 @@
 {
-	"name": "pomeranc/cms",
-	"description": "Pomeranc CMS",
+	"name": "pomeranc/cmsbe",
+	"description": "Pomeranc CMS Backend",
 	"type": "project",
 	"license": ["BSD-3-Clause"],
 	"authors": [
