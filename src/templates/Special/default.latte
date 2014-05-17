@@ -1,10 +1,10 @@
 {block content}
 
-<h1 n:block=title>Speciální nabídka</h1>
+<h1 n:block=title><span class="glyphicon glyphicon-list"></span> Speciální nabídka</h1>
 
 {foreach $offers as $offersOne}
     {first}
-        <a href="#" class="btn btn-success">Nová speciální nabídka</a>
+        <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nová speciální nabídka</a>
         <p>
         <div style="display:inline-block;border-radius:5px;background-color:#fcf8e3;color:#000;padding:0.3em 0.5em;">Uplynulé</div>
         <div style="display:inline-block;border-radius:5px;background-color:#dff0d8;color:#000;padding:0.3em 0.5em;">Aktuální</div>
@@ -50,7 +50,7 @@
                     </div>
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success">Upravit</a>
+                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
                 </td>
             </tr>
             {last}

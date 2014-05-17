@@ -1,6 +1,6 @@
 {block content}
 
-<h1 n:block=title>O nás</h1>
+<h1 n:block=title><span class="glyphicon glyphicon-align-justify"></span> O nás</h1>
 
 <table class="table">
     <thead>
@@ -32,7 +32,7 @@
                     {$articleOne->shortText}
                 </td>
                 <td style="padding-top: 0.5em;text-align:center;vertical-align:top;font-weight:bold;">
-                    <a class="btn btn-sm btn-primary" n:href="edit id => $articleOne->id">Upravit text</a>
+                    <a class="btn btn-sm btn-primary" n:href="edit id => $articleOne->id"><span class="glyphicon glyphicon-pencil"></span> Upravit text</a>
                 </td>
             </tr>
         {/foreach}

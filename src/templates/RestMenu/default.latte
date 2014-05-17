@@ -1,0 +1,81 @@
+{block content}
+
+<h1 n:block=title><span class="glyphicon glyphicon-cutlery"></span> Denní menu</h1>
+
+<a class="btn btn-primary" n:href="add"><span class="glyphicon glyphicon-plus"></span> Přidat denní menu</a>
+<p>
+</p>
+<b>Popisek:</b>
+<div class="quotation">
+    {$menuIntro}
+</div>
+
+<a class="btn btn-primary" n:href="editIntro"><span class="glyphicon glyphicon-pencil"></span> Upravit popisek</a>
+
+<p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Datum od
+            </th>
+            <th>
+                Datum do
+            </th>
+            <th>
+                Menu
+            </th>
+            <th>
+                Stav
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $menuDayList as $menuDayListOne}
+            <tr>
+                <td>
+                    {$menuDayListOne->id}
+                </td>
+                <td>
+                    {$menuDayListOne->dateFrom|date:'j.n.Y'}
+                </td>
+                <td>
+                    {$menuDayListOne->dateTo|date:'j.n.Y'}
+                </td>
+                <td>
+                    <h4 style="margin-top:0.2em;"><b>{$menuDayListOne->formattedHeading}</b></h4>
+                    <div>
+                        {!$getFormattedMenu($menuDayListOne->id)}
+                    </div>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        {if $menuDayListOne->public == 0}
+                            <a class="btn btn-danger" class="dropdown-toggle" data-toggle="dropdown">Nezveřejněno <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a n:href="public! id => $menuDayListOne->id">Zveřejnit</a></li>
+
+                            {else}
+                                <a class="btn btn-primary" class="dropdown-toggle" data-toggle="dropdown">Zveřejněno <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a n:href="unPublic! id => $menuDayListOne->id">Zneveřejnit</a></li>
+
+                                {/if}
+                                <li><a n:href="delete! id => $menuDayListOne->id">Smazat</a></li>
+                            </ul>
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-primary" n:href="edit id => $menuDayListOne->id"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
+                </td>
+            </tr>
+        {/foreach}
+    </tbody>
+
+</table>

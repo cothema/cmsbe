@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="sys_webinfo")
  */
 class Webinfo extends \Kdyby\Doctrine\Entities\IdentifiedEntity
 {
@@ -24,6 +25,21 @@ class Webinfo extends \Kdyby\Doctrine\Entities\IdentifiedEntity
      * @ORM\Column(type="text")
      */
     protected $webAdmin;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $company;
+
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    public function setCompany($in)
+    {
+        $this->company = $in;
+    }
 
     public function getWebName()
     {

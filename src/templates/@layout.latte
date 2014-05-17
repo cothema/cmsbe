@@ -41,15 +41,17 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid fullw">
                 <div class="navbar-header">
-                    {if !$isSA}<a class="navbar-brand" n:href="Homepage:">{else}<a class="navbar-brand" data-toggle="dropdown" href="#">{/if}Administrace {$companyName}{if $isSA} <b class="caret"></b>{/if}</a>
-                        <ul class="dropdown-menu">
-                            <li><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>
-                        </ul>
+                    <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-briefcase"></span> {$companyName} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a n:href="Homepage:">Hlavní strana</a></li>
+                        {if $isSA}<li><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>{/if}
+                        <li><a n:href="AboutWebapp:">O aplikaci</a></li>
+                    </ul>
                 </div>
                 {if $user->isLoggedIn()}
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Další weby <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Další weby <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Club XANADU</li>
                                 <li><a href="http://www.clubxanadu.cz">Web - www.clubxanadu.cz</a></li>
@@ -64,19 +66,23 @@
                 {/if}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{$companyWebsite}">Přejít na web</a></li>
-                            {if !$user->isLoggedIn()}
+                        <li><a target="_blank" href="{$companyWebsite}">Přejít na web &nbsp; <span class="glyphicon glyphicon-new-window"></span></a></li>
+                                {if !$user->isLoggedIn()}
                             <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
                                 <a n:href="Sign:in">Přihlášení</a>
                             </li>
                         {else}
                             <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášen: {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a n:href="Custom:">Přizpůsobení</a></li>
                                     <li><a n:href="Sign:in">Profilové informace</a></li>
                                     <li><a n:href="Sign:changePass">Změnit heslo</a></li>
                                     <li><a n:href="Sign:out">Odhlásit se</a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a title="Odhlásit se" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="glyphicon glyphicon-off"></span></a>
                             </li>
                         {/if}
                     </ul>
@@ -85,11 +91,13 @@
         </div>
 
         <div class="pagewrap">
-            <div class="mainlogo-wrap">
-                <a href="/">
-                    <img src="/img/logo/logo.png" class="mainlogo" />
-                </a>
-            </div>
+            {if $custom->topPanel != '0'}
+                <div class="mainlogo-wrap">
+                    <a href="/">
+                        <img src="/img/logo/logo.png" class="mainlogo" />
+                    </a>
+                </div>
+            {/if}
             <div class="navbar navbar-default">
                 <div class="container">
                     <div class="navbar-header">
@@ -100,13 +108,14 @@
                         <ul class="nav navbar-nav">
                             {if $user->isLoggedIn()}
                                 <li{ifCurrent AboutUs:} class="active"{/ifCurrent}><a n:href="AboutUs:">O nás</a></li>
-                                <li{ifCurrent Menu:} class="active"{/ifCurrent}><a n:href="Menu:">Denní menu</a></li>
+                                <li{ifCurrent RestMenu:} class="active"{/ifCurrent}><a n:href="RestMenu:">Denní menu</a></li>
                                 <li{ifCurrent Special:} class="active"{/ifCurrent}><a n:href="Special:">Speciální nabídka</a></li>
                                 <li{ifCurrent Sign:in} class="active"{/ifCurrent} class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Uživatelé <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a n:href="Sign:in">Přihlášený uživatel</a></li>
                                         <li><a n:href="Users:list">Správce uživatelů</a></li>
+                                        <li><a n:href="Users:groups">Skupiny uživatelů</a></li>
                                     </ul>
                                 </li>
                                 {if $user->isLoggedIn() && $user->isInRole('stats')}
@@ -127,7 +136,7 @@
             </div>
 
             <div class="footer">
-                &copy; {time()|date:'Y'} UDANAX, s.r.o.
+                &copy; {time()|date:'Y'} {$companyFullName}
             </div>
         </div>
 
