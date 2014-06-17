@@ -1,0 +1,32 @@
+<div class="container navbar-default waybar">
+    <div class="navbar-header">
+      <a class="navbar-brand" n:href="Homepage:"><span class="glyphicon glyphicon-home"></span></a>
+    </div>
+    {ifCurrent Homepage:default}
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Dnes je <b>{$actualDate}</b>. Svátek má <b>{$nameday->name}</b>.</a></li>
+      </ul>
+    </div>
+    {else}
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {if isset($navbar) && is_array($navbar)}
+            {foreach $navbar as $navbarOne}
+                <li class="navbar-brand bar-delimiter"><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li>
+                    {if isset($navbarOne->link)}
+                        <a n:href="$navbarOne->link">{$navbarOne->name}</a>
+                    {else}
+                        <a href="#">{$navbarOne->name}</a>
+                    {/if}
+                </li>
+            {/foreach}
+        {else}
+        <li class="navbar-brand bar-delimiter"><span class="glyphicon glyphicon-chevron-right"></span></li>
+        <li><a href="#">Aktuální stránka</a></li>
+        {/if}
+      </ul>
+    </div>
+    {/ifCurrent}
+</div>
