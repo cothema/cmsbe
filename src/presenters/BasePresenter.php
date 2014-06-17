@@ -48,10 +48,29 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var \Kdyby\Doctrine\EntityManager @inject */
     public $em;
 
+    private function getActualNameday() {
+        return $this->getNameday(date('j'),date('n'));
+    }
+    
+    private function getNameday($day, $month) {
+        $dao = $this->em->getDao(Admin\Nameday::getClassName());
+        $nameday = $dao->findBy(['day' => (int)$day,'month' => (int)$month]);
+        
+        if(isset($nameday[0])) {
+            return $nameday[0];
+        }
+        
+        return null;
+    }
+    
     public function beforeRender()
     {
         parent::beforeRender();
 
+        $this->template->actualDate = date('j. n. Y');
+        
+        $this->template->nameday = $this->getActualNameday();
+        
         if ($this->user->isLoggedIn()) {
             Admin\LogActivityRepository::logActivity($this->em, $this->user->id);
         }
