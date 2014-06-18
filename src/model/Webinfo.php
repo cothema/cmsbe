@@ -14,76 +14,31 @@ class Webinfo extends \Kdyby\Doctrine\Entities\IdentifiedEntity
     /**
      * @ORM\Column(type="text")
      */
-    protected $webName;
+    public $webName;
 
     /**
      * @ORM\Column(type="text")
      */
-    protected $website;
+    public $website;
 
     /**
      * @ORM\Column(type="text")
      */
-    protected $webAdmin;
+    public $webAdmin;
 
     /**
      * @ORM\Column(type="text")
      */
-    protected $company;
+    public $company;
 
     /**
      * @ORM\Column(name="urlstats",type="text")
      */
-    protected $urlStats;
-
-    public function getUrlStats()
-    {
-        return $this->urlStats;
-    }
-
-    public function setUrlStats($in)
-    {
-        $this->urlStats = $in;
-    }
-
-    public function getCompany()
-    {
-        return $this->company;
-    }
-
-    public function setCompany($in)
-    {
-        $this->company = $in;
-    }
-
-    public function getWebName()
-    {
-        return $this->webName;
-    }
-
-    public function setWebName($in)
-    {
-        $this->webName = $in;
-    }
-
-    public function getWebsite()
-    {
-        return $this->website;
-    }
-
-    public function setWebsite($in)
-    {
-        $this->website = $in;
-    }
-
-    public function getWebAdmin()
-    {
-        return $this->webAdmin;
-    }
-
-    public function setWebAdmin($in)
-    {
-        $this->webAdmin = $in;
-    }
+    public $urlStats;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $systype;
 
 }

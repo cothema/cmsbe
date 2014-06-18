@@ -1,10 +1,8 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
-<h1 n:block=title><span class="glyphicon glyphicon-briefcase"></span> Administrace</h1>
+<h1 n:block=title><span class="glyphicon glyphicon-briefcase"></span> {if $webinfo->systype==='is'}Informační systém{else}Administrace{/if}</h1>
 
 <div class="well">
-    Vítejte v administraci webu {$companyName}!
+    Vítejte v {if $webinfo->systype==='is'}informačním systému společnosti{else}administraci webu{/if} {$companyName}!
 </div>
 
 {*

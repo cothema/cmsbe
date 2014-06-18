@@ -122,6 +122,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->companyFullName = $webinfo->company;
         $this->template->companyWebsite = $webinfo->website;
         $this->template->urlStats = $webinfo->urlStats;
+        $this->template->webinfo = $webinfo;
 
         $this->template->otherWebsites = [];
         $otherWebsitesDao = $this->em->getDao(App\BEMenu::getClassName());
