@@ -33,6 +33,10 @@ class SettingsPresenter extends BasePresenter
                 ->setDefaultValue($res->company)
                 ->getControlPrototype()
                 ->class("form-control mediumwidth");
+        $form->addSelect('systype', 'Druh aplikace' ,['webapp' => 'Webové stránky','is' => 'Informační systém'])
+                ->setDefaultValue($res->systype)
+                ->getControlPrototype()
+                ->class("form-control mediumwidth");
         $form->addText('website', 'URL webu')
                 ->setDefaultValue($res->website)
                 ->getControlPrototype()
@@ -63,6 +67,7 @@ class SettingsPresenter extends BasePresenter
         $settings->company = trim($val['company']);
         $settings->website = trim($val['website']);
         $settings->webAdmin = trim($val['webAdmin']);
+        $settings->systype = trim($val['systype']);
 
         if (trim($val['urlStats']) === '') {
             $settings->urlStats = null;
