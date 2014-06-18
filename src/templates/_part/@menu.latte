@@ -1,9 +1,5 @@
 <div class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" n:href="Homepage:">Administrace</a>
-        </div>
-
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 {if $user->isLoggedIn()}
@@ -35,3 +31,5 @@
         </div>
     </div>
 </div>
+
+{include './@navmenu.latte'}

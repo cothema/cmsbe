@@ -11,25 +11,16 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
-
         <title>Administrace {$companyName} - {block title|striptags}{/block}</title>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-<!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <!-- Optional theme -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <!-- Latest compiled and minified JavaScript -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
         {block head}{/block}
-
     </head>
-
     <body>
         <script> document.documentElement.className += ' js'</script>
 
@@ -38,8 +29,8 @@
         <div class="pagewrap">
             {if $custom->topPanel != '0'}
                 <div class="mainlogo-wrap">
-                    <a href="/">
-                        <img src="/img/logo/logo.png" class="mainlogo" />
+                    <a n:href="Homepage:">
+                        <img src="{$basePath}/data/img/logo/logo.png" class="mainlogo" />
                     </a>
                 </div>
             {/if}
