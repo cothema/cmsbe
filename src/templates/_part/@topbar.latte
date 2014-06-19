@@ -49,7 +49,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a n:href="Custom:">Přizpůsobení</a></li>
-                            <li><a n:href="Sign:in">Profilové informace</a></li>
+                            <li><a n:href="Users:profile">Profilové informace</a></li>
                             <li><a n:href="Sign:changePass">Změnit heslo</a></li>
                             <li><a n:href="Sign:out">Odhlásit se</a></li>
                         </ul>

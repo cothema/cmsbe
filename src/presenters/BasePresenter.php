@@ -233,5 +233,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->redirect('Sign:in');
         }
     }
+    
+    protected function notYetImplemented() 
+    {
+        $this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!','danger');
+    }
 
 }
