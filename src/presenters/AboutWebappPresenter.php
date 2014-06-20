@@ -14,9 +14,12 @@ use App;
 class AboutWebappPresenter extends BasePresenter
 {
 
-    public function renderList()
+    public function renderDefault()
     {
-
+        $navbar = [];
+        $navbar[] = (object)['name' => 'O aplikaci'];
+        
+        $this->template->navbar = $navbar;
     }
 
 }

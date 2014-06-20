@@ -17,7 +17,11 @@ class CustomPresenter extends BasePresenter
 
     public function renderDefault()
     {
-
+        $navbar = [];
+        $navbar[] = (object)['name' => 'Nastavení', 'link' => 'Settings:BasicInfo'];
+        $navbar[] = (object)['name' => 'Přizpůsobení'];
+        
+        $this->template->navbar = $navbar;
     }
 
     protected function createComponentCustomForm()

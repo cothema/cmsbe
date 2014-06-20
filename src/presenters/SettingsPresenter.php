@@ -16,6 +16,12 @@ class SettingsPresenter extends BasePresenter
     public function renderBasicInfo()
     {
         $this->permissions('superadmin');
+        
+        $navbar = [];
+        $navbar[] = (object)['name' => 'Nastavení'];
+        $navbar[] = (object)['name' => 'Základní informace'];
+        
+        $this->template->navbar = $navbar;
     }
 
     public function createComponentBasicSettingsForm()
