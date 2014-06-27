@@ -36,6 +36,19 @@
                 </li>
             </ul>
         {/if}
+        
+        {if $user->isLoggedIn()}
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-earphone"></span> <b>Telefonická podpora:</b> +420 606 460 316 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a n:href="Support:">Další formy podpory systému</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        {/if}
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

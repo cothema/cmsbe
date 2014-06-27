@@ -1,0 +1,28 @@
+{block content}
+
+<h1 n:block=title><span class="glyphicon glyphicon-earphone"></span> Podpora systému</h1>
+
+<div class="well">
+    V případě jakýchkoliv problémů neváhejte kontaktovat podporu systému.
+</div>
+
+<table class="table table-striped" style="width:49%; float: left;margin-right:2%;">
+    {if $contact->name}
+    <tr>
+        <th>Kontaktní osoba:</th>
+        <td><span class="glyphicon glyphicon-user"></span> {$contact->name}</td>
+    </tr>
+    {/if}
+    {if $contact->tel}
+    <tr>
+        <th>Telefon:</th>
+        <td><span class="glyphicon glyphicon-earphone"></span> {$contact->tel}</td>
+    </tr>
+    {/if}
+    {if $contact->email}
+    <tr>
+        <th>E-mail:</th>
+        <td><a href="mailto:{$contact->email}?subject=Podpora%20syst%C3%A9mu"><span class="glyphicon glyphicon-envelope"></span> {$contact->email}</li></td>
+    </tr>
+    {/if}
+</table>
