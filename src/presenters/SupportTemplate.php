@@ -16,7 +16,7 @@ class SupportPresenter extends BasePresenter
     public function renderDefault() {
         
         $navbar = [];
-        $navbar[] = (object)['name' => 'Pomoc'];
+        $navbar[] = (object)['name' => 'Pomoc', 'link' => 'Help:'];
         $navbar[] = (object)['name' => 'Podpora systému'];
         
         $this->template->navbar = $navbar;
