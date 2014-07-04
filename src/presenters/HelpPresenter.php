@@ -19,6 +19,7 @@ class HelpPresenter extends BasePresenter
         $navbar[] = (object)['name' => 'Pomoc'];
         
         $this->template->navbar = $navbar;
+        $this->template->yourIp = $_SERVER['SERVER_ADDR'];
     }
     
 }
