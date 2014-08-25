@@ -1,22 +1,30 @@
 {
-	"name": "pomeranc/cmsbe",
-	"description": "Pomeranc CMS Backend",
-	"type": "project",
-	"license": ["BSD-3-Clause"],
-	"authors": [
-		{
-			"name": "Milos Havlicek"
-		}
-	],
-	"require": {
-		"php": ">= 5.3.7",
-		"nette/nette": "~2.1.0",
-		"mobiledetect/mobiledetectlib": "2.7.8",
-		"nextras/forms": "v1.3.1",
-		"kdyby/doctrine": "v1.1.0",
-    "pomeranc/cmsbe-user": "@dev"
-	},
-	"require-dev": {
-		"nette/tester": "~1.0.0"
-	}
+    "name": "cothema/cmsbe",
+    "description": "Cothema CMS Backend",
+    "type": "project",
+    "license": ["BSD-3-Clause"],
+    "authors": [
+        {
+            "name": "Cothema s.r.o.",
+            "email": "info@cothema.com",
+            "homepage": "http://www.cothema.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Milos Havlicek",
+            "email": "havlicek@cothema.cz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">= 5.3.7",
+        "nette/nette": "~2.1.0",
+        "mobiledetect/mobiledetectlib": "2.7.8",
+        "nextras/forms": "v1.3.1",
+        "kdyby/doctrine": "v1.1.0",
+        "cothema/cmsbe-user": "@dev"
+    },
+    "require-dev": {
+        "nette/tester": "~1.0.0"
+    }
 }
