@@ -6,7 +6,7 @@ use Nette,
     App\Model;
 use App;
 use App\Cothema\Admin;
-use Pomeranc\Model as PModel;
+use Cothema\Model as CModel;
 
 /**
  * Base presenter for all application presenters.
@@ -82,7 +82,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         if ($this->user->isLoggedIn()) {
-            $actualUserDao = $this->em->getDao(PModel\User\User::getClassName());
+            $actualUserDao = $this->em->getDao(CModel\User\User::getClassName());
             $actualUser = $actualUserDao->find($this->getUser()->id);
 
             $custDao = $this->em->getDao(App\Cothema\Admin\Custom::getClassName());
@@ -194,7 +194,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->mainLayoutAfterPath = __DIR__ . '/../templates/@layout-after.latte';
 
         if ($this->getUser()->id) {
-            $user = $this->em->getDao(PModel\User\User::getClassName());
+            $user = $this->em->getDao(CModel\User\User::getClassName());
             $profileUser = $user->find($this->getUser()->id);
 
             $this->template->gravatar = $this->getGravatar($profileUser->email);
