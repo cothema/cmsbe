@@ -52,7 +52,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     public function createComponentCssScreen()
     {
-        $this->cssComponentWrapper(['screen.css'], 'screen,projection,tv');
+        return $this->lessComponentWrapper(['screen.less'], 'screen,projection,tv');
     }
 
     /**
@@ -61,20 +61,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     public function createComponentCssPrint()
     {
-        $this->cssComponentWrapper(['print.css'], 'print');
+        return $this->lessComponentWrapper(['print.css'], 'print');
     }
 
-    private function cssComponentWrapper(array $files, $media = 'screen,projection,tv')
+    private function lessComponentWrapper(array $fileNames, $media = 'screen,projection,tv')
     {
-        $files = new WebLoader\FileCollection($this->context->parameters['wwwDir'] . '/css');
-        $files->addFiles($files);
+        $fileCollection = new WebLoader\FileCollection($this->context->parameters['wwwDir'] . '/css');
+        $fileCollection->addFiles($fileNames);
 
         $name = strtolower(substr($this->name, strrpos($this->name, ':') + 1)) . '.css';
         if (file_exists($this->context->parameters['wwwDir'] . '/css/' . $name)) {
             $files->addFile($name);
         }
 
-        $compiler = WebLoader\Compiler::createCssCompiler($files, $this->context->parameters['wwwDir'] . '/assets-gen');
+        $compiler = WebLoader\Compiler::createCssCompiler($fileCollection, $this->context->parameters['wwwDir'] . '/assets-gen');
+
+        $filter = new WebLoader\Filter\LessFilter;
+        $compiler->addFileFilter($filter);
 
         $control = new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/assets-gen');
         $control->setMedia($media);
