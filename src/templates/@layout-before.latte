@@ -16,8 +16,10 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
+
+        {control cssScreen}
+        {control cssPrint}
+
         <link rel="shortcut icon" href="{$basePath}/data/favicon.ico">
         {block head}{/block}
     </head>

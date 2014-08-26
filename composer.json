@@ -22,7 +22,9 @@
         "mobiledetect/mobiledetectlib": "2.7.8",
         "nextras/forms": "v1.3.1",
         "kdyby/doctrine": "v1.1.0",
-        "cothema/cmsbe-user": "@dev"
+        "cothema/cmsbe-user": "@dev",
+        "janmarek/webloader": "2.2.0",
+        "leafo/lessphp": "0.4.0"
     },
     "require-dev": {
         "nette/tester": "~1.0.0"

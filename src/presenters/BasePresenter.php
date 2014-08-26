@@ -7,6 +7,7 @@ use Nette,
 use App;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
+use WebLoader;
 
 /**
  * Base presenter for all application presenters.
@@ -45,32 +46,70 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $url;
     }
 
+    /**
+     * CSS stylesheet loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentCssScreen()
+    {
+        $this->cssComponentWrapper(['screen.css'], 'screen,projection,tv');
+    }
+
+    /**
+     * CSS stylesheet loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentCssPrint()
+    {
+        $this->cssComponentWrapper(['print.css'], 'print');
+    }
+
+    private function cssComponentWrapper(array $files, $media = 'screen,projection,tv')
+    {
+        $files = new WebLoader\FileCollection($this->context->parameters['wwwDir'] . '/css');
+        $files->addFiles($files);
+
+        $name = strtolower(substr($this->name, strrpos($this->name, ':') + 1)) . '.css';
+        if (file_exists($this->context->parameters['wwwDir'] . '/css/' . $name)) {
+            $files->addFile($name);
+        }
+
+        $compiler = WebLoader\Compiler::createCssCompiler($files, $this->context->parameters['wwwDir'] . '/assets-gen');
+
+        $control = new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/assets-gen');
+        $control->setMedia($media);
+
+        return $control;
+    }
+
     /** @var \Kdyby\Doctrine\EntityManager @inject */
     public $em;
 
-    private function getActualNameday() {
-        return $this->getNameday(date('j'),date('n'));
+    private function getActualNameday()
+    {
+        return $this->getNameday(date('j'), date('n'));
     }
-    
-    private function getNameday($day, $month) {
+
+    private function getNameday($day, $month)
+    {
         $dao = $this->em->getDao(Admin\Nameday::getClassName());
-        $nameday = $dao->findBy(['day' => (int)$day,'month' => (int)$month]);
-        
-        if(isset($nameday[0])) {
+        $nameday = $dao->findBy(['day' => (int) $day, 'month' => (int) $month]);
+
+        if (isset($nameday[0])) {
             return $nameday[0];
         }
-        
+
         return null;
     }
-    
+
     public function beforeRender()
     {
         parent::beforeRender();
 
         $this->template->actualDate = date('j. n. Y');
-        
+
         $this->template->nameday = $this->getActualNameday();
-        
+
         if ($this->user->isLoggedIn()) {
             Admin\LogActivityRepository::logActivity($this->em, $this->user->id);
         }
@@ -233,10 +272,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->redirect('Sign:in');
         }
     }
-    
-    protected function notYetImplemented() 
+
+    protected function notYetImplemented()
     {
-        $this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!','danger');
+        $this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!', 'danger');
     }
 
 }
