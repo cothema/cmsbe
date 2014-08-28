@@ -9,5 +9,4 @@ Welcome to Backend part of Content Management System which is maintened and deve
 
 ## Installation (to [CMS BE Skeleton](//github.com/cothema/cmsbe-skeleton))
 
-1. Copy [**CMS BE Skeleton**](//github.com/cothema/cmsbe-skeleton) to the desired directory
-2. Follow the instructions of [**CMS BE Skeleton**](//github.com/cothema/cmsbe-skeleton)
+1. Follow the instructions of [**CMS BE Skeleton**](//github.com/cothema/cmsbe-skeleton)
