@@ -24,7 +24,8 @@
         "kdyby/doctrine": "v1.1.0",
         "cothema/cmsbe-user": "@dev",
         "janmarek/webloader": "2.2.0",
-        "leafo/lessphp": "0.4.0"
+        "leafo/lessphp": "0.4.0",
+        "cothema/admin-lte": "*"
     },
     "require-dev": {
         "nette/tester": "~1.0.0"
