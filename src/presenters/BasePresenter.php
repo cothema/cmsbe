@@ -64,22 +64,72 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $this->lessComponentWrapper(['print.css'], 'print');
     }
 
-    private function lessComponentWrapper(array $fileNames, $media = 'screen,projection,tv')
+    /**
+     * JavaScript loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentJsJquery()
     {
-        $fileCollection = new WebLoader\FileCollection($this->context->parameters['wwwDir'] . '/css');
+        return $this->jsComponentWrapper(['jquery.js']);
+    }
+
+    /**
+     * JavaScript loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentJsMain()
+    {
+        return $this->jsComponentWrapper(['main.js']);
+    }
+
+    /**
+     * JavaScript loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentJsNetteForms()
+    {
+        return $this->jsComponentWrapper(['netteForms.js']);
+    }
+
+    private function jsComponentWrapper(array $fileNames)
+    {
+        $stylesDir = __DIR__ . '/../scripts';
+        $outputDirName = '/tmp/js';
+
+        $fileCollection = new WebLoader\FileCollection($stylesDir);
         $fileCollection->addFiles($fileNames);
 
         $name = strtolower(substr($this->name, strrpos($this->name, ':') + 1)) . '.css';
-        if (file_exists($this->context->parameters['wwwDir'] . '/css/' . $name)) {
+        if (file_exists($stylesDir . '/' . $name)) {
             $files->addFile($name);
         }
 
-        $compiler = WebLoader\Compiler::createCssCompiler($fileCollection, $this->context->parameters['wwwDir'] . '/assets-gen');
+        $compiler = WebLoader\Compiler::createJsCompiler($fileCollection, $this->context->parameters['wwwDir'] . $outputDirName);
+
+        $control = new WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . $outputDirName);
+
+        return $control;
+    }
+
+    private function lessComponentWrapper(array $fileNames, $media = 'screen,projection,tv')
+    {
+        $stylesDir = __DIR__ . '/../styles';
+        $outputDirName = '/tmp/css';
+
+        $fileCollection = new WebLoader\FileCollection($stylesDir);
+        $fileCollection->addFiles($fileNames);
+
+        $name = strtolower(substr($this->name, strrpos($this->name, ':') + 1)) . '.css';
+        if (file_exists($stylesDir . '/' . $name)) {
+            $files->addFile($name);
+        }
+
+        $compiler = WebLoader\Compiler::createCssCompiler($fileCollection, $this->context->parameters['wwwDir'] . $outputDirName);
 
         $filter = new WebLoader\Filter\LessFilter;
         $compiler->addFileFilter($filter);
 
-        $control = new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/assets-gen');
+        $control = new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . $outputDirName);
         $control->setMedia($media);
 
         return $control;

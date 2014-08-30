@@ -1,0 +1,295 @@
+body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #000;
+    font-family: Calibri;
+    margin: 0;
+    padding-top: 42px;
+    min-width: 980px;
+}
+
+.mainmenubar {
+    margin-bottom: 0;
+}
+
+.waybar {
+    margin-top: -20px;
+}
+
+.alert {
+    font-weight: bold;
+}
+
+.topdropdown {
+    margin-left: 100px;
+}
+
+.bar-delimiter {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.topdmenu {
+    left: 100px !important;
+}
+
+.fullw {
+    min-width: 980px;
+}
+
+ul {
+    list-style-type: square;
+}
+
+h1 {
+    color: #000;
+}
+
+n-table {
+    width: 601px;
+    border-collapse:collapse;
+
+    &.borders {
+        td, th {
+            border: 1px solid #ccc;
+        }
+    }
+    
+    td, th {
+        padding: 0 5px;
+    }
+    
+    &.fullwidth {
+        width: 100%;
+    }
+
+    &.headingTop th {
+        text-align: center;
+    }
+
+    tr {
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+        &.odd {
+            background-color: #f0f0f0;
+            &:hover {
+                background-color: #ccc;
+            }
+        }
+    }
+
+    th {
+        width: 300px;
+        text-align: right;
+    }
+}
+
+a.n-button {
+    text-decoration: none;
+    background-color: #888888;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 2px;
+
+    &::hover {
+        background-color: #555555;
+    }
+
+    &.line {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    &.low {
+        padding: 0 10px;
+    }
+
+    &.red {
+        background-color: #e31e25;
+
+        &:hover {
+            background-color: #9b090a;
+        }
+    }
+
+    &.black {
+        background-color: #000;
+    }
+}
+
+#topbar {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    font-family: Calibri;
+    padding: 10px 20px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #fff;
+}
+
+.pagewrap {
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+#ajax-spinner {
+    margin: 15px 0 0 15px;
+    padding: 13px;
+    background: white url('../img/spinner.gif') no-repeat 50% 50%;
+    font-size: 0;
+    z-index: 123456;
+    display: none;
+}
+
+.maincontent {
+    padding: 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    a {
+        color: #000;
+
+        &.btn {
+            color: #fff;
+        }
+    }
+    
+    h1 {
+        margin: 0 0 10px 0;
+    }
+}
+
+.mainlogo-wrap {
+    display: block;
+    text-align: center;
+    background: #333333;
+    padding: 20px 0 15px 0;
+}
+
+.topmenu-wrap {
+    display: block;
+    text-align: left;
+    background: #bbbbbb;
+    padding: 0.2em 1em 0.5em 1em;
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+        }
+    }
+}
+
+
+.mainlogo {
+    margin: 0 auto;
+    height: 80px;
+}
+
+div.flash {
+    color: black;
+    background: #FFF9D7;
+    border: 1px solid #E2C822;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+a[href^="error:"] {
+    background: red;
+    color: white;
+}
+
+input[type=radio], input[type=checkbox] {
+    margin: 0.5em 0.5em 0 0;
+}
+
+form {
+    th, td {
+        vertical-align: top;
+        font-weight: normal;
+        padding: 0.3em 0.5em;
+    }
+    
+    th {
+        text-align: right;
+        padding-top: 0.5em;
+    }
+    
+    .required label {
+        font-weight: bold;
+    }
+    
+    .error {
+        color: #D00;
+        font-weight: bold;
+    }
+}
+
+html.js .jshidden {
+    display: none;
+}
+
+.footer {
+    background: #333333;
+    color: #fff;
+    padding: 5px 20px;
+    text-align: center;
+    clear: both;
+
+    a {
+        color: #fff;
+    }
+}
+
+.space {
+    margin-top: 1.5em !important;
+}
+
+.lowspace {
+    margin-top: 0.5em !important;
+}
+
+.nanospace {
+    margin-top: 0.1em !important;
+}
+
+.textareafull {
+    height: 10em !important;
+}
+
+.textareafull, .morewidth {
+    width: 680px;
+}
+
+.mediumwidth {
+    width: 260px;
+}
+
+.quotation {
+    padding: 0.4em 1em;
+    border-left: 0.2em solid #888888;
+}
+
+.white, .white a {
+    color: #fff;
+}
+
+.glyphicon {
+    padding-right: 0.18em;
+    font-size: 80%;
+}

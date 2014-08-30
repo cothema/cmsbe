@@ -39,5 +39,5 @@
 
             {include './_part/@menu.latte'}
 
-            <div class="maincontent">
+            <section class="maincontent">
                 <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
