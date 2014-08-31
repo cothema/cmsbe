@@ -65,6 +65,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     }
 
     /**
+     * CSS stylesheet loading.
+     * @return WebLoader\Nette\CssLoader
+     */
+    public function createComponentCssAdminLTE()
+    {
+        return $this->lessComponentWrapper(['AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
+    }
+
+    /**
      * JavaScript loading.
      * @return WebLoader\Nette\CssLoader
      */
@@ -75,7 +84,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     /**
      * JavaScript loading.
-     * @return WebLoader\Nette\CssLoader
+     * @return WebLoader\Nette\JavaScriptLoader
      */
     public function createComponentJsMain()
     {
@@ -84,23 +93,35 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     /**
      * JavaScript loading.
-     * @return WebLoader\Nette\CssLoader
+     * @return WebLoader\Nette\JavaScriptLoader
+     */
+    public function createComponentJsAdminLTE()
+    {
+        return $this->jsComponentWrapper(['app.js', '../plugins/iCheck/icheck.min.js'], __DIR__ . '/../../../admin-lte/js/AdminLTE');
+    }
+
+    /**
+     * JavaScript loading.
+     * @return WebLoader\Nette\JavaScriptLoader
      */
     public function createComponentJsNetteForms()
     {
         return $this->jsComponentWrapper(['netteForms.js']);
     }
 
-    private function jsComponentWrapper(array $fileNames)
+    private function jsComponentWrapper(array $fileNames, $jsDir = null)
     {
-        $stylesDir = __DIR__ . '/../scripts';
+        if ($jsDir === null) {
+            $jsDir = __DIR__ . '/../scripts';
+        }
+
         $outputDirName = '/tmp/js';
 
-        $fileCollection = new WebLoader\FileCollection($stylesDir);
+        $fileCollection = new WebLoader\FileCollection($jsDir);
         $fileCollection->addFiles($fileNames);
 
         $name = strtolower(substr($this->name, strrpos($this->name, ':') + 1)) . '.css';
-        if (file_exists($stylesDir . '/' . $name)) {
+        if (file_exists($jsDir . '/' . $name)) {
             $files->addFile($name);
         }
 
@@ -111,9 +132,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $control;
     }
 
-    private function lessComponentWrapper(array $fileNames, $media = 'screen,projection,tv')
+    private function lessComponentWrapper(array $fileNames, $media = null, $stylesDir = null)
     {
-        $stylesDir = __DIR__ . '/../styles';
+        if ($media === null) {
+            $media = 'screen,projection,tv';
+        }
+
+        if ($stylesDir === null) {
+            $stylesDir = __DIR__ . '/../styles';
+        }
+
         $outputDirName = '/tmp/css';
 
         $fileCollection = new WebLoader\FileCollection($stylesDir);
@@ -130,7 +158,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $compiler->addFileFilter($filter);
 
         $control = new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . $outputDirName);
-        $control->setMedia($media);
+
+        if (is_string($media)) {
+            $control->setMedia($media);
+        }
 
         return $control;
     }

@@ -12,8 +12,44 @@ body {
     margin-bottom: 0;
 }
 
+@media(max-width:1180px){
+    .top-support {
+        display: none;
+    }
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
+    color: #fff !important;
+}
+
+@media screen and (max-width: 992px) {
+  .left-side {
+    top: 50px !important;
+  }
+}
+
+.navbar {
+    .left-top-heading {
+        float: left;
+        font-size: 20px;
+        line-height: 50px;
+        text-align: center;
+        padding: 0 10px;
+        width: 220px;
+        font-family: 'Kaushan Script', cursive;
+        font-weight: 500;
+        height: 50px;
+        display: block;
+        margin-right: 20px;
+    }
+    
+    .nav a {
+        color: #777 !important;
+    }
+}
+
 .waybar {
-    margin-top: -20px;
+    
 }
 
 .alert {
@@ -21,7 +57,7 @@ body {
 }
 
 .topdropdown {
-    margin-left: 100px;
+    margin-left: 330px;
 }
 
 .bar-delimiter {
@@ -142,7 +178,11 @@ a.n-button {
 
 .pagewrap {
     background-color: #fff;
-    margin: 0 auto;
+    margin: 0;
+    
+    &.crop-left {
+        margin-left: 220px;
+    }
 }
 
 #ajax-spinner {
@@ -198,7 +238,7 @@ a.n-button {
 
 .mainlogo {
     margin: 0 auto;
-    height: 80px;
+    height: 90px;
 }
 
 div.flash {
@@ -212,6 +252,14 @@ div.flash {
 a[href^="error:"] {
     background: red;
     color: white;
+}
+
+a.no-under {
+    text-decoration: none !important;
+}
+
+.icheckbox_minimal {
+    margin-right: 5px;
 }
 
 input[type=radio], input[type=checkbox] {

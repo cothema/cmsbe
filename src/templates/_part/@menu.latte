@@ -1,35 +1,39 @@
-<div class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                {if $user->isLoggedIn()}
+{if $user->isLoggedIn()}
+    <aside class="left-side sidebar-offcanvas">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{$gravatar}" class="img-circle">
+                </div>
+                <div class="pull-left info">
+                    <p>{if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
 
-                    {foreach $menu as $menuOne}
-                        <li{ifCurrent $menuOne->nLink} class="active"{/ifCurrent}>
-                            {if $menuOne->nLink}<a n:href="$menuOne->nLink">{else}<a href="#"{if $menuOne->childs} class="dropdown-toggle" data-toggle="dropdown"{/if}>{/if}{$menuOne->name}{if $menuOne->childs} <b class="caret"></b>{/if}</a>
+                <li>
+                    <a n:href="Homepage:"><i class="fa fa-home"></i> <span>Řídící deska</span></a>
+                </li>
+
+                {foreach $menu as $menuOne}
+                    <li class="{ifCurrent $menuOne->nLink} active {/ifCurrent}{if $menuOne->childs} treeview {/if}">
+                        {if $menuOne->nLink}<a n:href="$menuOne->nLink">{else}<a href="#">{/if}<span>{$menuOne->name}</span>{if $menuOne->childs} <i class="fa fa-angle-left pull-right"></i>{/if}</a>
                                     {foreach $menuOne->childs as $menuOneChild}
-                                        {first}<ul class="dropdown-menu">{/first}
-                                        <li><a n:href="{$menuOneChild->nLink}">{$menuOneChild->name}</a></li>
-                                        {last}</ul>{/last}
-                                    {/foreach}
-                        </li>
-                    {/foreach}
-
-                    <li{ifCurrent Sign:in} class="active"{/ifCurrent} class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"></a>
-
+                                        {first}<ul class="treeview-menu">{/first}
+                                    <li><a n:href="$menuOneChild->nLink">{$menuOneChild->name}</a></li>
+                                    {last}</ul>{/last}
+                                {/foreach}
                     </li>
+                {/foreach}
 
-
-                    {if $user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null}
-                        <li><a href="{$urlStats}">Statistiky návštěvnosti</a></li>
-                        {/if}
-                    {else}
-                    <li{ifCurrent Sign:in} class="active"{/ifCurrent}><a n:href="Sign:in">Přihlášení</a></li>
+                {if $user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null}
+                    <li><a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>Statistiky návštěvnosti</span></a></li>
                     {/if}
-            </ul>
-        </div>
-    </div>
-</div>
+                <li><a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>Systémová nastavení</span></a></li>
+                <li><a n:href="Settings:BasicInfo"><i class="fa fa-support"></i> <span>Nápověda</span></a></li>
 
-{include './@navmenu.latte'}
+            </ul>
+        </section>
+    </aside>
+{/if}
