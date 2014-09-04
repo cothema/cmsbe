@@ -1,5 +1,5 @@
 {block content}
-<h1 n:block=title><span class="glyphicon glyphicon-briefcase"></span> {if $webinfo->systype==='is'}Informační systém{else}Administrace{/if}</h1>
+<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}Informační systém{else}Administrace{/if}</h1>
 
 <div class="well">
     Vítejte v {if $webinfo->systype==='is'}informačním systému společnosti{else}administraci webu{/if} {$companyName}!
@@ -11,7 +11,7 @@
         <h3 class="panel-title">Upozornění</h3>
     </div>
     <div class="panel-body">
-        <span class="glyphicon glyphicon-ok"></span> Nemáte žádná upozornění.
+        <span class="fa fa-check"></span> Nemáte žádná upozornění.
     </div>
 </div>
 *}

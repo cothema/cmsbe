@@ -1,6 +1,6 @@
 <div class="container navbar-default waybar">
     <div class="navbar-header">
-      <a class="navbar-brand" n:href="Homepage:"><span class="glyphicon glyphicon-home"></span></a>
+      <a class="navbar-brand" n:href="Homepage:"><span class="fa fa-home"></span></a>
     </div>
     {ifCurrent Homepage:default}
     <div class="navbar-collapse collapse">
@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
         {if isset($navbar) && is_array($navbar)}
             {foreach $navbar as $navbarOne}
-                <li class="navbar-brand bar-delimiter"><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
                 <li>
                     {if isset($navbarOne->link)}
                         <a n:href="$navbarOne->link">{$navbarOne->name}</a>
@@ -23,7 +23,7 @@
                 </li>
             {/foreach}
         {else}
-        <li class="navbar-brand bar-delimiter"><span class="glyphicon glyphicon-chevron-right"></span></li>
+        <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
         <li><a href="#">Aktuální stránka</a></li>
         {/if}
       </ul>

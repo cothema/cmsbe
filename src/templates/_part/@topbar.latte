@@ -13,12 +13,12 @@
     <div class="container-fluid fullw">
         <div class="navbar-header">
             <a class="navbar-brand" onclick="event.preventDefault();
-                    location.reload()" href="#"><span class="glyphicon glyphicon-repeat"></span> </a>
+                    location.reload()" href="#"><span class="fa fa-repeat"></span> </a>
             <a class="navbar-brand" onclick="event.preventDefault();
-                    window.history.back()" href="#"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+                    window.history.back()" href="#"><span class="fa fa-chevron-left"></span> </a>
             <a class="navbar-brand" onclick="event.preventDefault();
-                    window.history.forward();" href="#"><span class="glyphicon glyphicon-chevron-right"></span> </a>
-            <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-briefcase"></span> {$companyName} <b class="caret"></b></a>
+                    window.history.forward();" href="#"><span class="fa fa-chevron-right"></span> </a>
+            <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
             <ul class="dropdown-menu topdropdown">
                 <li><a n:href="Homepage:">Hlavní strana</a></li>
                 {if $isSA}<li><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>{/if}
@@ -28,7 +28,7 @@
         {if $user->isLoggedIn() && $otherWebsites}
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Další weby <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> Další weby <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {foreach $otherWebsites as $otherWebsitesOne}
                             <li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
@@ -48,7 +48,7 @@
         {if $user->isLoggedIn()}
             <ul class="nav navbar-nav navbar-left top-support">
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-earphone"></span> <b>Telefonická podpora:</b> +420 606 460 316 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>Telefonická podpora:</b> +420 606 460 316 <b class="caret"></b></a>
                     <ul class="dropdown-menu pull-right">
                         <li>
                             <a n:href="Help:">Nápověda</a>
@@ -61,7 +61,7 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank" href="{$companyWebsite}">Přejít na web &nbsp; <span class="glyphicon glyphicon-new-window"></span></a></li>
+                <li><a target="_blank" href="{$companyWebsite}">Přejít na web &nbsp; <span class="fa fa-external-link"></span></a></li>
                         {if !$user->isLoggedIn()}
                     <li {ifCurrent Sign:in}class="active"{/ifCurrent}>
                         <a n:href="Sign:in">Přihlášení</a>
@@ -77,7 +77,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Odhlásit se" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="glyphicon glyphicon-off"></span></a>
+                        <a title="Odhlásit se" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="fa fa-power-off"></span></a>
                     </li>
                 {/if}
             </ul>
