@@ -7,22 +7,16 @@
 </div>
 
 <table class="table table-striped" style="width:49%; float: left;margin-right:2%;">
-    {if $contact->name}
-    <tr>
+    <tr n:if="$contact->name">
         <th>Kontaktní osoba:</th>
         <td><span class="fa fa-user"></span> {$contact->name}</td>
     </tr>
-    {/if}
-    {if $contact->tel}
-    <tr>
+    <tr n:if="$contact->tel">
         <th>Telefon:</th>
         <td><span class="fa fa-phone"></span> {$contact->tel}</td>
     </tr>
-    {/if}
-    {if $contact->email}
-    <tr>
+    <tr n:if="$contact->email">
         <th>E-mail:</th>
         <td><a href="mailto:{$contact->email}?subject=Podpora%20syst%C3%A9mu"><span class="fa fa-envelope"></span> {$contact->email}</li></td>
     </tr>
-    {/if}
 </table>
