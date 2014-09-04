@@ -12,7 +12,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         {if isset($navbar) && is_array($navbar)}
-                <li n:foreach="$navbar as $navbarOne" class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
+            {foreach $navbar as $navbarOne}
+                <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
                 <li>
                     {if isset($navbarOne->link)}
                         <a n:href="$navbarOne->link">{$navbarOne->name}</a>
@@ -20,6 +21,7 @@
                         <a href="#">{$navbarOne->name}</a>
                     {/if}
                 </li>
+            {/foreach}
         {else}
         <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
         <li><a href="#">Aktuální stránka</a></li>
