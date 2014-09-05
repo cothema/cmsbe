@@ -40,6 +40,7 @@ Kdyby\Console\DI\ConsoleExtension::register($configurator);
 Kdyby\Events\DI\EventsExtension::register($configurator);
 Kdyby\Doctrine\DI\OrmExtension::register($configurator);
 /* end: Doctrine */
+Kdyby\Translation\DI\TranslationExtension::register($configurator);
 
 $container = $configurator->createContainer();
 
