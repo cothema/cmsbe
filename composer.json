@@ -19,6 +19,7 @@
     "require": {
         "php": ">= 5.3.7",
         "nette/nette": "~2.1.0",
+        "kdyby/translation": "~2.0",
         "mobiledetect/mobiledetectlib": "2.7.8",
         "nextras/forms": "v1.3.1",
         "kdyby/doctrine": "v1.1.0",
