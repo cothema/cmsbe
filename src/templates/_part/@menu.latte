@@ -13,7 +13,7 @@
             <li>
                 <a n:href="Homepage:"><i class="fa fa-home"></i> <span>Řídící deska</span></a>
             </li>
-            <li n:foreach="$menu as $menuOne" class="{ifCurrent $menuOne->nLink} active {/ifCurrent}{if $menuOne->childs} treeview {/if}">
+            <li n:foreach="$menu as $menuOne" n:class="$presenter->isLinkCurrent($menuOne->nLink) ? active, $menuOne->childs ? treeview">
                 <a n:tag-if="$menuOne->nLink" n:href="$menuOne->nLink"><a n:tag-if="!$menuOne->nLink" href="#"><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span></a></a>
 
                 <ul n:inner-foreach="$menuOne->childs as $menuOneChild" class="treeview-menu">

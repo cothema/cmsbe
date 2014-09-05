@@ -33,14 +33,12 @@
 
         {include './_part/@menu.latte'}
 
-        <div class="pagewrap{if $user->isLoggedIn()} crop-left{/if}">
-            {if $custom->topPanel != '0'}
-                <div class="mainlogo-wrap">
-                    <a n:href="Homepage:">
-                        <img src="{$basePath}/data/img/logo/logo.png" class="mainlogo" />
-                    </a>
-                </div>
-            {/if}
+        <div n:class="pagewrap, $user->isLoggedIn() ? crop-left">
+            <div n:if="$custom->topPanel != '0'" class="mainlogo-wrap">
+                <a n:href="Homepage:">
+                    <img src="{$basePath}/data/img/logo/logo.png" class="mainlogo" />
+                </a>
+            </div>
 
             {include './_part/@navmenu.latte'}
 
