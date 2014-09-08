@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">= 5.3.7",
-        "nette/nette": "~2.1.0",
+        "nette/nette": "~2.2",
         "kdyby/translation": "@dev",
         "mobiledetect/mobiledetectlib": "2.7.8",
         "nextras/forms": "v1.3.1",
@@ -26,7 +26,8 @@
         "cothema/cmsbe-user": "@dev",
         "janmarek/webloader": "2.2.0",
         "leafo/lessphp": "0.4.0",
-        "cothema/admin-lte": "*"
+        "cothema/admin-lte": "*",
+        "symfony/yaml": "~2.5"
     },
     "require-dev": {
         "nette/tester": "~1.0.0"
