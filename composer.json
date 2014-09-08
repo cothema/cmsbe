@@ -2,6 +2,7 @@
     "name": "cothema/cmsbe",
     "description": "Cothema CMS Backend",
     "type": "project",
+    "keywords": ["cms"],
     "license": ["MIT"],
     "authors": [
         {
