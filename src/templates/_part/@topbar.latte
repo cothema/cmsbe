@@ -51,7 +51,16 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a></li>
+                <li>
+                    <a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a>
+                </li>
+                <li>
+                    <a target="_blank" href="{$companyWebsite}">{_layout.general.language} &nbsp; <span class="fa fa-external-link"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a n:href="changeLang! locale=>czech">{_layout.langs.czech}</a></li>
+                        <li><a n:href="changeLang! locale=>english">{_layout.langs.english}</a></li>
+                    </ul>
+                </li>
                         {if !$user->isLoggedIn()}
                     <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
                         <a n:href="Sign:in">{_layout.general.login}</a>

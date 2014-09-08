@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use Nette,
-    App\Model;
+use Nette;
+use App\Model;
 use App;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
@@ -26,12 +26,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     }
 
     protected function createTemplate($class = null)
-	{
-		$template = parent::createTemplate($class);
-		$template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
+    {
+            $template = parent::createTemplate($class);
+            $template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
 
-		return $template;
-	}
+            return $template;
+    }
+    
+    public function handleChangeLang()
+    {
+        
+    }
 
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.

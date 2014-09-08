@@ -1,0 +1,22 @@
+homepage:
+    support: 'Podpora'
+    custom_settings: 'Přizpůsobení'
+
+help:
+    your_ip_server: 'Vaše IP adresa (z pohledu serveru)'
+    help: 'Nápověda'
+    about_app: 'O aplikaci'
+    system_support: 'Podpora systému'
+    info_about_authors: 'Informace o autorech a použitých technologiích'
+    technical_system_support: 'Odborná pomoc se systémem'
+
+custom:
+    custom: 'Přizpůsobení'
+    settings_on_this_page_private: 'Nastavení na této stránce jsou uložena pouze pro Vás. Ostatní uživatelé si mohou uložit nastavení svá.'
+
+about_webapp:
+    about_webapp: 'O aplikaci'
+    app_use_icons: 'V rámci aplikace jsou využívány ikony'
+
+settings:
+    basic_info_settings: 'Nastavení základních informací'

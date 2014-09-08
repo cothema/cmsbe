@@ -1,16 +1,16 @@
 {block content}
 
-<h1 n:block=title><span class="fa fa-hand-o-down"></span> Nápověda</h1>
+<h1 n:block=title><span class="fa fa-hand-o-down"></span> {_pages.help.help}</h1>
 
 <div class="col-sm-4">
     <div class="list-group">
         <a n:href="Support:" class="list-group-item">
-          <h4 class="list-group-item-heading"><span class="fa fa-phone"></span> Podpora systému</h4>
-          <p class="list-group-item-text">Odborná pomoc se systémem</p>
+          <h4 class="list-group-item-heading"><span class="fa fa-phone"></span> {_pages.help.system_support}</h4>
+          <p class="list-group-item-text">{_pages.help.technical_system_support}</p>
         </a>
         <a n:href="AboutWebapp:" class="list-group-item">
-          <h4 class="list-group-item-heading"><span class="fa fa-bookmark"></span> O aplikaci</h4>
-          <p class="list-group-item-text">Informace o autorech a použitých technologiích</p>
+          <h4 class="list-group-item-heading"><span class="fa fa-bookmark"></span> {_pages.help.about_app}</h4>
+          <p class="list-group-item-text">{_pages.help.info_about_authors}</p>
         </a>
     </div>
 </div>
@@ -18,7 +18,7 @@
 <table class="table table-striped" style="width:49%; float: left;margin-right:2%;">
     <tbody>
         <tr>
-            <th>Vaše IP adresa (z pohledu serveru):</th>
+            <th>{_pages.help.your_ip_server}:</th>
             <td><span class="fa fa-sign-in"></span> {$yourIp}</td>
         </tr>
     </tbody>

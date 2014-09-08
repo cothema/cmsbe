@@ -43,3 +43,5 @@ translation:
     default: cz
     whitelist: [cz, en, de]
     fallback: [cs_CZ, cz]
+    resolvers:
+        session: on

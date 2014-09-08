@@ -1,0 +1,22 @@
+homepage:
+    support: 'Support'
+    custom_settings: 'Custom settings'
+
+help:
+    your_ip_server: 'Your IP address (from server side)'
+    help: 'Help'
+    about_app: 'About application'
+    system_support: 'System support'
+    info_about_authors: 'Information about authors and technologies'
+    technical_system_support: 'Technical system support'
+
+custom:
+    custom: 'Custom settings'
+    settings_on_this_page_private: 'Settings on this page are private. Other users can save their own settings.'
+
+about_webapp:
+    about_webapp: 'About application'
+    app_use_icons: 'Within this aplication are used icons'
+
+settings:
+    basic_info_settings: 'Basic information settings'
