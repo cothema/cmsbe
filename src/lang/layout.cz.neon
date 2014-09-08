@@ -1,0 +1,10 @@
+general:
+    administration: 'Administrace'
+    information_system: 'Informační systém'
+    phone_support: 'Telefonická podpora'
+    help: 'Nápověda'
+    about_app: 'O aplikaci'
+    homepage: 'Hlavní strana'
+    go_to_website: 'Přejít na web'
+    login: 'Přihlášení'
+    custom_settings: 'Přizpůsobení'

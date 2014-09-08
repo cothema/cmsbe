@@ -7,7 +7,7 @@
 <header class="navbar navbar-inverse navbar-fixed-top">
     <a n:href="Homepage:">
         <div id="left-also-top" class="left-top-heading">
-            {if $webinfo->systype==='is'}Informační systém{else}{_layout.general.administration}{/if}
+            {if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}
         </div>
     </a>
     <div class="container-fluid fullw">
@@ -20,9 +20,9 @@
                     window.history.forward();" href="#"><span class="fa fa-chevron-right"></span> </a>
             <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
             <ul class="dropdown-menu topdropdown">
-                <li><a n:href="Homepage:">Hlavní strana</a></li>
+                <li><a n:href="Homepage:">{_layout.general.homepage}</a></li>
                 <li n:if="$isSA"><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>
-                <li><a n:href="AboutWebapp:">O aplikaci</a></li>
+                <li><a n:href="AboutWebapp:">{_layout.general.about_app}</a></li>
             </ul>
         </div>
         <ul n:if="$user->isLoggedIn() && $otherWebsites" class="nav navbar-nav navbar-left">
@@ -39,10 +39,10 @@
 
         <ul n:if="$user->isLoggedIn()" class="nav navbar-nav navbar-left top-support">
             <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>Telefonická podpora:</b> +420 606 460 316 <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>{_layout.general.phone_support}:</b> +420 606 460 316 <b class="caret"></b></a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a n:href="Help:">Nápověda</a>
+                        <a n:href="Help:">{_layout.general.help}</a>
                         <a n:href="Support:">Další formy podpory systému</a>
                     </li>
                 </ul>
@@ -51,16 +51,16 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank" href="{$companyWebsite}">Přejít na web &nbsp; <span class="fa fa-external-link"></span></a></li>
+                <li><a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a></li>
                         {if !$user->isLoggedIn()}
                     <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-                        <a n:href="Sign:in">Přihlášení</a>
+                        <a n:href="Sign:in">{_layout.general.login}</a>
                     </li>
                 {else}
                     <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a n:href="Custom:">Přizpůsobení</a></li>
+                            <li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
                             <li><a n:href="Users:profile">Profilové informace</a></li>
                             <li><a n:href="Users:changePass">Změnit heslo</a></li>
                             <li><a n:href="Sign:out">Odhlásit se</a></li>

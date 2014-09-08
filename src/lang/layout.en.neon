@@ -1,0 +1,10 @@
+general:
+    administration: 'Office'
+    information_system: 'Information system'
+    phone_support: 'Phone support'
+    help: 'Help'
+    about_app: 'About application'
+    homepage: 'Homepage'
+    go_to_website: 'Go to website'
+    login: 'Log in'
+    custom_settings: 'Custom settings'
