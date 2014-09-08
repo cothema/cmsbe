@@ -55,10 +55,10 @@
                     <a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a>
                 </li>
                 <li>
-                    <a target="_blank" href="{$companyWebsite}">{_layout.general.language} &nbsp; <span class="fa fa-external-link"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_layout.general.language} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a n:href="changeLang! locale=>czech">{_layout.langs.czech}</a></li>
-                        <li><a n:href="changeLang! locale=>english">{_layout.langs.english}</a></li>
+                        <li><a n:href="changeLang! locale=>czech">{_langs.czech}</a></li>
+                        <li><a n:href="changeLang! locale=>english">{_langs.english}</a></li>
                     </ul>
                 </li>
                         {if !$user->isLoggedIn()}
