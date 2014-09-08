@@ -37,4 +37,4 @@ services:
 	router: @App\RouterFactory::createRouter
   
 extensions:
-    translation: Kdyby\Translation\DI\TranslationExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
