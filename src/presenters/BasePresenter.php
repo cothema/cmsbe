@@ -25,6 +25,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         parent::__construct();
     }
 
+    protected function createTemplate($class = null)
+	{
+		$template = parent::createTemplate($class);
+		$template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
+
+		return $template;
+	}
+
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.
      *
