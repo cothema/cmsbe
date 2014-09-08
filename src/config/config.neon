@@ -28,8 +28,8 @@ nette:
 
 doctrine:
 		metadata:
-			App: '%appDir%/../vendor/cothema/cmsbe/src/model'
-			Cothema: '%appDir%/../vendor/cothema/cmsbe-user/src/model'
+			App: '%appDir%/../../cmsbe/src/model'
+			Cothema: '%appDir%/../../cmsbe-user/src/model'
 
 services:
 	- App\UserManager
