@@ -38,3 +38,8 @@ services:
   
 extensions:
 	translation: Kdyby\Translation\DI\TranslationExtension
+
+translation:
+    default: cz
+    whitelist: [cz, en, de]
+    fallback: [cs_CZ, cz]
