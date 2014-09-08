@@ -21,7 +21,9 @@ Container::extensionMethod('addTypeahead', function(Container $container, $name,
 
 $configurator = new Nette\Configurator;
 
-$configurator->setDebugMode(['127.0.0.1']);
+if(isset($debugIPs)) {
+	$configurator->setDebugMode($debugIPs);
+}
 $configurator->enableDebugger(DIR_ROOT . '/log');
 
 $configurator->setTempDirectory(DIR_ROOT . '/temp');
