@@ -7,7 +7,7 @@
 <header class="navbar navbar-inverse navbar-fixed-top">
     <a n:href="Homepage:">
         <div id="left-also-top" class="left-top-heading">
-            {if $webinfo->systype==='is'}Informační systém{else}Administrace{/if}
+            {if $webinfo->systype==='is'}Informační systém{else}{_layout.general.administration}{/if}
         </div>
     </a>
     <div class="container-fluid fullw">
