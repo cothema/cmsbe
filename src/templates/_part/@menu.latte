@@ -6,12 +6,12 @@
             </div>
             <div class="pull-left info">
                 <p>{if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i> {_menu.items.online}</a>
             </div>
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a n:href="Homepage:"><i class="fa fa-home"></i> <span>Řídící deska</span></a>
+                <a n:href="Homepage:"><i class="fa fa-home"></i> <span>{_menu.items.dashboard}</span></a>
             </li>
             <li n:foreach="$menu as $menuOne" n:class="$presenter->isLinkCurrent($menuOne->nLink) ? active, $menuOne->childs ? treeview">
                 <a n:tag-if="$menuOne->nLink" n:href="$menuOne->nLink"><a n:tag-if="!$menuOne->nLink" href="#"><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span></a></a>
@@ -20,9 +20,9 @@
                     <li><a n:href="$menuOneChild->nLink">{$menuOneChild->name}</a></li>
                 </ul>
             </li>
-            <li n:if="$user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null"><a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>Statistiky návštěvnosti</span></a></li>
-            <li><a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>Systémová nastavení</span></a></li>
-            <li><a n:href="Settings:BasicInfo"><i class="fa fa-support"></i> <span>Nápověda</span></a></li>
+            <li n:if="$user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null"><a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>{_menu.items.visitor_stats}</span></a></li>
+            <li><a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>{_menu.items.system_settings}</span></a></li>
+            <li><a n:href="Settings:BasicInfo"><i class="fa fa-support"></i> <span>{_menu.items.help}</span></a></li>
 
         </ul>
     </section>

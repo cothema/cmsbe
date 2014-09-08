@@ -1,0 +1,6 @@
+items:
+    dashboard: 'Hlavní panel'
+    help: 'Nápověda'
+    system_settings: 'Systémová nastavení'
+    visitor_stats: 'Statistiky návštěvnosti'
+    online: 'Přítomný'

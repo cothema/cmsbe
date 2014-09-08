@@ -5,7 +5,7 @@
     {ifCurrent Homepage:default}
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">Dnes je <b>{$actualDate}</b>. Svátek má <b>{$nameday->name}</b>.</a></li>
+        <li><a href="#">{_layout.general.today_is_date} <b>{$actualDate}</b>. {_layout.general.nameday_of} <b>{$nameday->name}</b>.</a></li>
       </ul>
     </div>
     {else}
@@ -24,7 +24,7 @@
             {/foreach}
         {else}
         <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
-        <li><a href="#">Aktuální stránka</a></li>
+        <li><a href="#">{$navbarOne->actual_page}</a></li>
         {/if}
       </ul>
     </div>

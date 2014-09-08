@@ -21,13 +21,13 @@
             <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
             <ul class="dropdown-menu topdropdown">
                 <li><a n:href="Homepage:">{_layout.general.homepage}</a></li>
-                <li n:if="$isSA"><a n:href="Settings:basicInfo">Nastavení základních informací</a></li>
+                <li n:if="$isSA"><a n:href="Settings:basicInfo">{_layout.general.basic_info_settings}</a></li>
                 <li><a n:href="AboutWebapp:">{_layout.general.about_app}</a></li>
             </ul>
         </div>
         <ul n:if="$user->isLoggedIn() && $otherWebsites" class="nav navbar-nav navbar-left">
             <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> Další weby <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> {_layout.general.other_websites} <b class="caret"></b></a>
                 <ul n:inner-foreach="$otherWebsites as $otherWebsitesOne" class="dropdown-menu">
                     <li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
                     <li n:foreach="$otherWebsitesOne->items as $oneOWItem" n:if="is_object($oneOWItem)">
@@ -43,7 +43,7 @@
                 <ul class="dropdown-menu pull-right">
                     <li>
                         <a n:href="Help:">{_layout.general.help}</a>
-                        <a n:href="Support:">Další formy podpory systému</a>
+                        <a n:href="Support:">{_layout.general.other_forms_of_support}</a>
                     </li>
                 </ul>
             </li>
@@ -61,13 +61,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
-                            <li><a n:href="Users:profile">Profilové informace</a></li>
-                            <li><a n:href="Users:changePass">Změnit heslo</a></li>
-                            <li><a n:href="Sign:out">Odhlásit se</a></li>
+                            <li><a n:href="Users:profile">{_layout.general.profile_info}</a></li>
+                            <li><a n:href="Users:changePass">{_layout.general.change_password}</a></li>
+                            <li><a n:href="Sign:out">{_layout.general.log_out}</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a title="Odhlásit se" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="fa fa-power-off"></span></a>
+                        <a title="{_layout.general.log_out}" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="fa fa-power-off"></span></a>
                     </li>
                 {/if}
             </ul>
