@@ -58,7 +58,7 @@
                     </li>
                 {else}
                     <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="Profilová fotografie" class="img-circle" style="height:40px;margin-top:-10px;;margin-right:0.5em;float:left;" /> {if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="{_layout.general.profile_picture}" class="img-circle profile-picture" /> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
                             <li><a n:href="Users:profile">{_layout.general.profile_info}</a></li>
