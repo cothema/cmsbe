@@ -32,11 +32,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
             return $template;
     }
-    
-    public function handleChangeLang()
-    {
-        
-    }
 
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.
