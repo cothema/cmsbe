@@ -1,5 +1,5 @@
 {block content}
-<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_pages.layout.general.administration}{else}{_pages.layout.general.information_system}{/if}</h1>
+<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_layout.general.administration}{else}{_layout.general.information_system}{/if}</h1>
 
 <div class="well">
     Vítejte v {if $webinfo->systype==='is'}informačním systému společnosti{else}administraci webu{/if} {$companyName}!
