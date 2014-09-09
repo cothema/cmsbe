@@ -1,22 +1,22 @@
 {block content}
 
-<h1 n:block=title><span class="fa fa-phone"></span> Podpora systému</h1>
+<h1 n:block=title><span class="fa fa-phone"></span> {_pages.support.header.support}</h1>
 
 <div class="well">
-    V případě jakýchkoliv problémů neváhejte kontaktovat podporu systému.
+    {_pages.support.intro.in_case}
 </div>
 
 <table class="table table-striped" style="width:49%; float: left;margin-right:2%;">
     <tr n:if="$contact->name">
-        <th>Kontaktní osoba:</th>
+        <th>{_pages.support.contact_person}:</th>
         <td><span class="fa fa-user"></span> {$contact->name}</td>
     </tr>
     <tr n:if="$contact->tel">
-        <th>Telefon:</th>
+        <th>{_pages.support.telephone}:</th>
         <td><span class="fa fa-phone"></span> {$contact->tel}</td>
     </tr>
     <tr n:if="$contact->email">
-        <th>E-mail:</th>
+        <th>{_pages.support.email}:</th>
         <td><a href="mailto:{$contact->email}?subject=Podpora%20syst%C3%A9mu"><span class="fa fa-envelope"></span> {$contact->email}</a></td>
     </tr>
 </table>

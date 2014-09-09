@@ -1,6 +1,8 @@
 homepage:
     support: 'Support'
+    support_you_have_subscribed: 'You have subscribed technical support for using the system'
     custom_settings: 'Custom settings'
+    custom_settings_set_yours: 'Customize your environment to your own requirements'
 
 help:
     your_ip_server: 'Your IP address (from server side)'
@@ -19,4 +21,16 @@ about_webapp:
     app_use_icons: 'Within this aplication are used icons'
 
 settings:
+    intro:
+        basic_info: 'Basic information is used uniformly throughout the system. In case you want to set customization for your user account - go to "Customize" - see below.'
     basic_info_settings: 'Basic information settings'
+    customization: 'Customization'
+
+support:
+    header:
+        support: 'System support'
+    intro:
+        in_case: 'If you have any problems, please contact our helpdesk.'
+    contact_person: 'Contact person'
+    telephone: 'Telephone'
+    email: 'E-mail'
