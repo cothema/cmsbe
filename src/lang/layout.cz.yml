@@ -19,3 +19,5 @@ general:
     basic_info_settings: 'Nastavení základních informací'
     profile_picture: 'Profilová fotografie'
     language: 'Jazyk'
+navbar:
+    actual_page: 'Aktuální stránka'

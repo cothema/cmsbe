@@ -19,3 +19,5 @@ general:
     basic_info_settings: 'Basic information settings'
     profile_picture: 'Profile picture'
     language: 'Language'
+navbar:
+    actual_page: 'Actual page'
