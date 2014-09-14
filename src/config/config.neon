@@ -1,17 +1,7 @@
-#
-# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
-#
-# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
-# http://nette.org/security-warning
-#
-parameters:
-
-
 php:
 	date.timezone: Europe/Prague
-	session.name: "cothadm"
+	session.name: %session.name%
 	# zlib.output_compression: yes
-
 
 nette:
 	application:
@@ -23,13 +13,20 @@ nette:
 		expiration: 14 days
 
 	database:
+		dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
+		user: %database.user%
+		password: %database.password%
 		options:
 			lazy: yes
 
 doctrine:
-		metadata:
-			App: '%appDir%/../../cmsbe/src/model'
-			Cothema: '%appDir%/../../cmsbe-user/src/model'
+	host: %database.host%
+	user: %database.user%
+	password: %database.password%
+	dbname: %database.database%
+	metadata:
+		App: '%appDir%/../../cmsbe/src/model'
+		Cothema: '%appDir%/../../cmsbe-user/src/model'
 
 services:
 	- App\UserManager
