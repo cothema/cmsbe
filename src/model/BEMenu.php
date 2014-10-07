@@ -35,6 +35,11 @@ class BEMenu extends \Kdyby\Doctrine\Entities\IdentifiedEntity
      * @ORM\Column(type="text")
      */
     protected $module;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $faIcon;
 
     public function getNLink()
     {

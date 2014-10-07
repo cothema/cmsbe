@@ -277,6 +277,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $menuHandle['orderLine'] = $beMenuOne->orderLine;
             $menuHandle['parent'] = $beMenuOne->parent;
             $menuHandle['module'] = $beMenuOne->module;
+            $menuHandle['faIcon'] = $beMenuOne->faIcon;
 
             // Find childs
             $beSubmenuDao = $this->em->getDao(App\BEMenu::getClassName());

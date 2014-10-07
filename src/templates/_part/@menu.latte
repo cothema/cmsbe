@@ -25,7 +25,7 @@
                 <li n:class="$active ? active, $menuOne->childs ? treeview">
                     <a n:tag-if="$menuOne->nLink" n:href="$menuOne->nLink">
                         <a n:tag-if="!$menuOne->nLink" href="#">
-                            <span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span>
+                            <span n:if="$menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                     </a>
                     <ul class="treeview-menu">
