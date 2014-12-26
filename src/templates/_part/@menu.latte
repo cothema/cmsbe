@@ -29,9 +29,11 @@
                         </a>
                     </a>
                     <ul class="treeview-menu">
-                        <a n:href="$menuOneChild->nLink">
-                            <span n:if="$menuOneChild->faIcon"><i class="fa fa-{$menuOneChild->faIcon}"></i> </span><span n:if="!$menuOneChild->faIcon && $menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOneChild->name}</span>
-                        </a>
+						<li n:foreach="$menuOne->childs as $menuOneChild">
+							<a n:href="$menuOneChild->nLink">
+								<span n:if="$menuOneChild->faIcon"><i class="fa fa-{$menuOneChild->faIcon}"></i> </span><span n:if="!$menuOneChild->faIcon && $menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOneChild->name}</span>
+							</a>
+						</li>
                     </ul>
                 </li>
             {/foreach}
