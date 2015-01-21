@@ -360,14 +360,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
             throw new \Exception('You do not have sufficient permissions.');
         } catch (\Exception $e) {
-
             if (is_array($role)) {
                 $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním (' . implode(' / ', $role) . ').');
             } else {
                 $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním (' . $role . ').');
             }
 
-            $this->redirect('Sign:in');
+            $this->redirect('Sign:in', ['backSignInUrl' => $this->getHttpRequest()->url->path]);
         }
     }
 
