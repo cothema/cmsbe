@@ -19,9 +19,9 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  .left-side {
-    top: 50px !important;
-  }
+    .left-side {
+        top: 50px !important;
+    }
 }
 
 .left-side {
@@ -45,12 +45,12 @@ body {
         margin-right: 20px;
         color: #fff;
     }
-    
+
     .nav a {
         color: #777 !important;
         margin-top: -1px;
     }
-    
+
     .profile-picture {
         height: 40px;
         margin-top: -10px;
@@ -63,29 +63,29 @@ body {
     color: #fff !important;
 }
 
-.navbar-bookmark {
-	position: relative;
-	top: 2px;
-	display: inline-block;
-	font-size: 30px;
-	float: right;
-	margin-right: 50px;
-	
-	i {
-		cursor: pointer;
-		color: #f0f0f0;
-		text-shadow:
-	   -1px -1px 0 #000,  
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		 1px 1px 0 #000;
-	}
-	
-	i:hover {
-		color: #ffd800;
-		text-shadow:
-	    0 0 0 #000;
-	}
+.navbar-tools {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    font-size: 30px;
+    float: right;
+    margin-right: 50px;
+
+    a {
+        cursor: pointer;
+        color: #f0f0f0;
+        text-shadow:
+            -1px -1px 0 #000,  
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        text-decoration: none;
+    }
+
+    .pinned, a:hover {
+        color: #343234 !important;
+        text-shadow: 0 0 0 #000;
+    }
 }
 
 .waybar {
@@ -136,11 +136,11 @@ n-table {
             border: 1px solid #ccc;
         }
     }
-    
+
     td, th {
         padding: 0 5px;
     }
-    
+
     &.fullwidth {
         width: 100%;
     }
@@ -219,7 +219,7 @@ a.n-button {
 .pagewrap {
     background-color: #fff;
     margin: 0;
-    
+
     &.crop-left {
         margin-left: 220px;
     }
@@ -246,11 +246,11 @@ a.n-button {
             color: #fff;
         }
     }
-    
+
     h1 {
         margin: 0 0 10px 0;
     }
-    
+
     .homepage-tile {
         .inner {
             margin-right: 90px;
@@ -319,16 +319,16 @@ form {
         font-weight: normal;
         padding: 0.3em 0.5em;
     }
-    
+
     th {
         text-align: right;
         padding-top: 0.5em;
     }
-    
+
     .required label {
         font-weight: bold;
     }
-    
+
     .error {
         color: #D00;
         font-weight: bold;
@@ -397,5 +397,5 @@ tr.required:after {
     content: " *";
     color: #ff0000;
     font-weight: bold;
-	font-size: 200%;
+    font-size: 200%;
 }

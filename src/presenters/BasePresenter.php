@@ -8,29 +8,87 @@ use App;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
 use WebLoader;
+use App\ORM\Sys\Pinned;
+use App\BEMenu;
 
 /**
  * Base presenter for all application presenters.
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter
-{
+abstract class BasePresenter extends Nette\Application\UI\Presenter {
+
     /** @persistent */
     public $locale;
 
     /** @var \Kdyby\Translation\Translator @inject */
     public $translator;
 
-    public function __construct()
-    {
+    /** @var \Kdyby\Doctrine\EntityManager @inject */
+    public $em;
+
+    function __construct() {
         parent::__construct();
     }
 
-    protected function createTemplate($class = null)
-    {
-            $template = parent::createTemplate($class);
-            $template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
+    function handlePinIt() {
+        $pinnedDao = $this->em->getDao(Pinned::getClassName());
 
-            return $template;
+        $pinnedEntity = new Pinned;
+        $pinnedEntity->user = $this->user->id;
+        $pinnedEntity->page = $this->backlink();
+
+        $menuItemDao = $this->em->getDao(BEMenu::getClassName());
+        $menuItem = $menuItemDao->findBy(['nLink' => $this->getName() . ':' . $this->action]);
+
+        $pinnedPageName = '';
+        if (isset($menuItem[0])) {
+            $pinnedPageName = $pinnedEntity->title = $menuItem[0]->name;
+            $pinnedEntity->faIcon = $menuItem[0]->faIcon;
+        }
+
+        $this->em->persist($pinnedEntity);
+
+        try {
+            $this->em->flush();
+
+            $this->flashMessage('Stránka "' . $pinnedPageName . '" byla připnuta na Hlavní panel.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage('Došlo k chybě.', 'danger');
+        }
+
+        $this->redirect('this');
+    }
+
+    function handleUnpinIt() {
+        $pinnedDao = $this->em->getDao(Pinned::getClassName());
+        $pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->backlink()]);
+
+        foreach ($pinned as $pinnedOne) {
+            $this->em->remove($pinnedOne);
+        }
+
+        try {
+            $this->em->flush();
+
+            $this->flashMessage('Stránka byla odebrána z Hlavního panelu.', 'warning');
+        } catch (\Exception $e) {
+            $this->flashMessage('Došlo k chybě.', 'danger');
+        }
+
+        $this->redirect('this');
+    }
+
+    function isPinned() {
+        $pinnedDao = $this->em->getDao(Pinned::getClassName());
+        $pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->backlink()]);
+
+        return isset($pinned[0]) ? true : false;
+    }
+
+    protected function createTemplate($class = null) {
+        $template = parent::createTemplate($class);
+        $template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
+
+        return $template;
     }
 
     /**
@@ -45,8 +103,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @return String containing either just a URL or a complete image tag
      * @source http://gravatar.com/site/implement/images/php/
      */
-    public function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array())
-    {
+    function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
         $url = 'http://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
         $url .= "?s=$s&d=$d&r=$r";
@@ -63,8 +120,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * CSS stylesheet loading.
      * @return WebLoader\Nette\CssLoader
      */
-    public function createComponentCssScreen()
-    {
+    function createComponentCssScreen() {
         return $this->lessComponentWrapper(['screen.less'], 'screen,projection,tv');
     }
 
@@ -72,8 +128,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * CSS stylesheet loading.
      * @return WebLoader\Nette\CssLoader
      */
-    public function createComponentCssPrint()
-    {
+    function createComponentCssPrint() {
         return $this->lessComponentWrapper(['print.css'], 'print');
     }
 
@@ -81,8 +136,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * CSS stylesheet loading.
      * @return WebLoader\Nette\CssLoader
      */
-    public function createComponentCssAdminLTE()
-    {
+    function createComponentCssAdminLTE() {
         return $this->lessComponentWrapper(['AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
     }
 
@@ -90,8 +144,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * JavaScript loading.
      * @return WebLoader\Nette\CssLoader
      */
-    public function createComponentJsJquery()
-    {
+    function createComponentJsJquery() {
         return $this->jsComponentWrapper(['jquery.js']);
     }
 
@@ -99,8 +152,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * JavaScript loading.
      * @return WebLoader\Nette\JavaScriptLoader
      */
-    public function createComponentJsMain()
-    {
+    function createComponentJsMain() {
         return $this->jsComponentWrapper(['main.js']);
     }
 
@@ -108,8 +160,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * JavaScript loading.
      * @return WebLoader\Nette\JavaScriptLoader
      */
-    public function createComponentJsAdminLTE()
-    {
+    function createComponentJsAdminLTE() {
         return $this->jsComponentWrapper(['app.js', '../plugins/iCheck/icheck.min.js'], __DIR__ . '/../../../admin-lte/js/AdminLTE');
     }
 
@@ -117,13 +168,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * JavaScript loading.
      * @return WebLoader\Nette\JavaScriptLoader
      */
-    public function createComponentJsNetteForms()
-    {
+    function createComponentJsNetteForms() {
         return $this->jsComponentWrapper(['netteForms.js']);
     }
 
-    private function jsComponentWrapper(array $fileNames, $jsDir = null)
-    {
+    private function jsComponentWrapper(array $fileNames, $jsDir = null) {
         if ($jsDir === null) {
             $jsDir = __DIR__ . '/../scripts';
         }
@@ -145,8 +194,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $control;
     }
 
-    private function lessComponentWrapper(array $fileNames, $media = null, $stylesDir = null)
-    {
+    private function lessComponentWrapper(array $fileNames, $media = null, $stylesDir = null) {
         if ($media === null) {
             $media = 'screen,projection,tv';
         }
@@ -179,16 +227,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $control;
     }
 
-    /** @var \Kdyby\Doctrine\EntityManager @inject */
-    public $em;
-
-    private function getActualNameday()
-    {
+    private function getActualNameday() {
         return $this->getNameday(date('j'), date('n'));
     }
 
-    private function getNameday($day, $month)
-    {
+    private function getNameday($day, $month) {
         $dao = $this->em->getDao(Admin\Nameday::getClassName());
         $nameday = $dao->findBy(['day' => (int) $day, 'month' => (int) $month]);
 
@@ -199,8 +242,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return null;
     }
 
-    public function beforeRender()
-    {
+    function beforeRender() {
         parent::beforeRender();
 
         $this->template->actualDate = date('j. n. Y');
@@ -212,7 +254,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         if (($this->getPresenter()->name == 'Sign' && $this->getAction() == 'in') || ($this->getPresenter()->name == 'AboutWebapp')) {
-
+            
         } else {
             $this->permissions('admin');
         }
@@ -259,6 +301,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->companyWebsite = $webinfo->website;
         $this->template->urlStats = $webinfo->urlStats;
         $this->template->webinfo = $webinfo;
+        $this->template->isPinned = $this->isPinned();
 
         $this->template->otherWebsites = [];
         $otherWebsitesDao = $this->em->getDao(App\BEMenu::getClassName());
@@ -342,8 +385,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @param mixed $role if array = OR (one of)
      */
 
-    protected function permissions($role)
-    {
+    protected function permissions($role) {
         try {
             if (is_array($role)) {
                 $ok = false;
@@ -370,8 +412,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    protected function notYetImplemented()
-    {
+    protected function notYetImplemented() {
         $this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!', 'danger');
     }
 

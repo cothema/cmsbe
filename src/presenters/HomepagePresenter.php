@@ -2,18 +2,22 @@
 
 namespace App\Presenters;
 
-use Nette,
-    App\Model;
+use Nette;
+use App\Model;
+use App\ORM\Sys\Pinned;
 
 /**
  * Homepage presenter.
  */
-class HomepagePresenter extends BasePresenter
-{
+class HomepagePresenter extends BasePresenter {
 
-    public function renderDefault()
-    {
-        
+    function renderDefault() {
+        $this->template->pins = $this->getAllPins();
+    }
+
+    private function getAllPins() {
+        $pinnedDao = $this->em->getDao(Pinned::getClassName());
+        return $pinnedDao->findBy(['user' => $this->user->id]);
     }
 
 }
