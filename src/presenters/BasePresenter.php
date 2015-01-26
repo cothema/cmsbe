@@ -3,7 +3,6 @@
 namespace App\Presenters;
 
 use Nette;
-use App\Model;
 use App;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
@@ -82,6 +81,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->backlink()]);
 
         return isset($pinned[0]) ? true : false;
+    }
+
+    function isPinable() {
+        $result = false;
+
+        $params = $this->request->getParameters();
+
+        if ($this->getName() !== 'Homepage' && empty($params['id'])) {
+            $result = true;
+        }
+
+        return $result;
     }
 
     protected function createTemplate($class = null) {
@@ -302,6 +313,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->urlStats = $webinfo->urlStats;
         $this->template->webinfo = $webinfo;
         $this->template->isPinned = $this->isPinned();
+        $this->template->isPinable = $this->isPinable();
 
         $this->template->otherWebsites = [];
         $otherWebsitesDao = $this->em->getDao(App\BEMenu::getClassName());
