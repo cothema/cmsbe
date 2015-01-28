@@ -22,7 +22,9 @@
             {foreach $navbar as $navbarOne}
                 <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
                 <li>
-                    {if isset($navbarOne->link)}
+                    {if isset($navbarOne->directLink)}
+                        <a href="{$navbarOne->directLink}">{$navbarOne->name}</a>
+                    {elseif isset($navbarOne->link)}
                         <a n:href="$navbarOne->link">{$navbarOne->name}</a>
                     {else}
                         <a href="#">{$navbarOne->name}</a>
