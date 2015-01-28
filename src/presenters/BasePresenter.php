@@ -9,6 +9,8 @@ use Cothema\Model as CModel;
 use WebLoader;
 use App\ORM\Sys\Pinned;
 use App\BEMenu;
+use Cothema\Model\User\User;
+use Cothema\Model\User\Permissions;
 
 /**
  * Base presenter for all application presenters.
@@ -399,20 +401,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     protected function permissions($role) {
         try {
-            if (is_array($role)) {
-                $ok = false;
-                foreach ($role as $roleOne) {
-                    $ok = ($this->user->isInRole($roleOne)) ? true : false;
+            $ok = (is_array($role)) ? $this->permissionsRoleArray($role) : $this->permissionsRole($role);
 
-                    if ($ok) {
-                        return;
-                    }
-                }
-            } elseif ($this->user->isInRole($role)) {
-                return;
+            if (!$ok) {
+                throw new \Exception('You do not have sufficient permissions.');
             }
-
-            throw new \Exception('You do not have sufficient permissions.');
         } catch (\Exception $e) {
             if (is_array($role)) {
                 $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním (' . implode(' / ', $role) . ').');
@@ -422,6 +415,36 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
             $this->redirect('Sign:in', ['backSignInUrl' => $this->getHttpRequest()->url->path]);
         }
+    }
+
+    private function permissionsRoleArray($role) {
+        foreach ($role as $roleOne) {
+            $ok = $this->permissionsRole($roleOne);
+
+            if ($ok) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function permissionsRole($role) {
+        return ($this->user->isInRole($role)) ? true : false;
+    }
+
+    protected function getPermissionsSection($section) {
+        $userSignedDao = $this->em->getDao(User::getClassName());
+        $userSigned = $userSignedDao->find($this->user->id);
+
+        $permissionsDao = $this->em->getDao(Permissions::getClassName());
+        $permissions = $permissionsDao->findBy(['user' => $userSigned, 'section' => $section]);
+
+        if (isset($permissions[0])) {
+            return $permissions[0];
+        }
+
+        return (object) ['section' => (string) $section, 'allowRead' => false, 'allowWrite' => false, 'allowDelete' => false];
     }
 
     protected function notYetImplemented() {
