@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use Nette;
-use App\Model;
 use App\ORM\Sys\Pinned;
 
 /**
