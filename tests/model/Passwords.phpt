@@ -32,12 +32,18 @@ class TestPasswords extends Tester\TestCase {
 		Passwords::hash('testPassword123', array('cost' => 1));
 	}
 
-	function testVerify() {
-		$password = array('testPasswords123', 'wefdERQ9_s(7žš+.f-s');
+	function getVerifyArgs() {
+		return array(
+			array('testPasswords123'),
+			array('wefdERQ9_s(7žš+.f-s')
+		);
+	}
 
-		foreach ($password as $passwordOne) {
-			Assert::true(Passwords::verify($passwordOne, Passwords::hash($passwordOne)));
-		}
+	/**
+	 * @dataProvider getVerifyArgs
+	 */
+	function testVerify($password) {
+		Assert::true(Passwords::verify($password[0], Passwords::hash($password[0])));
 	}
 
 	function testNeedsRehash() {
