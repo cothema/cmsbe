@@ -2,9 +2,8 @@
 
 namespace App\Presenters;
 
-use Nette,
-	App\Model,
-	Nette\Diagnostics\Debugger;
+use Nette;
+use Nette\Diagnostics\Debugger;
 
 
 /**

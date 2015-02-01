@@ -107,7 +107,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * Get either a Gravatar URL or complete image tag for a specified email address.
 	 *
 	 * @param string $email The email address
-	 * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
+	 * @param integer $s Size in pixels, defaults to 80px [ 1 - 2048 ]
 	 * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
 	 * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
 	 * @param boole $img True to return a complete IMG tag False for just the URL
@@ -155,7 +155,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/**
 	 * JavaScript loading.
-	 * @return WebLoader\Nette\CssLoader
+	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
 	function createComponentJsJquery() {
 		return $this->jsComponentWrapper(['jquery.js']);
@@ -185,6 +185,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $this->jsComponentWrapper(['netteForms.js']);
 	}
 
+	/**
+	 * @param string $jsDir
+	 */
 	private function jsComponentWrapper(array $fileNames, $jsDir = null) {
 		if ($jsDir === null) {
 			$jsDir = __DIR__ . '/../scripts';
@@ -207,6 +210,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $control;
 	}
 
+	/**
+	 * @param string|false $media
+	 * @param string $stylesDir
+	 */
 	private function lessComponentWrapper(array $fileNames, $media = null, $stylesDir = null) {
 		if ($media === null) {
 			$media = 'screen,projection,tv';
@@ -244,6 +251,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $this->getNameday(date('j'), date('n'));
 	}
 
+	/**
+	 * @param string $day
+	 * @param string $month
+	 */
 	private function getNameday($day, $month) {
 		$dao = $this->em->getDao(Admin\Nameday::getClassName());
 		$nameday = $dao->findBy(['day' => (int) $day, 'month' => (int) $month]);
