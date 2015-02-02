@@ -3,11 +3,14 @@
 namespace App\Cothema\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  */
-class Custom extends \Kdyby\Doctrine\Entities\BaseEntity {
+class Custom extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="text")

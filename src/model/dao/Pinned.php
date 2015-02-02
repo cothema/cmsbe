@@ -3,12 +3,15 @@
 namespace App\ORM\Sys;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_pinned")
  */
-class Pinned extends \Kdyby\Doctrine\Entities\BaseEntity {
+class Pinned extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="integer")

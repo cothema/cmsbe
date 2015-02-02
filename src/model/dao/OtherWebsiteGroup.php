@@ -3,12 +3,15 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_otherweb_group")
  */
-class OtherWebsiteGroup extends \Kdyby\Doctrine\Entities\BaseEntity {
+class OtherWebsiteGroup extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="text")

@@ -3,12 +3,15 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="bemenu")
  */
-class BEMenu extends \Kdyby\Doctrine\Entities\BaseEntity {
+class BEMenu extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(name="nLink",type="text")

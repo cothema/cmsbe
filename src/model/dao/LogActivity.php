@@ -3,12 +3,15 @@
 namespace App\Cothema\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="log_activity")
  */
-class LogActivity extends \Kdyby\Doctrine\Entities\BaseEntity {
+class LogActivity extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="text")

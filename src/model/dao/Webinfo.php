@@ -3,12 +3,15 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_webinfo")
  */
-class Webinfo extends \Kdyby\Doctrine\Entities\BaseEntity {
+class Webinfo extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="text")
