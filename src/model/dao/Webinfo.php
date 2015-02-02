@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="sys_webinfo")
  */
-class Webinfo extends \Kdyby\Doctrine\Entities\Attributes\IdentifiedEntity {
+class Webinfo extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
 
 	/**
 	 * @ORM\Column(type="text")

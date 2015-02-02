@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class Custom extends \Kdyby\Doctrine\Entities\Attributes\IdentifiedEntity {
+class Custom extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
 
 	/**
 	 * @ORM\Column(type="text")

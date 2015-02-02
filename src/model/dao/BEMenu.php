@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="bemenu")
  */
-class BEMenu extends \Kdyby\Doctrine\Entities\Attributes\IdentifiedEntity {
+class BEMenu extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
 
 	/**
 	 * @ORM\Column(name="nLink",type="text")

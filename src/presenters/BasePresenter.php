@@ -34,7 +34,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 		$pinnedEntity = new Pinned;
 		$pinnedEntity->user = $this->user->id;
-		$pinnedEntity->page = $this->backlink();
+		$pinnedEntity->page = $this->getAction(TRUE);
 
 		$menuItemDao = $this->em->getDao(BEMenu::getClassName());
 		$menuItem = $menuItemDao->findBy(['nLink' => $this->getName() . ':' . $this->action]);
@@ -60,7 +60,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	function handleUnpinIt() {
 		$pinnedDao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->backlink()]);
+		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->getAction(TRUE)]);
 
 		foreach ($pinned as $pinnedOne) {
 			$this->em->remove($pinnedOne);
@@ -79,7 +79,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	function isPinned() {
 		$pinnedDao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->backlink()]);
+		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->getAction(TRUE)]);
 
 		return isset($pinned[0]) ? true : false;
 	}

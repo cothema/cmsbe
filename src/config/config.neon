@@ -32,13 +32,13 @@ services:
 	- App\UserManager
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
-  
+
 extensions:
 	translation: Kdyby\Translation\DI\TranslationExtension
 
 translation:
-    default: cz
-    whitelist: [cz, en, de]
-    fallback: [cs_CZ, cz]
-    resolvers:
-        session: on
+	default: cz
+	whitelist: [cz, en, de]
+	fallback: [cs_CZ, cz]
+	resolvers:
+		session: on
