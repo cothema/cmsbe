@@ -34,7 +34,7 @@ class Pinned extends Entities\BaseEntity {
 	public $description;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="faIcon", type="text")
 	 */
 	public $faIcon;
 

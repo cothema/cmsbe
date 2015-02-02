@@ -14,7 +14,7 @@ class Webinfo extends Entities\BaseEntity {
 	use Entities\Attributes\Identifier;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="webName", type="text")
 	 */
 	public $webName;
 
@@ -24,7 +24,7 @@ class Webinfo extends Entities\BaseEntity {
 	public $website;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="webAdmin", type="text")
 	 */
 	public $webAdmin;
 

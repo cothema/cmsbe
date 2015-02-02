@@ -19,7 +19,7 @@ class OtherWebsiteGroup extends Entities\BaseEntity {
 	public $name;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="orderLine", type="text")
 	 */
 	public $orderLine;
 

@@ -24,12 +24,12 @@ class OtherWebsite extends Entities\BaseEntity {
 	public $url;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="orderLine", type="text")
 	 */
 	public $orderLine;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="groupLine", type="text")
 	 */
 	public $groupLine;
 

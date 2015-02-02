@@ -24,7 +24,7 @@ class BEMenu extends Entities\BaseEntity {
 	public $name;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="orderLine", type="text")
 	 */
 	public $orderLine;
 
@@ -39,7 +39,7 @@ class BEMenu extends Entities\BaseEntity {
 	public $module;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(name="faIcon", type="text")
 	 */
 	public $faIcon;
 
