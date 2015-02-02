@@ -6,6 +6,6 @@ namespace App;
  * @author     Milos Havlicek
  * @deprecated
  */
-class Passwords extends \Nette\Security {
+class Passwords extends \Nette\Security\Passwords {
 
 }

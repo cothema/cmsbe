@@ -33,17 +33,17 @@ class TestPasswords extends Tester\TestCase {
 	}
 
 	function getVerifyArgs() {
-		return array(
-			array('testPasswords123'),
-			array('wefdERQ9_s(7žš+.f-s')
-		);
+		return [
+			['testPasswords123'],
+			['wefdERQ9_s(7žš+.f-s']
+		];
 	}
 
 	/**
 	 * @dataProvider getVerifyArgs
 	 */
 	function testVerify($password) {
-		Assert::true(Passwords::verify($password[0], Passwords::hash($password[0])));
+		Assert::true(Passwords::verify($password, Passwords::hash($password)));
 	}
 
 	function testNeedsRehash() {

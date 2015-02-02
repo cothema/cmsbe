@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="log_activity")
  */
-class LogActivity extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
+class LogActivity extends \Kdyby\Doctrine\Entities\BaseEntity {
 
 	/**
 	 * @ORM\Column(type="text")

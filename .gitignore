@@ -1,4 +1,5 @@
 /nbproject/*
 /vendor/*
 /src/temp/*
+composer.lock
 !EXIST

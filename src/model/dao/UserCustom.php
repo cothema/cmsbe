@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="user_custom")
  */
-class UserCustom extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
+class UserCustom extends \Kdyby\Doctrine\Entities\BaseEntity {
 
 	/**
 	 * @ORM\Column(type="text")

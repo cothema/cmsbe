@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="sys_pinned")
  */
-class Pinned extends \Kdyby\Doctrine\Entities\Attributes\Identifier {
+class Pinned extends \Kdyby\Doctrine\Entities\BaseEntity {
 
 	/**
 	 * @ORM\Column(type="integer")
