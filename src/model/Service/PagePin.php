@@ -46,7 +46,7 @@ class PagePin extends \Nette\Object {
 	 */
 	function handleUnpinIt() {
 		$pinnedDao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->getAction(TRUE)]);
+		$pinned = $pinnedDao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
 
 		foreach ($pinned as $pinnedOne) {
 			$this->em->remove($pinnedOne);
@@ -61,7 +61,7 @@ class PagePin extends \Nette\Object {
 	 */
 	function isPinned() {
 		$dao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $dao->findBy(['user' => $pinned->user->id, 'page' => $pinned->getAction(TRUE)]);
+		$pinned = $dao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
 
 		return isset($pinned[0]) ? true : false;
 	}
