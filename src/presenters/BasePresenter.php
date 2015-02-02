@@ -7,13 +7,13 @@ use App;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
 use WebLoader;
-use App\ORM\Sys\Pinned;
-use App\BEMenu;
 use Cothema\Model\User\User;
 use Cothema\Model\User\Permissions;
 
 /**
  * Base presenter for all application presenters.
+ *
+ * @author Miloš Havlíček <miloshavlicek@gmail.com>
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
@@ -30,27 +30,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		parent::__construct();
 	}
 
+	/**
+	 *
+	 * @return void
+	 */
 	function handlePinIt() {
-
-		$pinnedEntity = new Pinned;
-		$pinnedEntity->user = $this->user->id;
-		$pinnedEntity->page = $this->getAction(TRUE);
-
-		$menuItemDao = $this->em->getDao(BEMenu::getClassName());
-		$menuItem = $menuItemDao->findBy(['nLink' => $this->getName() . ':' . $this->action]);
-
-		$pinnedPageName = '';
-		if (isset($menuItem[0])) {
-			$pinnedPageName = $pinnedEntity->title = $menuItem[0]->name;
-			$pinnedEntity->faIcon = $menuItem[0]->faIcon;
-		}
-
-		$this->em->persist($pinnedEntity);
+		$pin = new PagePin;
 
 		try {
-			$this->em->flush();
-
-			$this->flashMessage('Stránka "' . $pinnedPageName . '" byla připnuta na Hlavní panel.', 'success');
+			$pinned = $pin->pinIt($this, $this->em);
+			$this->flashMessage('Stránka "' . $pinned['title'] . '" byla připnuta na Hlavní panel.', 'success');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
 		}
@@ -58,17 +47,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('this');
 	}
 
+	/**
+	 *
+	 * @return void
+	 */
 	function handleUnpinIt() {
-		$pinnedDao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->getAction(TRUE)]);
-
-		foreach ($pinned as $pinnedOne) {
-			$this->em->remove($pinnedOne);
-		}
+		$pin = new PagePin($this, $this->em);
 
 		try {
-			$this->em->flush();
-
+			$pin->unpinIt();
 			$this->flashMessage('Stránka byla odebrána z Hlavního panelu.', 'warning');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
@@ -77,23 +64,24 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('this');
 	}
 
+	/**
+	 *
+	 * @return boolean
+	 */
 	function isPinned() {
-		$pinnedDao = $this->em->getDao(Pinned::getClassName());
-		$pinned = $pinnedDao->findBy(['user' => $this->user->id, 'page' => $this->getAction(TRUE)]);
+		$pin = new PagePin($this, $this->em);
 
-		return isset($pinned[0]) ? true : false;
+		return $pin->isPinned();
 	}
 
+	/**
+	 *
+	 * @return boolean
+	 */
 	function isPinable() {
-		$result = false;
+		$pin = new PagePin($this, $this->em);
 
-		$params = $this->request->getParameters();
-
-		if ($this->getName() !== 'Homepage' && empty($params['id'])) {
-			$result = true;
-		}
-
-		return $result;
+		return $pin->isPinable();
 	}
 
 	protected function createTemplate($class = null) {
