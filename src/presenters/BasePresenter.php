@@ -36,7 +36,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return void
 	 */
 	function handlePinIt() {
-		$pin = new PagePin;
+		$pin = new PagePin($this, $this->em);
 
 		try {
 			$pinned = $pin->pinIt($this, $this->em);
