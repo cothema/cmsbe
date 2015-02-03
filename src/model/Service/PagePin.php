@@ -28,12 +28,12 @@ class PagePin extends \Nette\Object {
 	 * @return array
 	 */
 	function pinIt() {
-		$pinned = new Pinned;
+		$pinned = new Pinned($this, $this->em);
 		$pinned->user = $this->presenter->user->id;
 		$pinned->page = $this->presenter->getAction(TRUE);
 
 		$dao = $this->em->getRepository(BEMenu::getClassName());
-		$menuItem = $dao->findBy(['nLink' => $this->getName() . ':' . $this->action]);
+		$menuItem = $dao->findBy(['nLink' => $this->presenter->getName() . ':' . $this->presenter->action]);
 
 		$pinnedPageName = '';
 		if (isset($menuItem[0])) {
@@ -50,7 +50,7 @@ class PagePin extends \Nette\Object {
 	/**
 	 * return void
 	 */
-	function handleUnpinIt() {
+	function unpinIt() {
 		$pinnedDao = $this->em->getRepository(Pinned::getClassName());
 		$pinned = $pinnedDao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
 
