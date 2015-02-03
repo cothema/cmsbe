@@ -39,7 +39,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$pin = new PagePin($this, $this->em);
 
 		try {
-			$pinned = $pin->pinIt($this, $this->em);
+			$pinned = $pin->pinIt();
 			$this->flashMessage('Stránka "' . $pinned['title'] . '" byla připnuta na Hlavní panel.', 'success');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
