@@ -3,6 +3,7 @@
 namespace Cothema\CMSBE\Service;
 
 use App\ORM\Sys\Pinned;
+use App\BEMenu;
 
 /**
  * @author     Miloš Havlíček <miloshavlicek@gmail.com>
