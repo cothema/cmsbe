@@ -9,6 +9,7 @@ use Cothema\Model as CModel;
 use WebLoader;
 use Cothema\Model\User\User;
 use Cothema\Model\User\Permissions;
+use Cothema\CMSBE\Service\PagePin;
 
 /**
  * Base presenter for all application presenters.
@@ -66,22 +67,30 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/**
 	 *
-	 * @return boolean
+	 * @return boolean|null
 	 */
 	function isPinned() {
-		$pin = new PagePin($this, $this->em);
+		try {
+			$pin = new PagePin($this, $this->em);
 
-		return $pin->isPinned();
+			return $pin->isPinned();
+		} catch (\Eception $e) {
+			return null;
+		}
 	}
 
 	/**
 	 *
-	 * @return boolean
+	 * @return boolean|null
 	 */
 	function isPinable() {
-		$pin = new PagePin($this, $this->em);
+		try {
+			$pin = new PagePin($this, $this->em);
 
-		return $pin->isPinable();
+			return $pin->isPinable();
+		} catch (\Exception $e) {
+			return null;
+		}
 	}
 
 	protected function createTemplate($class = null) {
@@ -406,6 +415,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 				throw new \Exception('You do not have sufficient permissions.');
 			}
 		} catch (\Exception $e) {
+
 			if (is_array($role)) {
 				$this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním (' . implode(' / ', $role) . ').');
 			} else {
