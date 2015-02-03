@@ -12,7 +12,12 @@ class PagePin extends \Nette\Object {
 	private $em;
 	private $presenter;
 
-	function __construct(Nette\Application\UI\Presenter & $presenter, \Kdyby\Doctrine\EntityManager $em) {
+	/**
+	 *
+	 * @param object $presenter
+	 * @param \Kdyby\Doctrine\EntityManager $em
+	 */
+	function __construct(& $presenter, \Kdyby\Doctrine\EntityManager $em) {
 		$this->presenter = $presenter;
 		$this->em = $em;
 	}
@@ -63,7 +68,7 @@ class PagePin extends \Nette\Object {
 		$dao = $this->em->getRepository(Pinned::getClassName());
 		$pinned = $dao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
 
-		return isset($pinned[0]) ? true : false;
+		return isset($pinned[0]) ? TRUE : FALSE;
 	}
 
 	/**
@@ -73,7 +78,7 @@ class PagePin extends \Nette\Object {
 	function isPinable() {
 		$params = $this->presenter->request->getParameters();
 
-		return ($this->presenter->getName() !== 'Homepage' && empty($params['id'])) ? true : false;
+		return ($this->presenter->getName() !== 'Homepage' && empty($params['id'])) ? TRUE : FALSE;
 	}
 
 }
