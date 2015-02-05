@@ -32,5 +32,8 @@
     },
     "require-dev": {
         "nette/tester": "1.*"
+    },
+    "suggest": {
+        "cothema/cmsbe-updater": "Install CMSBE Updater for easy installation and maintenence of additional packages."
     }
 }
