@@ -29,7 +29,8 @@
         "janmarek/webloader": "2.2.0",
         "leafo/lessphp": "0.4.0",
         "cothema/admin-lte": "*",
-        "symfony/yaml": "~2.5"
+        "symfony/yaml": "~2.5",
+        "composer/composer": "*@dev"
     },
     "require-dev": {
         "nette/tester": "1.*"
