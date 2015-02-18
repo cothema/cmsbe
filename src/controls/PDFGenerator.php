@@ -1,6 +1,6 @@
 <?php
 
-namespace Cothema\Eurotech\General\Service;
+namespace Cothema\CMSBE\Service;
 
 /**
  * PDF Generator service - Wrapper for dompdf/dompdf

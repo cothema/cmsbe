@@ -4,9 +4,21 @@
 </div>
 
 {block scripts}
+<script src="https://cdn.rawgit.com/vojtech-dobes/nette.ajax.js/2.0.0/nette.ajax.js"></script>
+<script src="https://cdn.rawgit.com/browserstate/history.js/1.8.0/scripts/bundled/html4+html5/jquery.history.js"></script>
+<script src="https://cdn.rawgit.com/twitter/typeahead.js/v0.10.5/dist/typeahead.bundle.min.js"></script>
+
+<script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/grido.js"></script>
+<script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.datepicker.js"></script>
+<script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.typeahead.js"></script>
+<script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.history.js"></script>
+<script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.nette.ajax.js"></script>
+
 {control jsNetteForms}
 {control jsAdminLTE}
 {control jsMain}
+
+<script type="text/javascript" n:syntax="double">$(function(){$.nette.init()})</script>
 {/block}
 </body>
 </html>
