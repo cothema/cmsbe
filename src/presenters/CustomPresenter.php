@@ -10,105 +10,99 @@ use App\Cothema\Admin;
 /**
  * Custom presenter.
  */
-class CustomPresenter extends BasePresenter
-{
+class CustomPresenter extends BasePresenter {
 
-    public function renderDefault()
-    {
-        $navbar = [];
-        $navbar[] = (object)['name' => 'Nastavení', 'link' => 'Settings:BasicInfo'];
-        $navbar[] = (object)['name' => 'Přizpůsobení'];
-        
-        $this->template->navbar = $navbar;
-    }
+	public function renderDefault() {
+		$navbar = [];
+		$navbar[] = (object) ['name' => 'Nastavení', 'link' => 'Settings:BasicInfo'];
+		$navbar[] = (object) ['name' => 'Přizpůsobení'];
 
-    protected function createComponentCustomForm()
-    {
-        $customsDao = $this->em->getDao(Admin\Custom::getClassName());
-        $customs = $customsDao->findBy([], ['id' => 'ASC']);
+		$this->template->navbar = $navbar;
+	}
 
-        $form = new Nette\Application\UI\Form;
+	protected function createComponentCustomForm() {
+		$customsDao = $this->em->getDao(Admin\Custom::getClassName());
+		$customs = $customsDao->findBy([], ['id' => 'ASC']);
 
-        foreach ($customs as $customsOne) {
-            $custUserDao = $this->em->getDao(Admin\UserCustom::getClassName());
-            $custUser = $custUserDao->findBy(['custom' => $customsOne->id, 'user' => $this->getUser()->id]);
+		$form = new Nette\Application\UI\Form;
 
-            if ($customsOne->type == 'yn') {
-                $formIt = $form->addSelect('CUV' . $customsOne->alias, $customsOne->name . ':', [1 => 'Ano', 0 => 'Ne']);
-            } else {
-                $formIt->addText('CUV' . $customsOne->alias, $customsOne->name . ':');
-            }
+		foreach ($customs as $customsOne) {
+			$custUserDao = $this->em->getDao(Admin\UserCustom::getClassName());
+			$custUser = $custUserDao->findBy(['custom' => $customsOne->id, 'user' => $this->getUser()->id]);
 
-            if (isset($custUser[0]->custVal)) {
-                $formIt->setDefaultValue($custUser[0]->custVal);
-            } else {
-                $formIt->setDefaultValue($customsOne->defVal);
-            }
+			if ($customsOne->type == 'yn') {
+				$formIt = $form->addSelect('CUV' . $customsOne->alias, $customsOne->name . ':', [1 => 'Ano', 0 => 'Ne']);
+			} else {
+				$formIt->addText('CUV' . $customsOne->alias, $customsOne->name . ':');
+			}
 
-            $formIt->getControlPrototype()->class('form-control');
-        }
+			if (isset($custUser[0]->custVal)) {
+				$formIt->setDefaultValue($custUser[0]->custVal);
+			} else {
+				$formIt->setDefaultValue($customsOne->defVal);
+			}
 
-        $form->addSubmit('send', 'Uložit')
-                ->getControlPrototype()->class('btn btn-success');
+			$formIt->getControlPrototype()->class('form-control');
+		}
 
-        $form->onSuccess[] = $this->customFormSucceeded;
-        return $form;
-    }
+		$form->addSubmit('send', 'Uložit')
+				->getControlPrototype()->class('btn btn-success');
 
-    public function customFormSucceeded($form)
-    {
-        $values = $form->getValues(true);
+		$form->onSuccess[] = $this->customFormSucceeded;
+		return $form;
+	}
 
-        foreach ($values as $valuesKey => $valuesOne) {
+	public function customFormSucceeded($form) {
+		$values = $form->getValues(true);
 
-            $prefix = 'CUV';
+		foreach ($values as $valuesKey => $valuesOne) {
 
-            if ($this->startsWith($valuesKey, $prefix)) {
-                $customsOneDao = $this->em->getDao(Admin\Custom::getClassName());
-                $customsOne = $customsOneDao->findBy(['alias' => substr($valuesKey, strlen($prefix))]);
+			$prefix = 'CUV';
 
-                if (!isset($customsOne[0])) {
-                    throw new \Exception('ID of user customization is not set!');
-                } else {
-                    $customsUserOneDao = $this->em->getDao(Admin\UserCustom::getClassName());
-                    $customsUserOne = $customsUserOneDao->findBy(['user' => $this->getUser()->id, 'custom' => $customsOne[0]->id]);
+			if ($this->startsWith($valuesKey, $prefix)) {
+				$customsOneDao = $this->em->getDao(Admin\Custom::getClassName());
+				$customsOne = $customsOneDao->findBy(['alias' => substr($valuesKey, strlen($prefix))]);
 
-                    if ($customsOne[0]->defVal == $valuesOne) {
-                        if (isset($customsUserOne[0])) {
-                            $this->em->remove($customsUserOne[0]);
-                        }
-                    } elseif (!isset($customsUserOne[0])) {
-                        $custNew = new Admin\UserCustom;
-                        $custNew->custVal = $valuesOne;
-                        $custNew->custom = $customsOne[0]->id;
-                        $custNew->user = $this->getUser()->id;
+				if (!isset($customsOne[0])) {
+					throw new \Exception('ID of user customization is not set!');
+				} else {
+					$customsUserOneDao = $this->em->getDao(Admin\UserCustom::getClassName());
+					$customsUserOne = $customsUserOneDao->findBy(['user' => $this->getUser()->id, 'custom' => $customsOne[0]->id]);
 
-                        $this->em->persist($custNew);
-                    } elseif ($customsUserOne[0]->custVal != $valuesOne) {
-                        $customsUserOne[0]->custVal = $valuesOne;
+					if ($customsOne[0]->defVal == $valuesOne) {
+						if (isset($customsUserOne[0])) {
+							$this->em->remove($customsUserOne[0]);
+						}
+					} elseif (!isset($customsUserOne[0])) {
+						$custNew = new Admin\UserCustom;
+						$custNew->custVal = $valuesOne;
+						$custNew->custom = $customsOne[0]->id;
+						$custNew->user = $this->getUser()->id;
 
-                        $this->em->persist($customsUserOne[0]);
-                    } else {
-                        // everything is OK (form val == user defined val)
-                    }
-                }
-            }
-        }
+						$this->em->persist($custNew);
+					} elseif ($customsUserOne[0]->custVal != $valuesOne) {
+						$customsUserOne[0]->custVal = $valuesOne;
 
-        $this->em->flush();
+						$this->em->persist($customsUserOne[0]);
+					} else {
+						// everything is OK (form val == user defined val)
+					}
+				}
+			}
+		}
 
-        $this->flashMessage('Uživatelské nastavení bylo úspěšně uloženo.', 'success');
-        $this->redirect('this');
-    }
+		$this->em->flush();
 
-    function startsWith($haystack, $needle)
-    {
-        return $needle === "" || strpos($haystack, $needle) === 0;
-    }
+		$this->flashMessage('Uživatelské nastavení bylo úspěšně uloženo.', 'success');
+		$this->redirect('this');
+	}
 
-    function endsWith($haystack, $needle)
-    {
-        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
-    }
+	public function startsWith($haystack, $needle) {
+		return $needle === "" || strpos($haystack, $needle) === 0;
+	}
+
+	public function endsWith($haystack, $needle) {
+		return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+	}
 
 }

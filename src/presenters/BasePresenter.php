@@ -27,7 +27,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
 
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 	}
 
@@ -40,7 +40,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 *
 	 * @return void
 	 */
-	function handlePinIt() {
+	public function handlePinIt() {
 		$pin = new PagePin($this, $this->em);
 
 		try {
@@ -57,7 +57,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 *
 	 * @return void
 	 */
-	function handleUnpinIt() {
+	public function handleUnpinIt() {
 		$pin = new PagePin($this, $this->em);
 
 		try {
@@ -74,7 +74,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 *
 	 * @return boolean|null
 	 */
-	function isPinned() {
+	public function isPinned() {
 		try {
 			$pin = new PagePin($this, $this->em);
 
@@ -88,7 +88,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 *
 	 * @return boolean|null
 	 */
-	function isPinable() {
+	public function isPinable() {
 		try {
 			$pin = new PagePin($this, $this->em);
 
@@ -117,7 +117,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return String containing either just a URL or a complete image tag
 	 * @source http://gravatar.com/site/implement/images/php/
 	 */
-	function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
+	public function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
 		$url = 'http://www.gravatar.com/avatar/';
 		$url .= md5(strtolower(trim($email)));
 		$url .= "?s=$s&d=$d&r=$r";
@@ -135,7 +135,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * CSS stylesheet loading.
 	 * @return WebLoader\Nette\CssLoader
 	 */
-	function createComponentCssScreen() {
+	public function createComponentCssScreen() {
 		return $this->lessComponentWrapper(['screen.less'], 'screen,projection,tv');
 	}
 
@@ -143,7 +143,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * CSS stylesheet loading.
 	 * @return WebLoader\Nette\CssLoader
 	 */
-	function createComponentCssPrint() {
+	public function createComponentCssPrint() {
 		return $this->lessComponentWrapper(['print.css'], 'print');
 	}
 
@@ -151,7 +151,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * CSS stylesheet loading.
 	 * @return WebLoader\Nette\CssLoader
 	 */
-	function createComponentCssAdminLTE() {
+	public function createComponentCssAdminLTE() {
 		return $this->lessComponentWrapper(['AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
 	}
 
@@ -159,7 +159,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * JavaScript loading.
 	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
-	function createComponentJsJquery() {
+	public function createComponentJsJquery() {
 		return $this->jsComponentWrapper(['jquery.js']);
 	}
 
@@ -167,7 +167,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * JavaScript loading.
 	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
-	function createComponentJsMain() {
+	public function createComponentJsMain() {
 		return $this->jsComponentWrapper(['main.js']);
 	}
 
@@ -175,7 +175,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * JavaScript loading.
 	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
-	function createComponentJsAdminLTE() {
+	public function createComponentJsAdminLTE() {
 		return $this->jsComponentWrapper(['app.js', '../plugins/iCheck/icheck.min.js'], __DIR__ . '/../../../admin-lte/js/AdminLTE');
 	}
 
@@ -183,7 +183,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * JavaScript loading.
 	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
-	function createComponentJsNetteForms() {
+	public function createComponentJsNetteForms() {
 		return $this->jsComponentWrapper(['netteForms.js']);
 	}
 
@@ -268,7 +268,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return null;
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 		parent::beforeRender();
 
 		$this->template->actualDate = date('j. n. Y');
