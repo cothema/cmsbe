@@ -31,6 +31,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		parent::__construct();
 	}
 
+	private function getWWWDir() {
+		$out = realpath(DIR_WWW);
+		return $out;
+	}
+
 	/**
 	 *
 	 * @return void
@@ -40,7 +45,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 		try {
 			$pinned = $pin->pinIt();
-			$this->flashMessage('Stránka "' . $pinned['title'] . '" byla připnuta na Hlavní panel.', 'success');
+			$this->flashMessage('Stránka "' . $pinned ['title'] . '" byla připnuta na Hlavní panel.', 'success');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
 		}
@@ -131,7 +136,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return WebLoader\Nette\CssLoader
 	 */
 	function createComponentCssScreen() {
-		return $this->lessComponentWrapper(['screen.less'], 'screen,projection,tv');
+		return $this->lessComponentWrapper([ 'screen.less'], 'screen,projection,tv');
 	}
 
 	/**
@@ -139,7 +144,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return WebLoader\Nette\CssLoader
 	 */
 	function createComponentCssPrint() {
-		return $this->lessComponentWrapper(['print.css'], 'print');
+		return $this->lessComponentWrapper([ 'print.css'], 'print');
 	}
 
 	/**
@@ -147,7 +152,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return WebLoader\Nette\CssLoader
 	 */
 	function createComponentCssAdminLTE() {
-		return $this->lessComponentWrapper(['AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
+		return $this->lessComponentWrapper([ 'AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
 	}
 
 	/**
@@ -171,7 +176,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return WebLoader\Nette\JavaScriptLoader
 	 */
 	function createComponentJsAdminLTE() {
-		return $this->jsComponentWrapper(['app.js', '../plugins/iCheck/icheck.min.js'], __DIR__ . '/../../../admin-lte/js/AdminLTE');
+		return $this->jsComponentWrapper([ 'app.js', '../plugins/iCheck/icheck.min.js'], __DIR__ . '/../../../admin-lte/js/AdminLTE');
 	}
 
 	/**
@@ -200,7 +205,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$files->addFile($name);
 		}
 
-		$compiler = WebLoader\Compiler::createJsCompiler($fileCollection, $this->context->parameters['wwwDir'] . $outputDirName);
+		$compiler = WebLoader\Compiler::createJsCompiler($fileCollection, $this->context->parameters ['wwwDir'] . $outputDirName);
 
 		$control = new WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . $outputDirName);
 
@@ -230,7 +235,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$files->addFile($name);
 		}
 
-		$compiler = WebLoader\Compiler::createCssCompiler($fileCollection, $this->context->parameters['wwwDir'] . $outputDirName);
+		$compiler = WebLoader\Compiler::createCssCompiler($fileCollection, $this->context->parameters ['wwwDir'] . $outputDirName);
 
 		$filter = new WebLoader\Filter\LessFilter;
 		$compiler->addFileFilter($filter);
@@ -241,7 +246,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$control->setMedia($media);
 		}
 
-		return $control;
+		return
+
+				$control;
 	}
 
 	private function getActualNameday() {
@@ -260,7 +267,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $nameday[0];
 		}
 
-		return null;
+		return
+
+				null;
 	}
 
 	function beforeRender() {
@@ -358,7 +367,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$otherWebsites = $otherWebsitesDao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
 
 		$c = 0;
-		foreach ($otherWebsites as $otherWebsitesOne) {
+		foreach ($otherWe bsites as $otherWebsitesOne) {
 			$c++;
 
 			if ($c == 1) {
@@ -377,7 +386,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$otherWebsitesGroupDao = $this->em->getDao(App\OtherWebsiteGroup::getClassName());
 		$otherWebsitesGroup = $otherWebsitesGroupDao->findBy([], ['orderLine' => 'ASC']);
 
-		foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
+		foreach ($otherWebsite sGroup as $otherWebsitesGroupOne) {
 			$otherWebsitesBDao = $this->em->getDao(App\OtherWebsite::getClassName());
 			$otherWebsitesB = $otherWebsitesBDao->findBy(['groupLine' => $otherWebsitesGroupOne->id], ['orderLine' => 'ASC']);
 
@@ -385,7 +394,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$handleOtherWB['groupName'] = $otherWebsitesGroupOne->name;
 
 			$handleOtherWB['items'] = [];
-			foreach ($otherWebsitesB as $otherWebsitesBOne) {
+			foreach ($otherWeb sitesB as $otherWebsitesBOne) {
 				$handleOtherWB['items'][] = $otherWebsitesBOne;
 			}
 
@@ -435,11 +444,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			}
 		}
 
-		return false;
+		return
+
+				false;
 	}
 
 	private function permissionsRole($role) {
-		return ($this->user->isInRole($role)) ? true : false;
+		return ($this->user->isInRole($role)) ? true :
+				false;
 	}
 
 	protected function getPermissionsSection($section) {
@@ -453,7 +465,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $permissions[0];
 		}
 
-		return (object) ['section' => (string) $section, 'allowRead' => false, 'allowWrite' => false, 'allowDelete' => false];
+		return (object) ['section' => (string) $section, 'allowRead' => false, 'allowWrite' => false, 'allowDelete' =>
+					false];
 	}
 
 	protected function notYetImplemented() {
