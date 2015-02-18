@@ -25,6 +25,7 @@
         "nextras/forms": "*",
         "kdyby/doctrine": "2.*",
         "cothema/cmsbe-user": "@dev",
+        "cothema/cmsbe-updater": "dev-master",
         "janmarek/webloader": "2.2.0",
         "leafo/lessphp": "0.4.0",
         "cothema/admin-lte": "*",
