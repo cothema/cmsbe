@@ -1,51 +1,50 @@
 <aside n:if="$user->isLoggedIn()" id="left-resizable" class="left-side sidebar-offcanvas">
-    <section class="sidebar">
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="{$gravatar}" class="img-circle">
-            </div>
-            <div class="pull-left info">
-                <p>{if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> {_menu.items.online}</a>
-            </div>
-        </div>
-        <ul class="sidebar-menu">
-            <li n:class="$presenter->isLinkCurrent('Homepage:') ? active">
-                <a n:href="Homepage:"><i class="fa fa-home"></i> <span>{_menu.items.dashboard}</span></a>
-            </li>
-            
-            {foreach $menu as $menuOne}
-                {* TO DO: logic (active) to presenter *}
-                {? $active = false}
-                {foreach $menuOne->childs as $menuOneChild}
-                    {if $presenter->isLinkCurrent($menuOneChild->nLink)}
-                        {? $active = true}
-                    {/if}
-                {/foreach}
-                <li n:class="$active ? active, $menuOne->childs ? treeview">
-                    <a n:tag-if="$menuOne->nLink" n:href="$menuOne->nLink">
-                        <a n:tag-if="!$menuOne->nLink" href="#">
-                            <span n:if="$menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span>
-                        </a>
-                    </a>
-                    <ul class="treeview-menu">
+	<section class="sidebar">
+		<div class="user-panel">
+			<div class="pull-left image">
+				<img src="{$gravatar}" class="img-circle">
+			</div>
+			<div class="pull-left info">
+				<p>{if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}</p>
+				<a href="#"><i class="fa fa-circle text-success"></i> {_menu.items.online}</a>
+			</div>
+		</div>
+		<ul class="sidebar-menu">
+			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active">
+				<a n:href="Homepage:"><i class="fa fa-home"></i> <span>{_menu.items.dashboard}</span></a>
+			</li>
+			{foreach $menu as $menuOne}
+				{* TO DO: logic (active) to presenter *}
+				{? $active = false}
+				{foreach $menuOne->childs as $menuOneChild}
+					{if $presenter->isLinkCurrent($menuOneChild->nLink)}
+						{? $active = true}
+					{/if}
+				{/foreach}
+				<li n:class="$active ? active, $menuOne->childs ? treeview">
+					<a n:tag-if="$menuOne->nLink" n:href="$menuOne->nLink">
+						<a n:tag-if="!$menuOne->nLink" href="#">
+							<span n:if="$menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+					</a>
+					<ul class="treeview-menu">
 						<li n:foreach="$menuOne->childs as $menuOneChild">
 							<a n:href="$menuOneChild->nLink">
 								<span n:if="$menuOneChild->faIcon"><i class="fa fa-{$menuOneChild->faIcon}"></i> </span><span n:if="!$menuOneChild->faIcon && $menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOneChild->name}</span>
 							</a>
 						</li>
-                    </ul>
-                </li>
-            {/foreach}
-            <li n:if="$user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null">
-                <a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>{_menu.items.visitor_stats}</span></a>
-            </li>
-            <li n:class="$presenter->isLinkCurrent('Settings:BasicInfo') ? active">
-                <a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>{_menu.items.system_settings}</span></a>
-            </li>
-            <li n:class="$presenter->isLinkCurrent('Help:') ? active">
-                <a n:href="Help:"><i class="fa fa-support"></i> <span>{_menu.items.help}</span></a>
-            </li>
-        </ul>
-    </section>
+					</ul>
+				</li>
+			{/foreach}
+			<li n:if="$user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null">
+				<a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>{_menu.items.visitor_stats}</span></a>
+			</li>
+			<li n:class="$presenter->isLinkCurrent('Settings:BasicInfo') ? active">
+				<a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>{_menu.items.system_settings}</span></a>
+			</li>
+			<li n:class="$presenter->isLinkCurrent('Help:') ? active">
+				<a n:href="Help:"><i class="fa fa-support"></i> <span>{_menu.items.help}</span></a>
+			</li>
+		</ul>
+	</section>
 </aside>

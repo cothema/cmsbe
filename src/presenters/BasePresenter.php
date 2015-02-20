@@ -3,7 +3,11 @@
 namespace App\Presenters;
 
 use Nette;
+use Nette\Caching\Cache;
+use Nette\Caching\Storages\FileStorage as CacheFileStorage;
 use App;
+use App\Webinfo;
+use App\OtherWebsite;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
 use WebLoader;
@@ -319,8 +323,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$this->template->actualUser = null;
 		}
 
-		$webinfoDao = $this->em->getDao(App\Webinfo::getClassName());
-		$webinfo = $webinfoDao->find(1);
+		$cacheStorage = new CacheFileStorage(DIR_ROOT . '/temp/cache');
+		$beCache = new Cache($cacheStorage, 'Cothema.BE');
+
+		$webinfo = $beCache->load('webInfo', function() use ($beCache) {
+			return $beCache->save('webInfo', $this->getWebInfo(), [Cache::EXPIRE => '20 minutes']);
+		});
 
 		$this->template->companyName = $webinfo->webName;
 		$this->template->companyFullName = $webinfo->company;
@@ -330,15 +338,91 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->template->isPinned = $this->isPinned();
 		$this->template->isPinable = $this->isPinable();
 
-		$this->template->otherWebsites = [];
-		$otherWebsitesDao = $this->em->getDao(App\BEMenu::getClassName());
-		$otherWebsites = $otherWebsitesDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
+		$this->template->menu = $beCache->load('items', function() use ($beCache) {
+			return $beCache->save('items', $this->getBEMenuItems(), [Cache::EXPIRE => '20 minutes']);
+		});
 
-		$this->template->menu = [];
+		$this->template->otherWebsites = $beCache->load('otherWebsites', function() use ($beCache) {
+			return $beCache->save('otherWebsites', $this->getOtherWebsites(), [Cache::EXPIRE => '20 minutes']);
+		});
+
+		$this->template->mainLayoutBeforePath = __DIR__ . '/../templates/@layout-before.latte';
+		$this->template->mainLayoutAfterPath = __DIR__ . '/../templates/@layout-after.latte';
+
+		if ($this->getUser()->id) {
+			$idUser = $this->getUser()->id;
+
+			$profileUser = $beCache->load('activeUser_' . $idUser, function() use ($beCache, $idUser) {
+				return $beCache->save('activeUser_' . $idUser, $this->getActualUserFromDb(), [Cache::EXPIRE => '20 minutes']);
+			});
+
+			$this->template->gravatar = $beCache->load('gravatar', function() use ($beCache, $profileUser) {
+				return $beCache->save('gravatar', $this->getGravatar($profileUser->email), [Cache::EXPIRE => '20 minutes']);
+			});
+		}
+	}
+
+	private function getActualUserFromDb() {
+		$dao = $this->em->getDao(CModel\User\User::getClassName());
+		return $dao->find($this->getUser()->id);
+	}
+
+	private function getWebInfo() {
+		$webinfoDao = $this->em->getDao(Webinfo::getClassName());
+		return $webinfoDao->find(1);
+	}
+
+	private function getOtherWebsites() {
+		$dao = $this->em->getDao(OtherWebsite::getClassName());
+		$otherWebsites = $dao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
+		unset($dao);
+
+		$c = 0;
+		foreach ($otherWebsites as $otherWebsitesOne) {
+			$c++;
+
+			if ($c == 1) {
+				$handleOtherW = [];
+				$handleOtherW['groupName'] = 'Nezařazené';
+				$handleOtherW['items'] = [];
+			}
+
+			$handleOtherW['items'][] = $otherWebsitesOne;
+		}
+
+		if ($c > 0) {
+			$otherWebsites[] = (object) $handleOtherW;
+		}
+
+		$otherWebsitesGroupDao = $this->em->getDao(App\OtherWebsiteGroup::getClassName());
+		$otherWebsitesGroup = $otherWebsitesGroupDao->findBy([], ['orderLine' => 'ASC']);
+
+		foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
+			$dao = $this->em->getDao(OtherWebsite::getClassName());
+			$otherWebsitesB = $dao->findBy(['groupLine' => $otherWebsitesGroupOne->id], ['orderLine' => 'ASC']);
+			unset($dao);
+
+			$handleOtherWB = [];
+			$handleOtherWB['groupName'] = $otherWebsitesGroupOne->name;
+
+			$handleOtherWB['items'] = [];
+			foreach ($otherWebsitesB as $otherWebsitesBOne) {
+				$handleOtherWB['items'][] = $otherWebsitesBOne;
+			}
+
+			$otherWebsites[] = (object) $handleOtherWB;
+		}
+
+		return $otherWebsites;
+	}
+
+	private function getBEMenuItems() {
+		$menu = [];
 		$beMenuDao = $this->em->getDao(App\BEMenu::getClassName());
 		$beMenu = $beMenuDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
 
 		// TODO: recursive - be careful - cycle!
+
 		foreach ($beMenu as $beMenuOne) {
 			$menuHandle = [];
 			$menuHandle['id'] = $beMenuOne->id;
@@ -355,57 +439,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 			$menuHandle['childs'] = $beSubmenu;
 
-			$this->template->menu[] = (object) $menuHandle;
+			$menu[] = (object) $menuHandle;
 		}
 
-		$this->template->otherWebsites = [];
-		$otherWebsitesDao = $this->em->getDao(App\OtherWebsite::getClassName());
-		$otherWebsites = $otherWebsitesDao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
-
-		$c = 0;
-		foreach ($otherWebsites as $otherWebsitesOne) {
-			$c++;
-
-			if ($c == 1) {
-				$handleOtherW = [];
-				$handleOtherW['groupName'] = 'Nezařazené';
-				$handleOtherW['items'] = [];
-			}
-
-			$handleOtherW['items'][] = $otherWebsitesOne;
-		}
-
-		if ($c > 0) {
-			$this->template->otherWebsites[] = (object) $handleOtherW;
-		}
-
-		$otherWebsitesGroupDao = $this->em->getDao(App\OtherWebsiteGroup::getClassName());
-		$otherWebsitesGroup = $otherWebsitesGroupDao->findBy([], ['orderLine' => 'ASC']);
-
-		foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
-			$otherWebsitesBDao = $this->em->getDao(App\OtherWebsite::getClassName());
-			$otherWebsitesB = $otherWebsitesBDao->findBy(['groupLine' => $otherWebsitesGroupOne->id], ['orderLine' => 'ASC']);
-
-			$handleOtherWB = [];
-			$handleOtherWB['groupName'] = $otherWebsitesGroupOne->name;
-
-			$handleOtherWB['items'] = [];
-			foreach ($otherWebsitesB as $otherWebsitesBOne) {
-				$handleOtherWB['items'][] = $otherWebsitesBOne;
-			}
-
-			$this->template->otherWebsites[] = (object) $handleOtherWB;
-		}
-
-		$this->template->mainLayoutBeforePath = __DIR__ . '/../templates/@layout-before.latte';
-		$this->template->mainLayoutAfterPath = __DIR__ . '/../templates/@layout-after.latte';
-
-		if ($this->getUser()->id) {
-			$user = $this->em->getDao(CModel\User\User::getClassName());
-			$profileUser = $user->find($this->getUser()->id);
-
-			$this->template->gravatar = $this->getGravatar($profileUser->email);
-		}
+		return $menu;
 	}
 
 	/*
