@@ -34,7 +34,7 @@ final class DocsPresenter extends BasePresenter {
 		$this->template->doc = $doc;
 
 		$navbar = [];
-		$navbar[] = (object) ['link' => 'CustDocs:list', 'name' => 'Dokumenty'];
+		$navbar[] = (object) ['link' => 'Docs:list', 'name' => 'Dokumenty'];
 		$navbar[] = (object) ['name' => 'Detail'];
 
 		$this->template->navbar = $navbar;
