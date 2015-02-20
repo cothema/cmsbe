@@ -5,7 +5,7 @@ namespace App\Presenters;
 use App\ORM\Sys\Pinned;
 
 /**
- * Homepage presenter.
+ * Homepage Presenter
  */
 class HomepagePresenter extends BasePresenter {
 

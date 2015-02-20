@@ -3,12 +3,10 @@
 namespace App\Presenters;
 
 use Nette;
-use Nette\Application\UI\Form;
-use App;
 use App\Cothema\Admin;
 
 /**
- * Custom presenter.
+ * Custom Presenter
  */
 class CustomPresenter extends BasePresenter {
 

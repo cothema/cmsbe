@@ -2,20 +2,16 @@
 
 namespace App\Presenters;
 
-use App;
-
 /**
- * AboutWebapp presenter.
+ * AboutWebapp Presenter
  */
-class AboutWebappPresenter extends BasePresenter
-{
+class AboutWebappPresenter extends BasePresenter {
 
-    public function renderDefault()
-    {
-        $navbar = [];
-        $navbar[] = (object)['name' => 'O aplikaci'];
-        
-        $this->template->navbar = $navbar;
-    }
+	public function renderDefault() {
+		$navbar = [];
+		$navbar[] = (object) ['name' => 'O aplikaci'];
+
+		$this->template->navbar = $navbar;
+	}
 
 }
