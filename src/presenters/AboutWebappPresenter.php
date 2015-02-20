@@ -5,7 +5,7 @@ namespace App\Presenters;
 /**
  * AboutWebapp Presenter
  */
-class AboutWebappPresenter extends BasePresenter {
+final class AboutWebappPresenter extends BasePresenter {
 
 	public function renderDefault() {
 		$navbar = [];

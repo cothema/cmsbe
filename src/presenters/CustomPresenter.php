@@ -8,7 +8,7 @@ use App\Cothema\Admin;
 /**
  * Custom Presenter
  */
-class CustomPresenter extends BasePresenter {
+final class CustomPresenter extends BasePresenter {
 
 	public function renderDefault() {
 		$navbar = [];

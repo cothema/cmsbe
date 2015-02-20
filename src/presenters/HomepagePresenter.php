@@ -7,7 +7,7 @@ use App\ORM\Sys\Pinned;
 /**
  * Homepage Presenter
  */
-class HomepagePresenter extends BasePresenter {
+final class HomepagePresenter extends BasePresenter {
 
 	public function renderDefault() {
 		$this->template->pins = $this->getAllPins();

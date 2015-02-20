@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 /**
  * Settings Presenter
  */
-class SettingsPresenter extends BasePresenter {
+final class SettingsPresenter extends BasePresenter {
 
 	public function renderBasicInfo() {
 		$this->permissions('superadmin');

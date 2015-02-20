@@ -8,7 +8,7 @@ use Nette\Diagnostics\Debugger;
 /**
  * Error presenter.
  */
-class ErrorPresenter extends BasePresenter {
+final class ErrorPresenter extends BasePresenter {
 
 	/**
 	 * @param  Exception

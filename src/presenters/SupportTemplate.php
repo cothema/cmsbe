@@ -5,10 +5,9 @@ namespace App\Presenters;
 /**
  * Support Presenter
  */
-class SupportPresenter extends BasePresenter {
+final class SupportPresenter extends BasePresenter {
 
 	public function renderDefault() {
-
 		$navbar = [];
 		$navbar[] = (object) ['name' => 'Pomoc', 'link' => 'Help:'];
 		$navbar[] = (object) ['name' => 'Podpora systému'];

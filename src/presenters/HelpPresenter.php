@@ -5,7 +5,7 @@ namespace App\Presenters;
 /**
  * Help Presenter
  */
-class HelpPresenter extends BasePresenter {
+final class HelpPresenter extends BasePresenter {
 
 	public function renderDefault() {
 
