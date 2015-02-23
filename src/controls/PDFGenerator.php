@@ -13,7 +13,7 @@ class PDFGenerator extends \Nette\Object {
 	protected $template;
 
 	/** @var \DOMPDF	DOMPDF object */
-	protected $domPDF = null;
+	protected $domPDF = NULL;
 
 	/** @var array	List of images used for template creation */
 	protected $images = [];
@@ -21,15 +21,15 @@ class PDFGenerator extends \Nette\Object {
 	/** @var string	String with HTML code for export to PDF */
 	protected $html = '';
 
-	function __construct() {
+	public function __construct() {
 		$this->prepareDomPDF();
 	}
 
-	function download($fileName) {
+	public function download($fileName) {
 		return $this->getStream($fileName);
 	}
 
-	function getHTML() {
+	public function getHTML() {
 		if (empty($this->template)) {
 			throw new \Exception('Template is not defined!');
 		}
@@ -37,21 +37,21 @@ class PDFGenerator extends \Nette\Object {
 		return (string) $this->template;
 	}
 
-	function getPDF() {
-		return $this->getDomPDF(true)->output();
+	public function getPDF() {
+		return $this->getDomPDF(TRUE)->output();
 	}
 
-	function setTemplate($template, $file) {
+	public function setTemplate($template, $file) {
 		$template->setFile($file);
 
 		$this->template = $template;
 	}
 
-	function setImages($images) {
+	public function setImages($images) {
 		$this->images = $images;
 	}
 
-	private function getDomPDF($refresh = false) {
+	private function getDomPDF($refresh = FALSE) {
 		if ($refresh) {
 			$this->loadHtml();
 		}
@@ -66,7 +66,7 @@ class PDFGenerator extends \Nette\Object {
 	}
 
 	private function getStream($filename) {
-		return $this->getDomPDF(true)->stream($filename);
+		return $this->getDomPDF(TRUE)->stream($filename);
 	}
 
 	private function prepareDomPDF() {
@@ -81,7 +81,7 @@ class PDFGenerator extends \Nette\Object {
 		require_once DIR_VENDOR . '/dompdf/dompdf/dompdf_config.inc.php';
 
 		if (!defined('DOMPDF_UNICODE_ENABLED')) {
-			define('DOMPDF_UNICODE_ENABLED', true);
+			define('DOMPDF_UNICODE_ENABLED', TRUE);
 		}
 
 		$this->domPDF = new \DOMPDF;
