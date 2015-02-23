@@ -2,13 +2,16 @@
 
 namespace App\Cothema\Admin;
 
-use Doctrine\ORM\Mapping as ORM;
+use \Doctrine\ORM\Mapping as ORM;
+use \Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="c_doc")
  */
-class Docs extends \Kdyby\Doctrine\Entities\IdentifiedEntity {
+class Docs extends Entities\BaseEntity {
+
+	use Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\Column(type="text")
