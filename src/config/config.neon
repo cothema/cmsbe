@@ -31,10 +31,12 @@ doctrine:
 services:
 	- App\UserManager
 	- App\RouterFactory
+	- Cothema\CMSBE\Model\PermissionsModel
 	router: @App\RouterFactory::createRouter
 
 extensions:
 	gravatar: IPub\Gravatar\DI\GravatarExtension
+	permission: IPub\Permissions\DI\PermissionsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
 
 gravatar:

@@ -23,7 +23,8 @@ use IPub;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	use IPub\Gravatar\TGravatar;
+	use IPub\Gravatar\TGravatar,
+	 IPub\Permissions\TPermission;
 
 	/** @persistent */
 	public $locale;
@@ -33,14 +34,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
-
-	public function __construct() {
-		parent::__construct();
-	}
-
-	protected function startup() {
-		parent::startup();
-	}
 
 	protected function getWWWDir() {
 		$path = DIR_WWW;

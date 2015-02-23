@@ -6,6 +6,8 @@ use Nette;
 use App\Cothema\Admin;
 
 /**
+ * @Secured\User(loggedIn)
+ *
  * Custom Presenter
  */
 final class CustomPresenter extends BasePresenter {

@@ -5,6 +5,8 @@ namespace App\Presenters;
 use App\Cothema\Admin\Docs;
 
 /**
+ * @Secured\User(loggedIn)
+ * 
  * Cust Phone List Presenter
  */
 final class DocsPresenter extends BasePresenter {
