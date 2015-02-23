@@ -76,7 +76,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/**
 	 *
-	 * @return boolean|null
+	 * @return boolean|NULL
 	 */
 	public function isPinned() {
 		try {
@@ -84,13 +84,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 			return $pin->isPinned();
 		} catch (\Eception $e) {
-			return null;
+			return NULL;
 		}
 	}
 
 	/**
 	 *
-	 * @return boolean|null
+	 * @return boolean|NULL
 	 */
 	public function isPinable() {
 		try {
@@ -98,11 +98,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 			return $pin->isPinable();
 		} catch (\Exception $e) {
-			return null;
+			return NULL;
 		}
 	}
 
-	protected function createTemplate($class = null) {
+	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
 		$template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
 
@@ -121,7 +121,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return String containing either just a URL or a complete image tag
 	 * @source http://gravatar.com/site/implement/images/php/
 	 */
-	public function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
+	public function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = FALSE, $atts = array()) {
 		$url = 'http://www.gravatar.com/avatar/';
 		$url .= md5(strtolower(trim($email)));
 		$url .= "?s=$s&d=$d&r=$r";
@@ -156,7 +156,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return WebLoader\Nette\CssLoader
 	 */
 	public function createComponentCssAdminLTE() {
-		return $this->lessComponentWrapper(['AdminLTE.css'], false, __DIR__ . '/../../../admin-lte/css');
+		return $this->lessComponentWrapper(['AdminLTE.css'], FALSE, __DIR__ . '/../../../admin-lte/css');
 	}
 
 	/**
@@ -194,8 +194,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/**
 	 * @param string $jsDir
 	 */
-	private function jsComponentWrapper(array $fileNames, $jsDir = null) {
-		if ($jsDir === null) {
+	private function jsComponentWrapper(array $fileNames, $jsDir = NULL) {
+		if ($jsDir === NULL) {
 			$jsDir = __DIR__ . '/../scripts';
 		}
 
@@ -217,15 +217,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	/**
-	 * @param string|false $media
+	 * @param array $fileNames
+	 * @param string|FALSE $media
 	 * @param string $stylesDir
 	 */
-	private function lessComponentWrapper(array $fileNames, $media = null, $stylesDir = null) {
-		if ($media === null) {
+	private function lessComponentWrapper(array $fileNames, $media = NULL, $stylesDir = NULL) {
+		if ($media === NULL) {
 			$media = 'screen,projection,tv';
 		}
 
-		if ($stylesDir === null) {
+		if ($stylesDir === NULL) {
 			$stylesDir = __DIR__ . '/../styles';
 		}
 
@@ -269,7 +270,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $nameday[0];
 		}
 
-		return null;
+		return NULL;
 	}
 
 	public function beforeRender() {
@@ -320,7 +321,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			}
 			$this->template->custom = (object) $customOut;
 
-			$this->template->actualUser = null;
+			$this->template->actualUser = NULL;
 		}
 
 		$cacheStorage = new CacheFileStorage(DIR_ROOT . '/temp/cache');
@@ -374,7 +375,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	private function getOtherWebsites() {
 		$dao = $this->em->getRepository(OtherWebsite::getClassName());
-		$otherWebsites = $dao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
+		$otherWebsites = $dao->findBy(['groupLine' => NULL], ['orderLine' => 'ASC']);
 		unset($dao);
 
 		$c = 0;
@@ -416,10 +417,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $otherWebsites;
 	}
 
+	/**
+	 *
+	 * @return array
+	 */
 	private function getBEMenuItems() {
 		$menu = [];
 		$beMenuDao = $this->em->getRepository(App\BEMenu::getClassName());
-		$beMenu = $beMenuDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
+		$beMenu = $beMenuDao->findBy(['parent' => NULL], ['orderLine' => 'ASC']);
 
 		// TODO: recursive - be careful - cycle!
 
@@ -468,22 +473,35 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		}
 	}
 
-	private function permissionsRoleArray($role) {
+	/**
+	 * @param array $role
+	 * @return boolean
+	 */
+	private function permissionsRoleArray(array $role) {
 		foreach ($role as $roleOne) {
 			$ok = $this->permissionsRole($roleOne);
 
 			if ($ok) {
-				return true;
+				return TRUE;
 			}
 		}
 
-		return false;
+		return FALSE;
 	}
 
+	/**
+	 *
+	 * @param string $role
+	 * @return boolean
+	 */
 	private function permissionsRole($role) {
-		return ($this->user->isInRole($role)) ? true : false;
+		return ($this->user->isInRole($role)) ? TRUE : FALSE;
 	}
 
+	/**
+	 * @param string $section
+	 * @return object
+	 */
 	protected function getPermissionsSection($section) {
 		$userSignedDao = $this->em->getRepository(User::getClassName());
 		$userSigned = $userSignedDao->find($this->user->id);
@@ -495,9 +513,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $permissions[0];
 		}
 
-		return (object) ['section' => (string) $section, 'allowRead' => false, 'allowWrite' => false, 'allowDelete' => false];
+		return (object) ['section' => (string) $section, 'allowRead' => FALSE, 'allowWrite' => FALSE, 'allowDelete' => FALSE];
 	}
 
+	/**
+	 * return void
+	 */
 	protected function notYetImplemented() {
 		$this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!', 'danger');
 	}
