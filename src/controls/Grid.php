@@ -12,8 +12,9 @@ class Grid extends \Grido\Grid {
 	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
 		parent::__construct($parent, $name);
 
-		if ($parent->translator instanceof \Kdyby\Translation\Translator) {
-			$lang = $parent->translator->getLocale();
+		$translator = $parent->translator;
+		if ($translator instanceof \Kdyby\Translation\Translator) {
+			$lang = $translator->getLocale();
 			$gridLang = ($lang === 'cz' ? 'cs' : 'en');
 
 			$this->getTranslator()->setLang($gridLang);

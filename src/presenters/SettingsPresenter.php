@@ -23,7 +23,7 @@ final class SettingsPresenter extends BasePresenter {
 	public function createComponentBasicSettingsForm() {
 		$form = new Form;
 
-		$dao = $this->em->getDao(App\Webinfo::getClassName());
+		$dao = $this->em->getRepository(App\Webinfo::getClassName());
 		$res = $dao->find(1);
 
 		$form->addText('webName', 'Název')
@@ -60,7 +60,7 @@ final class SettingsPresenter extends BasePresenter {
 	public function basicSettingsFormSucceeded($form) {
 		$val = $form->getValues(true);
 
-		$settingsDao = $this->em->getDao(\App\Webinfo::getClassName());
+		$settingsDao = $this->em->getRepository(\App\Webinfo::getClassName());
 		$settings = $settingsDao->find(1);
 
 		$settings->webName = trim($val['webName']);

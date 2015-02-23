@@ -14,7 +14,7 @@ final class HomepagePresenter extends BasePresenter {
 	}
 
 	private function getAllPins() {
-		$pinnedDao = $this->em->getDao(Pinned::getClassName());
+		$pinnedDao = $this->em->getRepository(Pinned::getClassName());
 		return $pinnedDao->findBy(['user' => $this->user->id]);
 	}
 

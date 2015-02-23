@@ -47,21 +47,21 @@ final class DocsPresenter extends BasePresenter {
 	}
 
 	private function getDocsAll() {
-		$dao = $this->em->getDao(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::getClassName());
 		$out = $dao->findBy([], ['id' => 'ASC']);
 
 		return $out;
 	}
 
 	private function getDocById($id) {
-		$dao = $this->em->getDao(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::getClassName());
 		$out = $dao->find($id);
 
 		return $out;
 	}
 
 	private function getDocByAlias($alias) {
-		$dao = $this->em->getDao(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::getClassName());
 		$out = $dao->findBy(['alias' => $alias]);
 
 		if (isset($out[0])) {

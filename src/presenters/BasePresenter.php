@@ -262,7 +262,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @param string $month
 	 */
 	private function getNameday($day, $month) {
-		$dao = $this->em->getDao(Admin\Nameday::getClassName());
+		$dao = $this->em->getRepository(Admin\Nameday::getClassName());
 		$nameday = $dao->findBy(['day' => (int) $day, 'month' => (int) $month]);
 
 		if (isset($nameday[0])) {
@@ -290,14 +290,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		}
 
 		if ($this->user->isLoggedIn()) {
-			$actualUserDao = $this->em->getDao(CModel\User\User::getClassName());
+			$actualUserDao = $this->em->getRepository(CModel\User\User::getClassName());
 			$actualUser = $actualUserDao->find($this->getUser()->id);
 
-			$custDao = $this->em->getDao(App\Cothema\Admin\Custom::getClassName());
+			$custDao = $this->em->getRepository(App\Cothema\Admin\Custom::getClassName());
 			$cust = $custDao->findAll();
 			$customOut = [];
 			foreach ($cust as $custOne) {
-				$userCustDao = $this->em->getDao(App\Cothema\Admin\UserCustom::getClassName());
+				$userCustDao = $this->em->getRepository(App\Cothema\Admin\UserCustom::getClassName());
 				$userCust = $userCustDao->findBy(['user' => $this->getUser()->id, 'custom' => $custOne->id]);
 
 				if (isset($userCust[0])) {
@@ -311,7 +311,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 			$this->template->actualUser = $actualUser;
 		} else {
-			$custDao = $this->em->getDao(App\Cothema\Admin\Custom::getClassName());
+			$custDao = $this->em->getRepository(App\Cothema\Admin\Custom::getClassName());
 			$cust = $custDao->findAll();
 			$customOut = [];
 			foreach ($cust as $custOne) {
@@ -363,17 +363,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	private function getActualUserFromDb() {
-		$dao = $this->em->getDao(CModel\User\User::getClassName());
+		$dao = $this->em->getRepository(CModel\User\User::getClassName());
 		return $dao->find($this->getUser()->id);
 	}
 
 	private function getWebInfo() {
-		$webinfoDao = $this->em->getDao(Webinfo::getClassName());
+		$webinfoDao = $this->em->getRepository(Webinfo::getClassName());
 		return $webinfoDao->find(1);
 	}
 
 	private function getOtherWebsites() {
-		$dao = $this->em->getDao(OtherWebsite::getClassName());
+		$dao = $this->em->getRepository(OtherWebsite::getClassName());
 		$otherWebsites = $dao->findBy(['groupLine' => null], ['orderLine' => 'ASC']);
 		unset($dao);
 
@@ -394,11 +394,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$otherWebsites[] = (object) $handleOtherW;
 		}
 
-		$otherWebsitesGroupDao = $this->em->getDao(App\OtherWebsiteGroup::getClassName());
+		$otherWebsitesGroupDao = $this->em->getRepository(App\OtherWebsiteGroup::getClassName());
 		$otherWebsitesGroup = $otherWebsitesGroupDao->findBy([], ['orderLine' => 'ASC']);
 
 		foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
-			$dao = $this->em->getDao(OtherWebsite::getClassName());
+			$dao = $this->em->getRepository(OtherWebsite::getClassName());
 			$otherWebsitesB = $dao->findBy(['groupLine' => $otherWebsitesGroupOne->id], ['orderLine' => 'ASC']);
 			unset($dao);
 
@@ -418,7 +418,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	private function getBEMenuItems() {
 		$menu = [];
-		$beMenuDao = $this->em->getDao(App\BEMenu::getClassName());
+		$beMenuDao = $this->em->getRepository(App\BEMenu::getClassName());
 		$beMenu = $beMenuDao->findBy(['parent' => null], ['orderLine' => 'ASC']);
 
 		// TODO: recursive - be careful - cycle!
@@ -434,7 +434,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$menuHandle['faIcon'] = $beMenuOne->faIcon;
 
 			// Find childs
-			$beSubmenuDao = $this->em->getDao(App\BEMenu::getClassName());
+			$beSubmenuDao = $this->em->getRepository(App\BEMenu::getClassName());
 			$beSubmenu = $beSubmenuDao->findBy(['parent' => $beMenuOne->id], ['orderLine' => 'ASC']);
 
 			$menuHandle['childs'] = $beSubmenu;
@@ -485,10 +485,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	protected function getPermissionsSection($section) {
-		$userSignedDao = $this->em->getDao(User::getClassName());
+		$userSignedDao = $this->em->getRepository(User::getClassName());
 		$userSigned = $userSignedDao->find($this->user->id);
 
-		$permissionsDao = $this->em->getDao(Permissions::getClassName());
+		$permissionsDao = $this->em->getRepository(Permissions::getClassName());
 		$permissions = $permissionsDao->findBy(['user' => $userSigned, 'section' => $section]);
 
 		if (isset($permissions[0])) {
