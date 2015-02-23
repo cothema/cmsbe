@@ -23,8 +23,7 @@ use IPub;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	use IPub\Gravatar\TGravatar,
-	 IPub\Permissions\TPermission;
+	use IPub\Gravatar\TGravatar;
 
 	/** @persistent */
 	public $locale;
@@ -37,6 +36,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function __construct() {
 		parent::__construct();
+	}
+
+	protected function startup() {
+		parent::startup();
 	}
 
 	protected function getWWWDir() {

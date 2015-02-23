@@ -35,8 +35,10 @@ services:
 
 extensions:
 	gravatar: IPub\Gravatar\DI\GravatarExtension
-	permission: IPub\Permissions\DI\PermissionsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
+
+gravatar:
+	defaultImage: mm
 
 translation:
 	default: cz
