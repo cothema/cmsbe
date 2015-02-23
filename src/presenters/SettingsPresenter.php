@@ -6,8 +6,9 @@ use App;
 use Nette\Application\UI\Form;
 
 /**
+ * @Secured
  * @Secured\User(loggedIn)
- * 
+ *
  * Settings Presenter
  */
 final class SettingsPresenter extends BasePresenter {

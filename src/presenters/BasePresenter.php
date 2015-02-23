@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use Nette;
+use Nette\Application;
 use Nette\Caching\Cache;
 use Nette\Caching\Storages\FileStorage as CacheFileStorage;
 use App;
@@ -34,6 +35,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
+
+	public function checkRequirements($element) {
+		try {
+			parent::checkRequirements($element);
+
+			if (!$this->requirementsChecker->isAllowed($element)) {
+				throw new Application\ForbiddenRequestException;
+			}
+		} catch (Application\ForbiddenRequestException $e) {
+			$this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním.');
+
+			$this->redirect('Sign:in', ['backSignInUrl' => $this->getHttpRequest()->url->path]);
+		}
+	}
 
 	protected function getWWWDir() {
 		$path = DIR_WWW;

@@ -5,8 +5,9 @@ namespace App\Presenters;
 use App\ORM\Sys\Pinned;
 
 /**
+ * @Secured
  * @Secured\User(loggedIn)
- * 
+ *
  * Homepage Presenter
  */
 final class HomepagePresenter extends BasePresenter {

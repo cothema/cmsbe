@@ -6,6 +6,7 @@ use Nette;
 use App\Cothema\Admin;
 
 /**
+ * @Secured
  * @Secured\User(loggedIn)
  *
  * Custom Presenter

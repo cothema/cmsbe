@@ -3,8 +3,9 @@
 namespace App\Presenters;
 
 /**
+ * @Secured
  * @Secured\User(loggedIn)
- * 
+ *
  * Support Presenter
  */
 final class SupportPresenter extends BasePresenter {
