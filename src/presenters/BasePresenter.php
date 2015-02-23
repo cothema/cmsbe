@@ -22,6 +22,8 @@ use Cothema\CMSBE\Service\PagePin;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
+	use IPub\Gravatar\TGravatar;
+
 	/** @persistent */
 	public $locale;
 
@@ -104,35 +106,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
+
+		$template->_gravatar = $this->gravatar;
+		$template->registerHelperLoader(callback($this->gravatar->createTemplateHelpers(), 'loader'));
 		$template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
 
 		return $template;
-	}
-
-	/**
-	 * Get either a Gravatar URL or complete image tag for a specified email address.
-	 *
-	 * @param string $email The email address
-	 * @param integer $s Size in pixels, defaults to 80px [ 1 - 2048 ]
-	 * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
-	 * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
-	 * @param boole $img True to return a complete IMG tag False for just the URL
-	 * @param array $atts Optional, additional key/value attributes to include in the IMG tag
-	 * @return String containing either just a URL or a complete image tag
-	 * @source http://gravatar.com/site/implement/images/php/
-	 */
-	public function getGravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = FALSE, $atts = array()) {
-		$url = 'http://www.gravatar.com/avatar/';
-		$url .= md5(strtolower(trim($email)));
-		$url .= "?s=$s&d=$d&r=$r";
-		if ($img) {
-			$url = '<img src="' . $url . '"';
-			foreach ($atts as $key => $val) {
-				$url .= ' ' . $key . '="' . $val . '"';
-			}
-			$url .= ' />';
-		}
-		return $url;
 	}
 
 	/**
@@ -357,9 +336,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 				return $beCache->save('activeUser_' . $idUser, $this->getActualUserFromDb(), [Cache::EXPIRE => '20 minutes']);
 			});
 
-			$this->template->gravatar = $beCache->load('gravatar', function() use ($beCache, $profileUser) {
-				return $beCache->save('gravatar', $this->getGravatar($profileUser->email), [Cache::EXPIRE => '20 minutes']);
-			});
+			$this->template->profileUser = $profileUser;
 		}
 	}
 

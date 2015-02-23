@@ -7,79 +7,79 @@
 <header class="navbar navbar-inverse navbar-fixed-top">
     <a n:href="Homepage:">
         <div id="left-also-top" class="left-top-heading">
-            {if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}
-        </div>
-    </a>
-    <div class="container-fluid fullw">
-        <div class="navbar-header">
-            <a class="navbar-brand" onclick="event.preventDefault();
-                    location.reload()" href="#"><span class="fa fa-repeat"></span> </a>
-            <a class="navbar-brand" onclick="event.preventDefault();
-                    window.history.back()" href="#"><span class="fa fa-chevron-left"></span> </a>
-            <a class="navbar-brand" onclick="event.preventDefault();
-                    window.history.forward();" href="#"><span class="fa fa-chevron-right"></span> </a>
-            <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
-            <ul class="dropdown-menu topdropdown">
-                <li><a n:href="Homepage:">{_layout.general.homepage}</a></li>
-                <li n:if="$isSA"><a n:href="Settings:basicInfo">{_layout.general.basic_info_settings}</a></li>
-                <li><a n:href="AboutWebapp:">{_layout.general.about_app}</a></li>
-            </ul>
-        </div>
-        <ul n:if="$user->isLoggedIn() && $otherWebsites" class="nav navbar-nav navbar-left">
-            <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> {_layout.general.other_websites} <b class="caret"></b></a>
-                <ul n:inner-foreach="$otherWebsites as $otherWebsitesOne" class="dropdown-menu">
-                    <li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
-                    <li n:foreach="$otherWebsitesOne->items as $oneOWItem" n:if="is_object($oneOWItem)">
-                        <a href="{$oneOWItem->url}">{$oneOWItem->name}</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+	{if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}
+</div>
+</a>
+<div class="container-fluid fullw">
+	<div class="navbar-header">
+		<a class="navbar-brand" onclick="event.preventDefault();
+				location.reload()" href="#"><span class="fa fa-repeat"></span> </a>
+		<a class="navbar-brand" onclick="event.preventDefault();
+				window.history.back()" href="#"><span class="fa fa-chevron-left"></span> </a>
+		<a class="navbar-brand" onclick="event.preventDefault();
+				window.history.forward();" href="#"><span class="fa fa-chevron-right"></span> </a>
+		<a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
+		<ul class="dropdown-menu topdropdown">
+			<li><a n:href="Homepage:">{_layout.general.homepage}</a></li>
+			<li n:if="$isSA"><a n:href="Settings:basicInfo">{_layout.general.basic_info_settings}</a></li>
+			<li><a n:href="AboutWebapp:">{_layout.general.about_app}</a></li>
+		</ul>
+	</div>
+	<ul n:if="$user->isLoggedIn() && $otherWebsites" class="nav navbar-nav navbar-left">
+		<li>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> {_layout.general.other_websites} <b class="caret"></b></a>
+			<ul n:inner-foreach="$otherWebsites as $otherWebsitesOne" class="dropdown-menu">
+				<li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
+				<li n:foreach="$otherWebsitesOne->items as $oneOWItem" n:if="is_object($oneOWItem)">
+					<a href="{$oneOWItem->url}">{$oneOWItem->name}</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-        <ul n:if="$user->isLoggedIn()" class="nav navbar-nav navbar-left top-support">
-            <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>{_layout.general.phone_support}:</b> +420 606 460 316 <b class="caret"></b></a>
-                <ul class="dropdown-menu pull-right">
-                    <li>
-                        <a n:href="Help:">{_layout.general.help}</a>
-                        <a n:href="Support:">{_layout.general.other_forms_of_support}</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+	<ul n:if="$user->isLoggedIn()" class="nav navbar-nav navbar-left top-support">
+		<li>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>{_layout.general.phone_support}:</b> +420 606 460 316 <b class="caret"></b></a>
+			<ul class="dropdown-menu pull-right">
+				<li>
+					<a n:href="Help:">{_layout.general.help}</a>
+					<a n:href="Support:">{_layout.general.other_forms_of_support}</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_layout.general.language} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a n:href="this,locale=>cz">{_langs.czech}</a></li>
-                        <li><a n:href="this,locale=>en">{_langs.english}</a></li>
-                    </ul>
-                </li>
-                        {if !$user->isLoggedIn()}
-                    <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-                        <a n:href="Sign:in">{_layout.general.login}</a>
-                    </li>
-                {else}
-                    <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{$gravatar}" alt="{_layout.general.profile_picture}" class="img-circle profile-picture" /> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
-                            <li><a n:href="Users:profile">{_layout.general.profile_info}</a></li>
-                            <li><a n:href="Users:changePass">{_layout.general.change_password}</a></li>
-                            <li><a n:href="Sign:out">{_layout.general.log_out}</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a title="{_layout.general.log_out}" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="fa fa-power-off"></span></a>
-                    </li>
-                {/if}
-            </ul>
-        </div>
-    </div>
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{_layout.general.language} <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a n:href="this,locale=>cz">{_langs.czech}</a></li>
+					<li><a n:href="this,locale=>en">{_langs.english}</a></li>
+				</ul>
+			</li>
+			{if !$user->isLoggedIn()}
+				<li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
+					<a n:href="Sign:in">{_layout.general.login}</a>
+				</li>
+			{else}
+				<li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img n:gravatar="$profileUser->email, 40" alt="{_layout.general.profile_picture}" class="img-circle profile-picture" /> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
+						<li><a n:href="Users:profile">{_layout.general.profile_info}</a></li>
+						<li><a n:href="Users:changePass">{_layout.general.change_password}</a></li>
+						<li><a n:href="Sign:out">{_layout.general.log_out}</a></li>
+					</ul>
+				</li>
+				<li>
+					<a title="{_layout.general.log_out}" n:href="Sign:out" rel="tooltip" data-placement="bottom" data-title="Tooltip on right"><span class="fa fa-power-off"></span></a>
+				</li>
+			{/if}
+		</ul>
+	</div>
+</div>
 </header>

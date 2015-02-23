@@ -35,6 +35,7 @@ services:
 
 extensions:
 	translation: Kdyby\Translation\DI\TranslationExtension
+	gravatar: IPub\Gravatar\DI\GravatarExtension
 
 translation:
 	default: cz
