@@ -17,7 +17,7 @@ custom:
     settings_on_this_page_private: 'Settings on this page are private. Other users can save their own settings.'
 
 about_webapp:
-    about_webapp: 'About application'
+    about_application: 'About application'
     app_use_icons: 'Within this aplication are used icons'
 
 settings:

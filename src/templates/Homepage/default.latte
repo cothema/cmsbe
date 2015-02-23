@@ -1,22 +1,11 @@
 {block content}
-<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_layout.general.administration}{else}{_layout.general.information_system}{/if}</h1>
+<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}</h1>
 
 <div class="well">
     Vítejte v {if $webinfo->systype==='is'}informačním systému společnosti{else}administraci webu{/if} {$companyName}!
 </div>
 
-{*
-<div class="panel panel-danger">
-    <div class="panel-heading">
-        <h3 class="panel-title">Upozornění</h3>
-    </div>
-    <div class="panel-body">
-        <span class="fa fa-check"></span> Nemáte žádná upozornění.
-    </div>
-</div>
-*}
-
-<h2>Záložky</h2>
+<h2>{_layout.general.bookmarks}</h2>
 <div class="row">
     {foreach $pins as $pinsOne}
         <div class="col-lg-4 col-md-6 dashboard-stats">
@@ -33,7 +22,7 @@
                             {/if}
                         </div>
                     </div>
-                </a>	
+                </a>
             </div>
         </div>
     {/foreach}

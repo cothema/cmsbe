@@ -1,5 +1,6 @@
 general:
     administration: 'Administrace'
+    bookmarks: 'Záložky'
     information_system: 'Informační systém'
     phone_support: 'Telefonická podpora'
     help: 'Nápověda'

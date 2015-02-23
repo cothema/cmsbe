@@ -17,7 +17,7 @@ custom:
     settings_on_this_page_private: 'Nastavení na této stránce jsou uložena pouze pro Vás. Ostatní uživatelé si mohou uložit nastavení svá.'
 
 about_webapp:
-    about_webapp: 'O aplikaci'
+    about_application: 'O aplikaci'
     app_use_icons: 'V rámci aplikace jsou využívány ikony'
 
 settings:

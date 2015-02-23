@@ -1,5 +1,6 @@
 general:
     administration: 'Office'
+    bookmarks: 'Bookmarks'
     information_system: 'Information system'
     phone_support: 'Phone support'
     help: 'Help'
