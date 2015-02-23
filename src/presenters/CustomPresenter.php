@@ -8,6 +8,7 @@ use App\Cothema\Admin;
 /**
  * @Secured
  * @Secured\User(loggedIn)
+ * @Secured\Role(admin)
  *
  * Custom Presenter
  */

@@ -2,20 +2,20 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application;
-use Nette\Caching\Cache;
-use Nette\Caching\Storages\FileStorage as CacheFileStorage;
 use App;
 use App\Webinfo;
 use App\OtherWebsite;
 use App\Cothema\Admin;
 use Cothema\Model as CModel;
-use WebLoader;
 use Cothema\Model\User\User;
 use Cothema\Model\User\Permissions;
 use Cothema\CMSBE\Service\PagePin;
 use IPub;
+use Nette;
+use Nette\Application;
+use Nette\Caching\Cache;
+use Nette\Caching\Storages\FileStorage as CacheFileStorage;
+use WebLoader;
 
 /**
  * Base presenter for all application presenters.
@@ -44,9 +44,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 				throw new Application\ForbiddenRequestException;
 			}
 		} catch (Application\ForbiddenRequestException $e) {
-			$this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním.');
+			$this->flashMessage('Pro vstup do požadované sekce musíte být přihlášen/a s příslušným oprávněním.');
 
-			$this->redirect('Sign:in', ['backSignInUrl' => $this->getHttpRequest()->url->path]);
+			if (!$this->user->isLoggedIn()) {
+				$this->redirect('Sign:in', ['backSignInUrl' => $this->getHttpRequest()->url->path]);
+			} elseif (!$this->isLinkCurrent('Homepage:')) {
+				$this->redirect('Homepage:');
+			} else {
+				$this->redirect('Sign:in');
+			}
 		}
 	}
 

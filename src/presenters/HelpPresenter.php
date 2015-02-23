@@ -5,6 +5,7 @@ namespace App\Presenters;
 /**
  * @Secured
  * @Secured\User(loggedIn)
+ * @Secured\Role(admin)
  *
  * Help Presenter
  */

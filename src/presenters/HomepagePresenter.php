@@ -7,6 +7,7 @@ use App\ORM\Sys\Pinned;
 /**
  * @Secured
  * @Secured\User(loggedIn)
+ * @Secured\Role(admin)
  *
  * Homepage Presenter
  */

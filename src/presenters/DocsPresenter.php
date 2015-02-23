@@ -7,6 +7,7 @@ use App\Cothema\Admin\Docs;
 /**
  * @Secured
  * @Secured\User(loggedIn)
+ * @Secured\Role(admin)
  *
  * Cust Phone List Presenter
  */

@@ -8,14 +8,13 @@ use Nette\Application\UI\Form;
 /**
  * @Secured
  * @Secured\User(loggedIn)
+ * @Secured\Role(superadmin)
  *
  * Settings Presenter
  */
 final class SettingsPresenter extends BasePresenter {
 
 	public function renderBasicInfo() {
-		$this->permissions('superadmin');
-
 		$navbar = [];
 		$navbar[] = (object) ['name' => 'Nastavení'];
 		$navbar[] = (object) ['name' => 'Základní informace'];
