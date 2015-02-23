@@ -34,8 +34,9 @@ services:
 	router: @App\RouterFactory::createRouter
 
 extensions:
-	translation: Kdyby\Translation\DI\TranslationExtension
 	gravatar: IPub\Gravatar\DI\GravatarExtension
+	permission: IPub\Permissions\DI\PermissionsExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
 
 translation:
 	default: cz

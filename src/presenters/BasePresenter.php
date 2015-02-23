@@ -14,6 +14,7 @@ use WebLoader;
 use Cothema\Model\User\User;
 use Cothema\Model\User\Permissions;
 use Cothema\CMSBE\Service\PagePin;
+use IPub;
 
 /**
  * Base presenter for all application presenters.
@@ -22,7 +23,8 @@ use Cothema\CMSBE\Service\PagePin;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	use IPub\Gravatar\TGravatar;
+	use IPub\Gravatar\TGravatar,
+	 IPub\Permissions\TPermission;
 
 	/** @persistent */
 	public $locale;
