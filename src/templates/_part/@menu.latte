@@ -12,7 +12,7 @@
 		<ul class="sidebar-menu">
 			{*control menu:breadcrumb*}
 
-			{control menu}
+			{control menuLeftTop}
 
 			{foreach $menu as $menuOne}
 				{* TO DO: logic (active) to presenter *}
@@ -40,12 +40,8 @@
 			<li n:if="$user->isLoggedIn() && $user->isInRole('stats') && $urlStats!==null">
 				<a href="{$urlStats}"><i class="fa fa-line-chart"></i> <span>{_menu.items.visitor_stats}</span></a>
 			</li>
-			<li n:class="$presenter->isLinkCurrent('Settings:BasicInfo') ? active">
-				<a n:href="Settings:BasicInfo"><i class="fa fa-wrench"></i> <span>{_menu.items.system_settings}</span></a>
-			</li>
-			<li n:class="$presenter->isLinkCurrent('Help:') ? active">
-				<a n:href="Help:"><i class="fa fa-support"></i> <span>{_menu.items.help}</span></a>
-			</li>
+
+			{control menuLeftBottom}
 		</ul>
 	</section>
 </aside>

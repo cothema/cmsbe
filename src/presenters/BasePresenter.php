@@ -36,8 +36,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
 
-	/** @var \DK\Menu\UI\IControlFactory @inject */
-	public $menuFactory;
+	/** @var \DK\Menu\UI\ICustomTopControlFactory @inject */
+	public $menuLeftTopFactory;
+
+	/** @var \DK\Menu\UI\ICustomBottomControlFactory @inject */
+	public $menuLeftBottomFactory;
 
 	public function checkRequirements($element) {
 		try {
@@ -195,8 +198,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/**
 	 * @return \DK\Menu\UI\Control
 	 */
-	protected function createComponentMenu() {
-		return $this->menuFactory->create();
+	protected function createComponentMenuLeftTop() {
+		return $this->menuLeftTopFactory->create();
+	}
+
+	/**
+	 * @return \DK\Menu\UI\Control
+	 */
+	protected function createComponentMenuLeftBottom() {
+		return $this->menuLeftBottomFactory->create();
 	}
 
 	/**
