@@ -2,8 +2,8 @@
 <h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}</h1>
 
 <div class="well">
-	<span n:if="$webinfo->systype === 'is'">Vítejte v informačním systému společnosti</span>
-	<span n:if="$webinfo->systype !== 'is'">Vítejte v administraci webu</span>
+	<span n:if="$webinfo->systype === 'is'">{_pages.homepage.welcome_is}</span>
+	<span n:if="$webinfo->systype !== 'is'">{_pages.homepage.welcome_webadmin}</span>
 	{$companyName}!
 </div>
 
