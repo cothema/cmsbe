@@ -1,0 +1,6 @@
+items:
+    dashboard: 'Dashboard'
+    help: 'Helpen'
+    system_settings: 'Systeeminstellingen'
+    visitor_stats: 'Visitor stats'
+    online: 'Online'

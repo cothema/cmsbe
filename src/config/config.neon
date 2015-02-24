@@ -44,7 +44,7 @@ gravatar:
 
 translation:
 	default: cz
-	whitelist: [cz, en, de]
+	whitelist: [cz, en, de, nl]
 	fallback: [cs_CZ, cz]
 	resolvers:
 		session: on

@@ -9,17 +9,15 @@ use Nette\Application\Routers\Route;
 /**
  * Router factory.
  */
-class RouterFactory
-{
+class RouterFactory {
 
-    /**
-     * @return \Nette\Application\IRouter
-     */
-    public function createRouter()
-    {
-        $router = new RouteList();
-        $router[] = new Route('<locale=cz cz|en>/<presenter>/<action>[/<id>]', 'Homepage:default');
-        return $router;
-    }
+	/**
+	 * @return \Nette\Application\IRouter
+	 */
+	public function createRouter() {
+		$router = new RouteList();
+		$router[] = new Route('<locale=cz cz|en|nl>/<presenter>/<action>[/<id>]', 'Homepage:default');
+		return $router;
+	}
 
 }

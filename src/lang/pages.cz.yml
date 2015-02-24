@@ -3,6 +3,8 @@ homepage:
     support_you_have_subscribed: 'Máte předplacenou technickou podporu pro používání systému'
     custom_settings: 'Přizpůsobení'
     custom_settings_set_yours: 'Uzpůsobte si administraci svým vlastním požadavkům'
+    welcome_is: 'Vítejte v informačním systému společnosti'
+    welcome_webadmin: 'Vítejte v administraci webu'
 
 help:
     your_ip_server: 'Vaše IP adresa (z pohledu serveru)'

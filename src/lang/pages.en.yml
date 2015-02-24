@@ -3,6 +3,8 @@ homepage:
     support_you_have_subscribed: 'You have subscribed technical support for using the system'
     custom_settings: 'Custom settings'
     custom_settings_set_yours: 'Customize your environment to your own requirements'
+    welcome_is: 'Welcome to the information system of the company'
+    welcome_webadmin: 'Welcome to the site administration'
 
 help:
     your_ip_server: 'Your IP address (from server side)'

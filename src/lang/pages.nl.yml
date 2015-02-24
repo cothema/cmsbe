@@ -1,0 +1,38 @@
+homepage:
+    support: 'Ondersteuning'
+    support_you_have_subscribed: 'Je hebt technische ondersteuning voor het gebruik van het systeem geabonneerd'
+    custom_settings: 'Aangepaste instellingen'
+    custom_settings_set_yours: 'Pas uw omgeving aan uw eigen wensen'
+    welcome_is: 'Welkom op het informatiesysteem van het bedrijf'
+    welcome_webadmin: 'Welkom op de plaats van toediening'
+
+help:
+    your_ip_server: 'Uw IP-adres (van server-side)'
+    help: 'Helpen'
+    about_app: 'Over de toepassing'
+    system_support: 'Systeemondersteuning'
+    info_about_authors: 'Informatie over auteurs en technologieën'
+    technical_system_support: 'Systeemondersteuning technische'
+
+custom:
+    custom: 'Aangepaste instellingen'
+    settings_on_this_page_private: 'Instellingen op deze pagina zijn privé. Andere gebruikers kunnen hun eigen instellingen op te slaan.'
+
+about_webapp:
+    about_application: 'Over de toepassing'
+    app_use_icons: 'Binnen deze aplication zijn gebruikte pictogrammen'
+
+settings:
+    intro:
+        basic_info: 'Basisinformatie wordt uniform gebruikt in het hele systeem. In het geval u wilt maatwerk voor uw account - ga naar "Customize" - zie hieronder.'
+    basic_info_settings: 'Basisinformatie instellingen'
+    customization: 'Maatwerk'
+
+support:
+    header:
+        support: 'Systeemondersteuning'
+    intro:
+        in_case: 'Als je problemen hebt, neem dan contact op met onze helpdesk.'
+    contact_person: 'Contactpersoon'
+    telephone: 'Telefoon'
+    email: 'E-mail'
