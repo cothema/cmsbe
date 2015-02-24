@@ -7,5 +7,6 @@ menu:
 			menu: %appDir%/templates/_components/menu/menu.latte
 		items:
 			'menu.items.dashboard':
-				icon: home
 				target: Homepage:default
+				data:
+					icon: home
