@@ -36,3 +36,10 @@ support:
     contact_person: 'Contactpersoon'
     telephone: 'Telefoon'
     email: 'E-mail'
+
+docs:
+    download_file: 'Het document downloaden'
+    list_all: 'Lijst van alle documenten'
+    name: 'Naam'
+    storage: 'Opslagruimte'
+    format: 'Formaat'

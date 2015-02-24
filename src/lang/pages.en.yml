@@ -36,3 +36,10 @@ support:
     contact_person: 'Contact person'
     telephone: 'Telephone'
     email: 'E-mail'
+
+docs:
+    download_file: 'Download the document'
+    list_all: 'List of all documents'
+    name: 'Name'
+    storage: 'Storage'
+    format: 'Format'

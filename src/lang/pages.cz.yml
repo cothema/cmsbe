@@ -36,3 +36,10 @@ support:
     contact_person: 'Kontaktní osoba'
     telephone: 'Telefon'
     email: 'E-mail'
+
+docs:
+    download_file: 'Stáhnout dokument'
+    list_all: 'Seznam všech dokumentů'
+    name: 'Název'
+    storage: 'Úložiště'
+    format: 'Formát'

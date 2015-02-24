@@ -3,9 +3,9 @@
 <h1 n:block=title><span class="fa fa-file"></span> {$doc->name}</h1>
 
 {if $doc->note}
-<div class="well">
-    {$doc->note}
-</div>
+	<div class="well">
+		{$doc->note}
+	</div>
 {/if}
 
-<a href="{if $doc->link}{$doc->link}{else}{$basePath}/data/docs/{$doc->file}{/if}" class="btn btn-lg btn-primary">Stáhnout dokument <span class="fa fa-download"></span></a>
+<a href="{if $doc->link}{$doc->link}{else}{$basePath}/data/docs/{$doc->file}{/if}" class="btn btn-lg btn-primary">{_layout.docs.download_file} <span class="fa fa-download"></span></a>

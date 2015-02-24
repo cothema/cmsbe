@@ -1,5 +1,8 @@
 {block content}
-<h1 n:block=title><span class="fa fa-briefcase"></span> {if $webinfo->systype==='is'}{_layout.general.information_system}{else}{_layout.general.administration}{/if}</h1>
+<h1 n:block=title><span class="fa fa-briefcase"></span>
+	<span n:if="$webinfo->systype === 'is'">{_layout.general.information_system}</span>
+	<span n:if="$webinfo->systype !== 'is'">{_layout.general.administration}</span>
+</h1>
 
 <div class="well">
 	<span n:if="$webinfo->systype === 'is'">{_pages.homepage.welcome_is}</span>
@@ -19,9 +22,7 @@
                             <p>&nbsp;<br />&nbsp;</p>
                         </div>
                         <div class="icon">
-                            {if $pinsOne->faIcon}
-                                <i class="fa fa-{$pinsOne->faIcon}"></i>
-                            {/if}
+							<i n:if="$pinsOne->faIcon" class="fa fa-{$pinsOne->faIcon}"></i>
                         </div>
                     </div>
                 </a>
