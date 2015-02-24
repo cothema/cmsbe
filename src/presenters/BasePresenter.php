@@ -36,6 +36,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
 
+	/** @var \DK\Menu\UI\IControlFactory @inject */
+	public $menuFactory;
+
 	public function checkRequirements($element) {
 		try {
 			parent::checkRequirements($element);
@@ -187,6 +190,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	public function createComponentJsNetteForms() {
 		return $this->jsComponentWrapper(['netteForms.js']);
+	}
+
+	/**
+	 * @return \DK\Menu\UI\Control
+	 */
+	protected function createComponentMenu() {
+		return $this->menuFactory->create();
 	}
 
 	/**

@@ -34,7 +34,8 @@
 		"o5/grido": "2.*",
 		"symfony/property-access": "2.6.*",
 		"ipub/gravatar": "1.*",
-		"ipub/permissions": "1.*"
+		"ipub/permissions": "1.*",
+		"sakren/nette-menu": "1.*"
 	},
 	"require-dev": {
 		"nette/tester": "1.*"

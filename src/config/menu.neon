@@ -1,0 +1,11 @@
+menu:
+	default:
+		allow:
+			roles: [admin]
+		translator: true
+		template:
+			menu: %appDir%/templates/_components/menu/menu.latte
+		items:
+			'menu.items.dashboard':
+				icon: home
+				target: Homepage:default
