@@ -1,41 +1,39 @@
 <div class="container navbar-default waybar">
     <div class="navbar-tools">
-		<a class="fa fa-print" href="javascript:if(window.print)window.print()"></a>
-		{if $isPinable}
-		<a n:if="!$isPinned" n:href="pinIt!" class="fa fa-thumb-tack"></a>
-		<a n:if="$isPinned" n:href="unpinIt!" class="fa fa-thumb-tack pinned"></a>
-		{/if}
-	</div>
-	<div class="navbar-header">
-      <a class="navbar-brand" n:href="Homepage:"><span class="fa fa-home"></span></a>
+        <a class="fa fa-print" href="javascript:if(window.print)window.print()"></a>
+        <a n:if="$isPinable && !$isPinned" n:href="pinIt!" class="fa fa-thumb-tack"></a>
+        <a n:if="$isPinable && $isPinned" n:href="unpinIt!" class="fa fa-thumb-tack pinned"></a>
+    </div>
+    <div class="navbar-header">
+        <a class="navbar-brand" n:href="Homepage:"><i class="fa fa-home"></i></a>
     </div>
     {ifCurrent Homepage:default}
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="#">{_layout.general.today_is_date} <b>{$actualDate}</b>. {_layout.general.nameday_of} <b>{$nameday->name}</b>.</a></li>
-      </ul>
-    </div>
-    {else}
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        {if isset($navbar) && is_array($navbar)}
-            {foreach $navbar as $navbarOne}
-                <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
-                <li>
-                    {if isset($navbarOne->directLink)}
-                        <a href="{$navbarOne->directLink}">{$navbarOne->name}</a>
-                    {elseif isset($navbarOne->link)}
-                        <a n:href="$navbarOne->link">{$navbarOne->name}</a>
-                    {else}
-                        <a href="#">{$navbarOne->name}</a>
-                    {/if}
-                </li>
-            {/foreach}
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">{_layout.general.today_is_date} <b>{$actualDate}</b>. {_layout.general.nameday_of} <b>{$nameday->name}</b>.</a></li>
+            </ul>
+        </div>
         {else}
-        <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
-        <li><a href="#">{_layout.navbar.actual_page}</a></li>
-        {/if}
-      </ul>
-    </div>
-    {/ifCurrent}
-</div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {if isset($navbar) && is_array($navbar)}
+                        {foreach $navbar as $navbarOne}
+                            <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
+                            <li>
+                                {if isset($navbarOne->directLink)}
+                                    <a href="{$navbarOne->directLink}">{$navbarOne->name}</a>
+                                {elseif isset($navbarOne->link)}
+                                    <a n:href="$navbarOne->link">{$navbarOne->name}</a>
+                                {else}
+                                    <a href="#">{$navbarOne->name}</a>
+                                {/if}
+                            </li>
+                        {/foreach}
+                    {else}
+                        <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
+                        <li><a href="#">{_layout.navbar.actual_page}</a></li>
+                        {/if}
+                </ul>
+            </div>
+            {/ifCurrent}
+            </div>

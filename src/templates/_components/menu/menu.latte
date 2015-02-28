@@ -1,14 +1,12 @@
 {if !isset($menuParent)}
-	{var $menuParent = $menu}
+    {var $menuParent = $menu}
 {/if}
 {block branch}
-{if $menuParent->hasVisualItems()}
-	<li n:foreach="$menuParent->getItems() as $item" n:if="$item->isVisual() && $item->isAllowed()">
-		<a href="{$item->getLink()}" n:class="$item->isActive() ? active">
-			<i n:if="$item->hasIcon()" class="fa fa-{$item->getIcon()}"></i>
-			<span>{$item->getTranslatedTitle()}</span>
-		</a>
-		{include branch, menuParent => $item}
-	</li>
-{/if}
+<li n:if="$menuParent->hasVisualItems()" n:foreach="$menuParent->getItems() as $item" n:if="$item->isVisual() && $item->isAllowed()">
+    <a href="{$item->getLink()}" n:class="$item->isActive() ? active">
+        <i n:if="$item->hasIcon()" class="fa fa-{$item->getIcon()}"></i>
+        <span>{$item->getTranslatedTitle()}</span>
+    </a>
+    {include branch, menuParent => $item}
+</li>
 {/block}

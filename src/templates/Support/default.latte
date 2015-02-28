@@ -1,6 +1,6 @@
 {block content}
 
-<h1 n:block=title><span class="fa fa-phone"></span> {_pages.support.header.support}</h1>
+<h1 n:block=title><i class="fa fa-phone"></i> {_pages.support.header.support}</h1>
 
 <div class="well">
     {_pages.support.intro.in_case}
@@ -9,11 +9,11 @@
 <table class="table table-striped" style="width:49%; float: left;margin-right:2%;">
     <tr n:if="$contact->name">
         <th>{_pages.support.contact_person}:</th>
-        <td><span class="fa fa-user"></span> {$contact->name}</td>
+        <td><i class="fa fa-user"></i> {$contact->name}</td>
     </tr>
     <tr n:if="$contact->tel">
         <th>{_pages.support.telephone}:</th>
-        <td><span class="fa fa-phone"></span> {$contact->tel}</td>
+        <td><i class="fa fa-phone"></i> {$contact->tel}</td>
     </tr>
     <tr n:if="$contact->email">
         <th>{_pages.support.email}:</th>
