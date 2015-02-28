@@ -9,7 +9,8 @@ use Nette\Application\UI\Form;
  * @Secured
  * @Secured\User(loggedIn)
  * @Secured\Role(superadmin)
- *
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
+ * 
  * Settings Presenter
  */
 final class SettingsPresenter extends BasePresenter {
@@ -25,7 +26,7 @@ final class SettingsPresenter extends BasePresenter {
 	public function createComponentBasicSettingsForm() {
 		$form = new Form;
 
-		$dao = $this->em->getRepository(App\Webinfo::getClassName());
+		$dao = $this->em->getRepository(App\Webinfo::class);
 		$res = $dao->find(1);
 
 		$form->addText('webName', 'Název')
@@ -62,7 +63,7 @@ final class SettingsPresenter extends BasePresenter {
 	public function basicSettingsFormSucceeded($form) {
 		$val = $form->getValues(true);
 
-		$settingsDao = $this->em->getRepository(\App\Webinfo::getClassName());
+		$settingsDao = $this->em->getRepository(\App\Webinfo::class);
 		$settings = $settingsDao->find(1);
 
 		$settings->webName = trim($val['webName']);

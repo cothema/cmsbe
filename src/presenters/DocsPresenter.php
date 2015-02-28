@@ -8,6 +8,7 @@ use App\Cothema\Admin\Docs;
  * @Secured
  * @Secured\User(loggedIn)
  * @Secured\Role(admin)
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
  *
  * Cust Phone List Presenter
  */
@@ -51,21 +52,21 @@ final class DocsPresenter extends BasePresenter {
 	}
 
 	private function getDocsAll() {
-		$dao = $this->em->getRepository(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::class);
 		$out = $dao->findBy([], ['id' => 'ASC']);
 
 		return $out;
 	}
 
 	private function getDocById($id) {
-		$dao = $this->em->getRepository(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::class);
 		$out = $dao->find($id);
 
 		return $out;
 	}
 
 	private function getDocByAlias($alias) {
-		$dao = $this->em->getRepository(Docs::getClassName());
+		$dao = $this->em->getRepository(Docs::class);
 		$out = $dao->findBy(['alias' => $alias]);
 
 		if (isset($out[0])) {

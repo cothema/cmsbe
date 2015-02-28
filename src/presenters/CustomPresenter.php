@@ -9,6 +9,7 @@ use App\Cothema\Admin;
  * @Secured
  * @Secured\User(loggedIn)
  * @Secured\Role(admin)
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
  *
  * Custom Presenter
  */
@@ -23,13 +24,13 @@ final class CustomPresenter extends BasePresenter {
 	}
 
 	protected function createComponentCustomForm() {
-		$customsDao = $this->em->getRepository(Admin\Custom::getClassName());
+		$customsDao = $this->em->getRepository(Admin\Custom::class);
 		$customs = $customsDao->findBy([], ['id' => 'ASC']);
 
 		$form = new Nette\Application\UI\Form;
 
 		foreach ($customs as $customsOne) {
-			$custUserDao = $this->em->getRepository(Admin\UserCustom::getClassName());
+			$custUserDao = $this->em->getRepository(Admin\UserCustom::class);
 			$custUser = $custUserDao->findBy(['custom' => $customsOne->id, 'user' => $this->getUser()->id]);
 
 			if ($customsOne->type == 'yn') {
@@ -62,13 +63,13 @@ final class CustomPresenter extends BasePresenter {
 			$prefix = 'CUV';
 
 			if ($this->startsWith($valuesKey, $prefix)) {
-				$customsOneDao = $this->em->getRepository(Admin\Custom::getClassName());
+				$customsOneDao = $this->em->getRepository(Admin\Custom::class);
 				$customsOne = $customsOneDao->findBy(['alias' => substr($valuesKey, strlen($prefix))]);
 
 				if (!isset($customsOne[0])) {
 					throw new \Exception('ID of user customization is not set!');
 				} else {
-					$customsUserOneDao = $this->em->getRepository(Admin\UserCustom::getClassName());
+					$customsUserOneDao = $this->em->getRepository(Admin\UserCustom::class);
 					$customsUserOne = $customsUserOneDao->findBy(['user' => $this->getUser()->id, 'custom' => $customsOne[0]->id]);
 
 					if ($customsOne[0]->defVal == $valuesOne) {

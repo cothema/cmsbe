@@ -3,6 +3,7 @@
 namespace App;
 
 /**
+ * 
  * @author     Milos Havlicek
  * @deprecated
  */

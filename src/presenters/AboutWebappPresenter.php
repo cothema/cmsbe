@@ -3,6 +3,8 @@
 namespace App\Presenters;
 
 /**
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
+ *
  * AboutWebapp Presenter
  */
 final class AboutWebappPresenter extends BasePresenter {

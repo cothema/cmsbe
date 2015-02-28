@@ -8,7 +8,8 @@ use App\ORM\Sys\Pinned;
  * @Secured
  * @Secured\User(loggedIn)
  * @Secured\Role(admin)
- *
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
+ * 
  * Homepage Presenter
  */
 final class HomepagePresenter extends BasePresenter {
@@ -18,7 +19,7 @@ final class HomepagePresenter extends BasePresenter {
 	}
 
 	private function getAllPins() {
-		$pinnedDao = $this->em->getRepository(Pinned::getClassName());
+		$pinnedDao = $this->em->getRepository(Pinned::class);
 		return $pinnedDao->findBy(['user' => $this->user->id]);
 	}
 

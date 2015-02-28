@@ -6,7 +6,8 @@ namespace App\Presenters;
  * @Secured
  * @Secured\User(loggedIn)
  * @Secured\Role(admin)
- *
+ * @author     Milos Havlicek <miloshavlicek@gmail.com>
+ * 
  * Help Presenter
  */
 final class HelpPresenter extends BasePresenter {
