@@ -29,7 +29,7 @@ class TestPasswords extends Tester\TestCase {
 	 * @throws Nette\InvalidArgumentException
 	 */
 	function testHashException() {
-		Passwords::hash('testPassword123', array('cost' => 1));
+		Passwords::hash('testPassword123', ['cost' => 1]);
 	}
 
 	function getVerifyArgs() {

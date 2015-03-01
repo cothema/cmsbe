@@ -23,7 +23,7 @@
 		"kdyby/translation": "@dev",
 		"mobiledetect/mobiledetectlib": "2.7.8",
 		"nextras/forms": "*",
-		"kdyby/doctrine": "2.*",
+		"kdyby/doctrine": "2.*@dev",
 		"cothema/cmsbe-user": "@dev",
 		"cothema/cmsbe-updater": "dev-master",
 		"janmarek/webloader": "2.2.0",
