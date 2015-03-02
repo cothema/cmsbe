@@ -385,8 +385,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $beCache->save('otherWebsites', $this->getOtherWebsites(), [Cache::EXPIRE => '20 minutes']);
 		});
 
-		$this->template->mainLayoutBeforePath = __DIR__ . '/../templates/@layout-before.latte';
-		$this->template->mainLayoutAfterPath = __DIR__ . '/../templates/@layout-after.latte';
+		$dirTemplates =  __DIR__ . '/templates';
+		$this->template->mainLayoutBeforePath = $dirTemplates . '/@layout-before.latte';
+		$this->template->mainLayoutAfterPath = $dirTemplates . '/@layout-after.latte';
 
 		if ($this->getUser()->id) {
 			$idUser = $this->getUser()->id;
