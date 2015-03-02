@@ -2,7 +2,7 @@
     {var $menuParent = $menu}
 {/if}
 {block branch}
-<li n:if="$menuParent->hasVisualItems()" n:foreach="$menuParent->getItems() as $item" n:if="$item->isVisual() && $item->isAllowed()">
+<li n:if="$menuParent->hasVisualItems() && $item->isVisual() && $item->isAllowed()" n:foreach="$menuParent->getItems() as $item">
     <a href="{$item->getLink()}" n:class="$item->isActive() ? active">
         <i n:if="$item->hasIcon()" class="fa fa-{$item->getIcon()}"></i>
         <span>{$item->getTranslatedTitle()}</span>
