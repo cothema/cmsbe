@@ -33,7 +33,7 @@
 		"composer/composer": "*@dev",
 		"o5/grido": "2.*",
 		"symfony/property-access": "2.6.*",
-		"ipub/gravatar": "1.*",
+		"ipub/gravatar": "dev-master",
 		"ipub/permissions": "1.*",
 		"sakren/nette-menu": "1.*"
 	},

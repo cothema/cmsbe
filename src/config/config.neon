@@ -32,7 +32,6 @@ services:
 	- App\UserManager
 	- App\RouterFactory
 	- Cothema\CMSBE\Model\PermissionsModel
-	- Kdyby\Console\Application
 	router: @App\RouterFactory::createRouter
 
 extensions:
