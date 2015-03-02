@@ -7,7 +7,7 @@ menu:
 			roles: [admin]
 		translator: true
 		template:
-			menu: %appDir%/templates/_components/menu/menu.latte
+			menu: %appDir%/presenters/templates/_components/menu/menu.latte
 		items:
 			'menu.items.dashboard':
 				target: Homepage:default
@@ -21,7 +21,7 @@ menu:
 			roles: [admin]
 		translator: true
 		template:
-			menu: %appDir%/templates/_components/menu/menu.latte
+			menu: %appDir%/presenters/templates/_components/menu/menu.latte
 		items:
 			'menu.items.system_settings':
 				target: Settings:BasicInfo
