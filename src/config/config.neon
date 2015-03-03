@@ -1,7 +1,7 @@
 php:
 	date.timezone: Europe/Prague
 	session.name: %session.name%
-	#zlib.output_compression: yes
+	zlib.output_compression: yes
 
 nette:
 	application:

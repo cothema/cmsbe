@@ -18,6 +18,5 @@ $configurator->createRobotLoader()
 		->addDirectory(__DIR__ . '/../src/model')
 		->register();
 
-//$configurator->addConfig(__DIR__ . '/../config/config.neon');
-$configurator->addConfig(__DIR__ . '/../src/app/config/config.neon');
+$configurator->addConfig(__DIR__ . '/config/config.neon');
 return $configurator->createContainer();
