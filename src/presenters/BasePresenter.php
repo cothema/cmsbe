@@ -149,9 +149,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 		$template->_gravatar = $this->gravatar;
 
-		$this->gravatar->createTemplateHelpers()
-				->register($template->getLatte());
-
 		$this->translator->createTemplateHelpers()
 				->register($template->getLatte());
 
@@ -385,7 +382,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $beCache->save('otherWebsites', $this->getOtherWebsites(), [Cache::EXPIRE => '20 minutes']);
 		});
 
-		$dirTemplates =  __DIR__ . '/templates';
+		$dirTemplates = __DIR__ . '/templates';
 		$this->template->mainLayoutBeforePath = $dirTemplates . '/@layout-before.latte';
 		$this->template->mainLayoutAfterPath = $dirTemplates . '/@layout-after.latte';
 
