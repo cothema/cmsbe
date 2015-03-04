@@ -3,13 +3,14 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Kdyby\Doctrine\Entities;
+use Cothema\DAO\Entities\StandardEntity;
+use Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_webinfo")
  */
-class Webinfo extends Entities\BaseEntity {
+class Webinfo extends StandardEntity {
 
 	use Entities\Attributes\Identifier;
 

@@ -3,13 +3,14 @@
 namespace App\Cothema\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Kdyby\Doctrine\Entities;
+use Cothema\DAO\Entities\StandardEntity;
+use Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="log_activity")
  */
-class LogActivity extends Entities\BaseEntity {
+class LogActivity extends StandardEntity {
 
 	use Entities\Attributes\Identifier;
 

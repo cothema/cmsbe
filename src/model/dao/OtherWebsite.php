@@ -3,13 +3,14 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Kdyby\Doctrine\Entities;
+use Cothema\DAO\Entities\StandardEntity;
+use Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_otherweb")
  */
-class OtherWebsite extends Entities\BaseEntity {
+class OtherWebsite extends StandardEntity {
 
 	use Entities\Attributes\Identifier;
 

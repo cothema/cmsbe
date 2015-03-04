@@ -3,13 +3,14 @@
 namespace App\Cothema\Admin;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Kdyby\Doctrine\Entities;
+use Cothema\DAO\Entities\StandardEntity;
+use Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="nameday")
  */
-class Nameday extends Entities\BaseEntity {
+class Nameday extends StandardEntity {
 
 	use Entities\Attributes\Identifier;
 

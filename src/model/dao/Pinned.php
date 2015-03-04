@@ -3,13 +3,14 @@
 namespace App\ORM\Sys;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Kdyby\Doctrine\Entities;
+use Cothema\DAO\Entities\StandardEntity;
+use Kdyby\Doctrine\Entities;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sys_pinned")
  */
-class Pinned extends Entities\BaseEntity {
+class Pinned extends StandardEntity {
 
 	use Entities\Attributes\Identifier;
 
