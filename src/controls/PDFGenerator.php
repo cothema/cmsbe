@@ -9,6 +9,9 @@ namespace Cothema\CMSBE\Service;
  */
 class PDFGenerator extends \Nette\Object {
 
+	/** @var \Kdyby\Doctrine\EntityManager @inject */
+	public $em;
+
 	/** @var \Latte\Engine	Template engine */
 	protected $template;
 
