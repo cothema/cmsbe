@@ -11,7 +11,7 @@
 </div>
 
 <h2>{_layout.general.bookmarks}</h2>
-<div class="row">
+<div id="hp-tiles" class="row">
     <div n:foreach="$pins as $pinsOne" class="col-lg-4 col-md-6 dashboard-stats">
         <div class="col-lg-12">
             <a n:href="$pinsOne->page" class="no-under">
@@ -29,39 +29,42 @@
     </div>
 
     <div class="col-lg-4 col-md-6 dashboard-stats">
-        <div class="row">
-            <div class="col-lg-12">
-                <a n:href="Support:" class="no-under">
-                    <div class="small-box bg-aqua homepage-tile">
-                        <div class="inner">
-                            <h3>{_pages.homepage.support}</h3>
-                            <p>{_pages.homepage.support_you_have_subscribed}</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-support"></i>
-                        </div>
+        <div class="col-lg-12">
+            <a n:href="Support:" class="no-under">
+                <div class="small-box bg-aqua homepage-tile">
+                    <div class="inner">
+                        <h3>{_pages.homepage.support}</h3>
+                        <p>{_pages.homepage.support_you_have_subscribed}</p>
                     </div>
-                </a>
-            </div>
+                    <div class="icon">
+                        <i class="fa fa-support"></i>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
     <div class="col-lg-4 col-md-6 dashboard-stats">
-        <div class="row">
-            <div class="col-lg-12">
-                <a n:href="Custom:" class="no-under">
-                    <div class="small-box bg-yellow homepage-tile">
-                        <div class="inner">
-                            <h3>{_pages.homepage.custom_settings}</h3>
-                            <p>{_pages.homepage.custom_settings_set_yours}</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-eye"></i>
-                        </div>
+        <div class="col-lg-12">
+            <a n:href="Custom:" class="no-under">
+                <div class="small-box bg-yellow homepage-tile">
+                    <div class="inner">
+                        <h3>{_pages.homepage.custom_settings}</h3>
+                        <p>{_pages.homepage.custom_settings_set_yours}</p>
                     </div>
-                </a>
-            </div>
+                    <div class="icon">
+                        <i class="fa fa-eye"></i>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
-
+<script n:syntax="double">
+    $("#hp-tiles").sortable({
+        placeholder: "col-lg-4 col-md-6 dashboard-stats",
+        revert: true,
+        update: function (event, ui) {
+        }
+    }).disableSelection();
+</script>
 {/block}
