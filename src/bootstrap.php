@@ -24,7 +24,7 @@ $configurator = new Nette\Configurator;
 if (isset($debugIPs)) {
 	$configurator->setDebugMode($debugIPs);
 }
-$configurator->enableDebugger(DIR_ROOT . '/log');
+$configurator->enableDebugger(DIR_ROOT . '/log', isset($debugMail) ? $debugMail : NULL);
 
 $configurator->setTempDirectory(DIR_ROOT . '/temp');
 
