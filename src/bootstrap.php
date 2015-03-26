@@ -47,6 +47,6 @@ $configurator->addConfig(DIR_ROOT . '/app/config/config.local.neon');
 
 $container = $configurator->createContainer();
 
-\Tracy\Debugger::getLogger()->emailSnooze = $debugMailSnooze ? $debugMailSnooze : '30 minutes';
+\Tracy\Debugger::getLogger()->emailSnooze = isset($debugMailSnooze) ? $debugMailSnooze : '30 minutes';
 
 return $container;
