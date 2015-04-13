@@ -8,5 +8,6 @@
     "dependencies": {
         "nette.ajax.js": "~2.0.0",
         "history.nette.ajax.js": "~2.0.0"
-    }
+    },
+    "ignore": ["src/"]
 }
