@@ -82,10 +82,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return void
 	 */
 	public function handlePinIt() {
-		$pin = new PagePin($this, $this->em);
-
 		try {
-			$pinned = $pin->pinIt();
+			$pinned = (new PagePin($this, $this->em))->pinIt();
 			$this->flashMessage('Stránka "' . $pinned['title'] . '" byla připnuta na Hlavní panel.', 'success');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
@@ -99,10 +97,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @return void
 	 */
 	public function handleUnpinIt() {
-		$pin = new PagePin($this, $this->em);
-
 		try {
-			$pin->unpinIt();
+			(new PagePin($this, $this->em))->unpinIt();
 			$this->flashMessage('Stránka byla odebrána z Hlavního panelu.', 'warning');
 		} catch (\Exception $e) {
 			$this->flashMessage('Došlo k chybě.', 'danger');
@@ -117,9 +113,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	public function isPinned() {
 		try {
-			$pin = new PagePin($this, $this->em);
-
-			return $pin->isPinned();
+			return (new PagePin($this, $this->em))->isPinned();
 		} catch (\Eception $e) {
 			return NULL;
 		}
@@ -131,9 +125,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	public function isPinable() {
 		try {
-			$pin = new PagePin($this, $this->em);
-
-			return $pin->isPinable();
+			return (new PagePin($this, $this->em))->isPinable();
 		} catch (\Exception $e) {
 			return NULL;
 		}
@@ -310,6 +302,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function beforeRender() {
 		parent::beforeRender();
+
+		if ($this->isAjax()) {
+			$this->redrawControl('content');
+			$this->redrawControl('menu');
+			$this->redrawControl('navMenu');
+		}
 
 		$this->template->actualDate = date('j. n. Y');
 

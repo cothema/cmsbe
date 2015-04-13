@@ -22,14 +22,14 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        
+
         {* Grido *}
-	<link rel="stylesheet" href="https://cdn.rawgit.com/dangrossman/bootstrap-daterangepicker/v1.3.17/daterangepicker-bs3.css">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/dangrossman/bootstrap-daterangepicker/v1.3.17/daterangepicker-bs3.css">
         <link rel="stylesheet" href="https://cdn.rawgit.com/hyspace/typeahead.js-bootstrap3.less/v0.2.3/typeahead.css">
         <link rel="stylesheet" href="https://cdn.rawgit.com/rstacruz/nprogress/v0.1.6/nprogress.css">
-	<link rel="stylesheet" href="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/css/grido.css">
-	{* end: Grido *}
-        
+        <link rel="stylesheet" href="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/css/grido.css">
+        {* end: Grido *}
+
         {control cssScreen}
         {control cssPrint}
         <link rel="shortcut icon" href="{$basePath}/data/favicon.ico">
@@ -40,7 +40,9 @@
 
         {include './_part/@topbar.latte'}
 
-        {include './_part/@menu.latte'}
+        {snippet menu}
+            {include './_part/@menu.latte'}
+        {/snippet}
 
         <div n:class="pagewrap, $user->isLoggedIn() ? crop-left">
             <div n:if="$custom->topPanel != '0'" class="mainlogo-wrap">
@@ -49,7 +51,9 @@
                 </a>
             </div>
 
-            {include './_part/@navmenu.latte'}
+            {snippet navMenu}
+                {include './_part/@navmenu.latte'}
+            {/snippet}
 
             <section class="maincontent">
                 <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
