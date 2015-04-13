@@ -17,11 +17,18 @@
 <script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.history.js"></script>
 <script src="https://cdn.rawgit.com/o5/grido/1a4f1e5/client-side/js/plugins/grido.nette.ajax.js"></script>
 
+<script src="{$basePath}/components/nette.ajax.js/nette.ajax.js?1"></script>
+<script src="{$basePath}/components/history.nette.ajax.js/client-side/history.ajax.js?1"></script>
+
 {control jsNetteForms}
 {control jsAdminLTE}
 {control jsMain}
 
-<script type="text/javascript" n:syntax="double">$(function(){$.nette.init()})</script>
+<script type="text/javascript" n:syntax="double">
+    $(function () {
+        $.nette.init()
+    })
+</script>
 {/block}
 </body>
 </html>
