@@ -32,7 +32,7 @@ if (!isset($robotLoaderDirs)) {
 	$robotLoaderDirs = [];
 }
 $robotLoaderDirs[] = DIR_VENDOR . '/cothema/';
-$robotLoaderDirs[] = DIR_ROOT . '/vendor-manual/';
+$robotLoaderDirs[] = DIR_ROOT . '/app/';
 
 $robotLoader = $configurator->createRobotLoader();
 
