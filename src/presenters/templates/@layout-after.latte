@@ -26,7 +26,17 @@
 
 <script type="text/javascript" n:syntax="double">
     $(function () {
-        $.nette.init()
+        $.nette.init();
+        $.nette.ext({
+            success: function (payload) {
+                if (payload.redirect) {
+                    $.nette.ajax({
+                        url: payload.redirect
+                    });
+                    return;
+                }
+            }
+        });
     })
 </script>
 {/block}
