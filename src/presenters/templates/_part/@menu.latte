@@ -6,7 +6,7 @@
             </div>
             <div class="pull-left info">
                 <p>{if $actualUser->firstName || $actualUser->lastName}{$actualUser->firstName} {$actualUser->lastName}{else}{$user->identity->data['username']}{/if}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> {_menu.items.online}</a>
+                <a><i class="fa fa-circle text-success"></i> {_menu.items.online}</a>
             </div>
         </div>
         <ul class="sidebar-menu">
@@ -24,14 +24,14 @@
                 {/foreach}
                 <li n:class="$active ? active, $menuOne->childs ? treeview">
                     <a n:tag-if="$menuOne->nLink" class="ajax" n:href="$menuOne->nLink">
-                        <a n:tag-if="!$menuOne->nLink" href="#">
+                        <a n:tag-if="!$menuOne->nLink">
                             <span n:if="$menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOne->name}</span><span n:if="$menuOne->childs"> <i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                     </a>
                     <ul class="treeview-menu">
                         <li n:foreach="$menuOne->childs as $menuOneChild">
                             <a n:tag-if="$menuOneChild->nLink" class="ajax" n:href="$menuOneChild->nLink">
-                                <a n:tag-if="!$menuOneChild->nLink" href="#">
+                                <a n:tag-if="!$menuOneChild->nLink">
                                     <span n:if="$menuOneChild->faIcon"><i class="fa fa-{$menuOneChild->faIcon}"></i> </span><span n:if="!$menuOneChild->faIcon && $menuOne->faIcon"><i class="fa fa-{$menuOne->faIcon}"></i> </span><span>{$menuOneChild->name}</span>
                                 </a>
                             </a>

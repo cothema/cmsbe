@@ -6,13 +6,13 @@
 </a>
 <div class="container-fluid fullw">
     <div class="navbar-header">
-       <a class="navbar-brand" onclick="event.preventDefault();
-                        location.reload()" href="#"><span class="fa fa-repeat"></span> </a>
-           <a class="navbar-brand" onclick="event.preventDefault();
-                        window.history.back()" href="#"><span class="fa fa-chevron-left"></span> </a>
-           <a class="navbar-brand" onclick="event.preventDefault();
-                        window.history.forward();" href="#"><span class="fa fa-chevron-right"></span> </a>
-        <a class="navbar-brand" data-toggle="dropdown" href="#"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
+        <a class="navbar-brand" onclick="event.preventDefault();
+                location.reload()"><span class="fa fa-repeat"></span> </a>
+        <a class="navbar-brand" onclick="event.preventDefault();
+                window.history.back()"><span class="fa fa-chevron-left"></span> </a>
+        <a class="navbar-brand" onclick="event.preventDefault();
+                window.history.forward();"><span class="fa fa-chevron-right"></span> </a>
+        <a class="navbar-brand" data-toggle="dropdown"><span class="fa fa-briefcase"></span> {$companyName} <b class="caret"></b></a>
         <ul class="dropdown-menu topdropdown">
             <li><a n:href="Homepage:">{_layout.general.homepage}</a></li>
             <li n:ifAllowed="role => 'superadmin'"><a n:href="Settings:basicInfo">{_layout.general.basic_info_settings}</a></li>
@@ -21,7 +21,7 @@
     </div>
     <ul n:ifAllowed="user => 'loggedIn'" n:if="$otherWebsites" class="nav navbar-nav navbar-left">
         <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> {_layout.general.other_websites} <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> {_layout.general.other_websites} <b class="caret"></b></a>
             <ul n:inner-foreach="$otherWebsites as $otherWebsitesOne" class="dropdown-menu">
                 <li class="dropdown-header">{$otherWebsitesOne->groupName}</li>
                 <li n:foreach="$otherWebsitesOne->items as $oneOWItem" n:if="is_object($oneOWItem)">
@@ -33,7 +33,7 @@
 
     <ul n:ifAllowed="user => 'loggedIn'" class="nav navbar-nav navbar-left top-support">
         <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>{_layout.general.phone_support}:</b> +420 606 460 316 <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-phone"></span> <b>{_layout.general.phone_support}:</b> +420 606 460 316 <b class="caret"></b></a>
             <ul class="dropdown-menu pull-right">
                 <li>
                     <a n:href="Help:">{_layout.general.help}</a>
@@ -49,7 +49,7 @@
                 <a target="_blank" href="{$companyWebsite}">{_layout.general.go_to_website} &nbsp; <span class="fa fa-external-link"></span></a>
             </li>
             <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_layout.general.language} <b class="caret"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">{_layout.general.language} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a n:href="this,locale=>cz">{_langs.czech}</a></li>
                     <li><a n:href="this,locale=>en">{_langs.english}</a></li>
@@ -60,7 +60,7 @@
                 <a n:href="Sign:in">{_layout.general.login}</a>
             </li>
             <li n:ifAllowed="user => 'loggedIn'" n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img n:gravatar="$profileUser->email, 40" alt="{_layout.general.profile_picture}" class="img-circle profile-picture" /> <b class="caret"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown"><img n:gravatar="$profileUser->email, 40" alt="{_layout.general.profile_picture}" class="img-circle profile-picture" /> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a n:href="Custom:">{_layout.general.custom_settings}</a></li>
                     <li><a n:href="Users:profile">{_layout.general.profile_info}</a></li>

@@ -10,7 +10,7 @@
     {ifCurrent Homepage:default}
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">{_layout.general.today_is_date} <b>{$actualDate}</b>. {_layout.general.nameday_of} <b>{$nameday->name}</b>.</a></li>
+                <li><a>{_layout.general.today_is_date} <b>{$actualDate}</b>. {_layout.general.nameday_of} <b>{$nameday->name}</b>.</a></li>
             </ul>
         </div>
         {else}
@@ -25,14 +25,14 @@
                                 {elseif isset($navbarOne->link)}
                                     <a n:href="$navbarOne->link" class="ajax">{$navbarOne->name}</a>
                                 {else}
-                                    <a href="#">{$navbarOne->name}</a>
+                                    <a>{$navbarOne->name}</a>
                                 {/if}
                             </li>
                         {/foreach}
                     {else}
                         <li class="navbar-brand bar-delimiter"><span class="fa fa-chevron-right"></span></li>
-                        <li><a href="#">{_layout.navbar.actual_page}</a></li>
-                        {/if}
+                        <li><a>{_layout.navbar.actual_page}</a></li>
+                            {/if}
                 </ul>
             </div>
             {/ifCurrent}
