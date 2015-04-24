@@ -23,7 +23,7 @@
                                 {if isset($navbarOne->directLink)}
                                     <a href="{$navbarOne->directLink}">{$navbarOne->name}</a>
                                 {elseif isset($navbarOne->link)}
-                                    <a n:href="$navbarOne->link">{$navbarOne->name}</a>
+                                    <a n:href="$navbarOne->link" class="ajax">{$navbarOne->name}</a>
                                 {else}
                                     <a href="#">{$navbarOne->name}</a>
                                 {/if}

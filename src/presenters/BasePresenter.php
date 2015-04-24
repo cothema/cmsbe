@@ -381,8 +381,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		});
 
 		$dirTemplates = __DIR__ . '/templates';
-		$this->template->mainLayoutBeforePath = $dirTemplates . '/@layout-before.latte';
-		$this->template->mainLayoutAfterPath = $dirTemplates . '/@layout-after.latte';
+		$this->template->mainLayoutPath = $dirTemplates . '/@layout.latte';
 
 		if ($this->getUser()->id) {
 			$idUser = $this->getUser()->id;
