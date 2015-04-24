@@ -305,7 +305,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 		if ($this->isAjax()) {
 			$this->redrawControl('content');
-			$this->redrawControl('menu');
 			$this->redrawControl('navMenu');
 		}
 
