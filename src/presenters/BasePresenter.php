@@ -27,20 +27,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	use IPub\Gravatar\TGravatar,
 	 IPub\Permissions\TPermission;
 
+	/** @var \Kdyby\Doctrine\EntityManager @inject */
+	public $em;
+
 	/** @persistent */
 	public $locale;
 
-	/** @var \Kdyby\Translation\Translator @inject */
-	public $translator;
-
-	/** @var \Kdyby\Doctrine\EntityManager @inject */
-	public $em;
+	/** @var \Nette\Mail\IMailer @inject */
+	public $mailer;
 
 	/** @var \DK\Menu\UI\ICustomTopControlFactory @inject */
 	public $menuLeftTopFactory;
 
 	/** @var \DK\Menu\UI\ICustomBottomControlFactory @inject */
 	public $menuLeftBottomFactory;
+
+	/** @var \Kdyby\Translation\Translator @inject */
+	public $translator;
 
 	/**
 	 * Checks authorization.
