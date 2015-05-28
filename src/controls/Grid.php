@@ -59,4 +59,26 @@ class Grid extends \Grido\Grid {
 		return $column;
 	}
 
+	public function addColumnDateTime($name, $label, $dateFormat = \Grido\Components\Columns\Date::FORMAT_DATETIME, $default = TRUE) {
+		$column = parent::addColumnDate($name, $label, $dateFormat);
+
+		if ($default === TRUE) {
+			$column->setSortable()
+					->setFilterDate();
+		}
+
+		return $column;
+	}
+
+	public function addColumnTime($name, $label, $dateFormat = 'H:i:s', $default = TRUE) {
+		$column = parent::addColumnDate($name, $label, $dateFormat);
+
+		if ($default === TRUE) {
+			$column->setSortable()
+					->setFilterDate();
+		}
+
+		return $column;
+	}
+
 }
