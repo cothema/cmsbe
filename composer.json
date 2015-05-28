@@ -30,7 +30,7 @@
         "cothema/admin-lte": "*",
         "symfony/yaml": "~2.5",
         "composer/composer": "*@dev",
-        "o5/grido": "2.*",
+        "cothema/grid": "dev-master",
         "symfony/property-access": "2.6.*",
         "ipub/gravatar": "dev-master",
         "ipub/permissions": "1.*",
