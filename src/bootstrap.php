@@ -3,6 +3,13 @@
 use Nette\Forms\Container;
 use Nextras\Forms\Controls;
 
+!defined('CURLOPT_CONNECTTIMEOUT') && define('CURLOPT_CONNECTTIMEOUT','300');
+!defined('CURLOPT_TIMEOUT') && define('CURLOPT_TIMEOUT','0');
+!defined('CURLOPT_HTTPHEADER') && define('CURLOPT_HTTPHEADER',NULL);
+!defined('CURLINFO_HEADER_OUT') && define('CURLINFO_HEADER_OUT',NULL);
+!defined('CURLOPT_HEADER') && define('CURLOPT_HEADER','0');
+!defined('CURLOPT_RETURNTRANSFER') && define('CURLOPT_RETURNTRANSFER','1');
+
 Container::extensionMethod('addOptionList', function (Container $container, $name, $label = NULL, array $items = NULL) {
 	return $container[$name] = new Controls\OptionList($label, $items);
 });
