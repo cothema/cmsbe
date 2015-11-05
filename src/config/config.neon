@@ -11,6 +11,7 @@ nette:
 
 	session:
 		expiration: 14 days
+		savePath: "%tempDir%/sessions"
 
 	database:
 		dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
