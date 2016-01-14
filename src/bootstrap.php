@@ -50,6 +50,7 @@ foreach ($robotLoaderDirs as $robotLoaderDirsOne) {
 $robotLoader->register();
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
+is_file(DIR_ROOT . '/app/config/config.neon') && $configurator->addConfig(DIR_ROOT . '/app/config/config.neon');
 $configurator->addConfig(DIR_ROOT . '/app/config/config.local.neon');
 
 $container = $configurator->createContainer();
