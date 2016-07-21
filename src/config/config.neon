@@ -3,22 +3,21 @@ php:
 	session.name: %session.name%
 	zlib.output_compression: yes
 
-nette:
-	application:
-		errorPresenter: Error
-		mapping:
-			*: App\*Module\Presenters\*Presenter
+application:
+        errorPresenter: Error
+        mapping:
+                *: App\*Module\Presenters\*Presenter
 
-	session:
-		expiration: 14 days
-		savePath: "%tempDir%/sessions"
+session:
+        expiration: 14 days
+        savePath: "%tempDir%/sessions"
 
-	database:
-		dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
-		user: %database.user%
-		password: %database.password%
-		options:
-			lazy: yes
+database:
+        dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
+        user: %database.user%
+        password: %database.password%
+        options:
+                lazy: yes
 
 doctrine:
 	host: %database.host%

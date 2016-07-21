@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.5",
         "nette/nette": ">=2.4.0",
-        "kdyby/translation": ">=2.2.0",
+        "kdyby/translation": "dev-master",
         "mobiledetect/mobiledetectlib": "2.7.8",
         "nextras/forms": "*",
         "kdyby/doctrine": ">=2.3.0",
