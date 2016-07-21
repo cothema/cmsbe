@@ -1,45 +1,45 @@
 {
-	"name": "cothema/cmsbe",
-	"description": "Cothema CMS Admin",
-	"type": "project",
-	"keywords": ["cms"],
-	"license": ["MIT"],
-	"authors": [
-		{
-			"name": "Cothema s.r.o.",
-			"email": "info@cothema.com",
-			"homepage": "http://www.cothema.com",
-			"role": "Developer"
-		},
-		{
-			"name": "Milos Havlicek",
-			"email": "havlicek@cothema.cz",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"php": ">=5.5",
-		"nette/nette": "~2.3.7",
-		"kdyby/translation": ">=2.2.0",
-		"mobiledetect/mobiledetectlib": "2.7.8",
-		"nextras/forms": "*",
-		"kdyby/doctrine": "~2.3.0",
-		"cothema/cmsbe-user": "@dev",
-		"janmarek/webloader": "2.2.0",
-		"leafo/lessphp": "0.4.0",
-		"cothema/admin-lte": "*",
-		"symfony/yaml": "~2.5",
-		"composer/composer": "*@dev",
-		"cothema/grid": "dev-master",
-		"symfony/property-access": "2.6.*",
-		"ipub/gravatar": "dev-master",
-		"ipub/permissions": "1.*",
-		"Carrooi/Nette-Menu": "1.*"
-	},
-	"require-dev": {
-		"nette/tester": "1.*"
-	},
-	"suggest": {
-		"cothema/cmsbe-updater": "Install CMSBE Updater for easy installation and maintenence of additional packages."
-	}
+    "name": "cothema/cmsbe",
+    "description": "Cothema CMS Admin",
+    "type": "project",
+    "keywords": ["cms"],
+    "license": ["MIT"],
+    "authors": [
+        {
+            "name": "Cothema s.r.o.",
+            "email": "info@cothema.com",
+            "homepage": "http://www.cothema.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Milos Havlicek",
+            "email": "havlicek@cothema.cz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "nette/nette": "~2.3.7",
+        "kdyby/translation": ">=2.2.0",
+        "mobiledetect/mobiledetectlib": "2.7.8",
+        "nextras/forms": "*",
+        "kdyby/doctrine": "~2.3.0",
+        "cothema/cmsbe-user": "@dev",
+        "janmarek/webloader": "2.2.0",
+        "leafo/lessphp": "0.4.0",
+        "cothema/admin-lte": "*",
+        "symfony/yaml": "~2.5",
+        "composer/composer": "@dev",
+        "cothema/grid": "dev-master",
+        "symfony/property-access": "2.6.*",
+        "ipub/gravatar": "@dev",
+        "ipub/permissions": "1.*",
+        "Carrooi/Nette-Menu": "1.*"
+    },
+    "require-dev": {
+        "nette/tester": "1.*"
+    },
+    "suggest": {
+        "cothema/cmsbe-updater": "Install CMSBE Updater for easy installation and maintenence of additional packages."
+    }
 }
