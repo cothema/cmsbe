@@ -31,10 +31,10 @@
         "symfony/yaml": "~2.5@stable",
         "composer/composer": "@dev",
         "cothema/grid": "dev-master@dev",
-        "symfony/property-access": ">=2.6.*@stable",
+        "symfony/property-access": ">=2.6.0@stable",
         "ipub/gravatar": "@dev",
-        "ipub/permissions": "1.*@stable",
-        "Carrooi/Nette-Menu": "1.*@stable"
+        "ipub/permissions": "*@stable",
+        "Carrooi/Nette-Menu": "*@stable"
     },
     "require-dev": {
         "nette/tester": "1.*"
