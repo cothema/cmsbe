@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": ">=5.6",
         "cothema/admin-lte": "*@dev",
         "cothema/cmsbe-user": "@dev",
         "nette/nette": ">=2.4.0@stable",
