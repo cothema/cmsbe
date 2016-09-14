@@ -10,16 +10,16 @@ use Nette\Application\Routers\Route;
  */
 class RouterFactory {
 
-	/**
-	 * @return \Nette\Application\IRouter
-	 */
-	public function createRouter() {
-		!defined('SECURED') && define('SECURED', FALSE);
-		$secured = in_array($_SERVER['REMOTE_ADDR'],['127.0.0.1','::1']) ? FALSE : Route::SECURED;
-		
-		$router = new RouteList();
-		$router[] = new Route('<locale=cz cz|en|nl>/<presenter>/<action>[/<id>]', 'Homepage:default', SECURED ? $secured : FALSE);
-		return $router;
-	}
+    /**
+     * @return \Nette\Application\IRouter
+     */
+    public function createRouter() {
+        !defined('SECURED') && define('SECURED', FALSE);
+        $sslForce = (SECURED && !LOCALHOST && !DEV_MODE) ? Route::SECURED : FALSE;
+
+        $router = new RouteList();
+        $router[] = new Route('<locale=cz cz|en|nl>/<presenter>/<action>[/<id>]', 'Homepage:default', $sslForce);
+        return $router;
+    }
 
 }
