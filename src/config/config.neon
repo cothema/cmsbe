@@ -31,7 +31,6 @@ doctrine:
 services:
 	- App\UserManager
 	- App\RouterFactory
-	- Cothema\CMSBE\Model\PermissionsModel
 	router: @App\RouterFactory::createRouter
 
 extensions:
