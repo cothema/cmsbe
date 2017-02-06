@@ -12,68 +12,75 @@ use App\Cothema\Admin\Docs;
  *
  * Cust Phone List Presenter
  */
-final class DocsPresenter extends BasePresenter {
+final class DocsPresenter extends BasePresenter
+{
 
-	public function renderList() {
-		$docs = $this->getDocsAll();
+    public function renderList()
+    {
+        $docs = $this->getDocsAll();
 
-		$this->template->docs = $docs;
+        $this->template->docs = $docs;
 
-		$navbar = [];
-		$navbar[] = (object) ['name' => 'Dokumenty'];
+        $navbar   = [];
+        $navbar[] = (object) ['name' => 'Dokumenty'];
 
-		$this->template->navbar = $navbar;
-	}
+        $this->template->navbar = $navbar;
+    }
 
-	public function renderProcedures() {
-		$doc = $this->getDocByAlias('postupy');
+    public function renderProcedures()
+    {
+        $doc = $this->getDocByAlias('postupy');
 
-		$this->template->doc = $doc;
-	}
+        $this->template->doc = $doc;
+    }
 
-	public function renderDetail() {
-		$id = $this->params['id'];
+    public function renderDetail()
+    {
+        $id = $this->params['id'];
 
-		$doc = $this->getDocById($id);
+        $doc = $this->getDocById($id);
 
-		$this->template->doc = $doc;
+        $this->template->doc = $doc;
 
-		$navbar = [];
-		$navbar[] = (object) ['link' => 'Docs:list', 'name' => 'Dokumenty'];
-		$navbar[] = (object) ['name' => 'Detail'];
+        $navbar   = [];
+        $navbar[] = (object) ['link' => 'Docs:list', 'name' => 'Dokumenty'];
+        $navbar[] = (object) ['name' => 'Detail'];
 
-		$this->template->navbar = $navbar;
-	}
+        $this->template->navbar = $navbar;
+    }
 
-	public function renderBasicIt() {
-		$doc = $this->getDocByAlias('zakladni_udaje_IT');
+    public function renderBasicIt()
+    {
+        $doc = $this->getDocByAlias('zakladni_udaje_IT');
 
-		$this->template->doc = $doc;
-	}
+        $this->template->doc = $doc;
+    }
 
-	private function getDocsAll() {
-		$dao = $this->em->getRepository(Docs::class);
-		$out = $dao->findBy([], ['id' => 'ASC']);
+    private function getDocsAll()
+    {
+        $dao = $this->em->getRepository(Docs::class);
+        $out = $dao->findBy([], ['id' => 'ASC']);
 
-		return $out;
-	}
+        return $out;
+    }
 
-	private function getDocById($id) {
-		$dao = $this->em->getRepository(Docs::class);
-		$out = $dao->find($id);
+    private function getDocById($id)
+    {
+        $dao = $this->em->getRepository(Docs::class);
+        $out = $dao->find($id);
 
-		return $out;
-	}
+        return $out;
+    }
 
-	private function getDocByAlias($alias) {
-		$dao = $this->em->getRepository(Docs::class);
-		$out = $dao->findBy(['alias' => $alias]);
+    private function getDocByAlias($alias)
+    {
+        $dao = $this->em->getRepository(Docs::class);
+        $out = $dao->findBy(['alias' => $alias]);
 
-		if (isset($out[0])) {
-			return $out[0];
-		}
+        if (isset($out[0])) {
+            return $out[0];
+        }
 
-		return null;
-	}
-
+        return null;
+    }
 }
