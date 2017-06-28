@@ -1,64 +1,64 @@
 php:
-	date.timezone: Europe/Prague
-	session.name: %session.name%
-	zlib.output_compression: yes
+    date.timezone: Europe/Prague
+    session.name: %session.name%
+    zlib.output_compression: yes
 
 application:
-        errorPresenter: Error
-        mapping:
-                *: App\*Module\Presenters\*Presenter
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
 
 session:
-        expiration: 14 days
-        savePath: "%tempDir%/sessions"
+    expiration: 14 days
+    savePath: "%tempDir%/sessions"
 
 database:
-        dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
-        user: %database.user%
-        password: %database.password%
-        options:
-                lazy: yes
+    dsn: '%database.type%:host=%database.host%;dbname=%database.database%'
+    user: %database.user%
+    password: %database.password%
+    options:
+        lazy: yes
 
 doctrine:
-	host: %database.host%
-	user: %database.user%
-	password: %database.password%
-	dbname: %database.database%
-	metadata:
-		App: '%appDir%/../../cmsbe/src/model'
-		Cothema: '%appDir%/../../cmsbe-user/src/model'
+    host: %database.host%
+    user: %database.user%
+    password: %database.password%
+    dbname: %database.database%
+    metadata:
+        App: '%appDir%/../../cmsbe/src/model'
+        Cothema: '%appDir%/../../cmsbe-user/src/model'
 
 services:
-	- App\UserManager
-	- App\RouterFactory
-	router: @App\RouterFactory::createRouter
+    - App\UserManager
+    - App\RouterFactory
+    router: @App\RouterFactory::createRouter
 
 extensions:
-	gravatar: IPub\Gravatar\DI\GravatarExtension
-	menu: DK\Menu\DI\Extension
-	permission: IPub\Permissions\DI\PermissionsExtension
-	console: Kdyby\Console\DI\ConsoleExtension
-	events: Kdyby\Events\DI\EventsExtension
-	annotations: Kdyby\Annotations\DI\AnnotationsExtension
-	doctrine: Kdyby\Doctrine\DI\OrmExtension
-	translation: Cothema\CMSBE\Translation\TranslationExtension
-	facebook: Kdyby\Facebook\DI\FacebookExtension
+    gravatar: IPub\Gravatar\DI\GravatarExtension
+    menu: DK\Menu\DI\Extension
+    permission: IPub\Permissions\DI\PermissionsExtension
+    console: Kdyby\Console\DI\ConsoleExtension
+    events: Kdyby\Events\DI\EventsExtension
+    annotations: Kdyby\Annotations\DI\AnnotationsExtension
+    doctrine: Kdyby\Doctrine\DI\OrmExtension
+    translation: Cothema\CMSBE\Translation\TranslationExtension
+    facebook: Kdyby\Facebook\DI\FacebookExtension
 
 includes:
 	- ./menu.neon
 
 facebook:
-	appId: "1234567890" # you have to change this key
-	appSecret: "e807f1fcf82d132f9bb018ca6738a19f" # you have to change this key
-	permissions: [public_profile, email]
-	graphVersion: v2.1
+    appId: "1234567890" # you have to change this key
+    appSecret: "e807f1fcf82d132f9bb018ca6738a19f" # you have to change this key
+    permissions: [public_profile, email]
+    graphVersion: v2.1
 
 gravatar:
-	defaultImage: mm
+    defaultImage: mm
 
 translation:
-	default: cz
-	whitelist: [cz, en, de, nl]
-	fallback: [cs_CZ, cz]
-	resolvers:
-		session: on
+    default: cz
+    whitelist: [cz, en, de, nl]
+    fallback: [cs_CZ, cz]
+    resolvers:
+        session: on
