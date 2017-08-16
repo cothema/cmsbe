@@ -9,14 +9,16 @@ use Kdyby\Doctrine\Entities;
  *
  * @author Milos Havlicek <miloshavlicek@gmail.com>
  */
-abstract class StandardEntity extends Entities\BaseEntity {
+abstract class StandardEntity extends Entities\BaseEntity
+{
 
-	protected function emptyToNull($in) {
-		return trim($in) === '' ? NULL : $in;
-	}
+    protected function emptyToNull($in)
+    {
+        return trim($in) === '' ? null : $in;
+    }
 
-	protected function fixDecimalValue($in) {
-		return $in === NULL ? NULL : str_replace(' ', '', str_replace(',', '.', $in));
-	}
-
+    protected function fixDecimalValue($in)
+    {
+        return $in === null ? null : str_replace(' ', '', str_replace(',', '.', $in));
+    }
 }

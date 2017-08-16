@@ -34,7 +34,7 @@
         "symfony/property-access": ">=2.6.0@stable",
         "ipub/gravatar": "@dev",
         "ipub/permissions": "*@stable",
-        "Carrooi/Nette-Menu": "*@stable"
+        "Carrooi/Nette-Menu": "1.*@stable"
     },
     "require-dev": {
         "nette/tester": "1.*"

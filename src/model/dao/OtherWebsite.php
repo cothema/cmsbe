@@ -10,28 +10,28 @@ use Kdyby\Doctrine\Entities;
  * @ORM\Entity
  * @ORM\Table(name="sys_otherweb")
  */
-class OtherWebsite extends StandardEntity {
+class OtherWebsite extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $name;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $name;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $url;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $url;
 
-	/**
-	 * @ORM\Column(name="orderLine", type="text")
-	 */
-	public $orderLine;
+    /**
+     * @ORM\Column(name="orderLine", type="text")
+     */
+    public $orderLine;
 
-	/**
-	 * @ORM\Column(name="groupLine", type="text")
-	 */
-	public $groupLine;
-
+    /**
+     * @ORM\Column(name="groupLine", type="text")
+     */
+    public $groupLine;
 }

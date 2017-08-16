@@ -10,38 +10,38 @@ use Kdyby\Doctrine\Entities;
  * @ORM\Entity
  * @ORM\Table(name="bemenu")
  */
-class BEMenu extends StandardEntity {
+class BEMenu extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(name="nLink",type="text")
-	 */
-	public $nLink;
+    /**
+     * @ORM\Column(name="nLink",type="text")
+     */
+    public $nLink;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $name;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $name;
 
-	/**
-	 * @ORM\Column(name="orderLine", type="text")
-	 */
-	public $orderLine;
+    /**
+     * @ORM\Column(name="orderLine", type="text")
+     */
+    public $orderLine;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $parent;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $parent;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $module;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $module;
 
-	/**
-	 * @ORM\Column(name="faIcon", type="text")
-	 */
-	public $faIcon;
-
+    /**
+     * @ORM\Column(name="faIcon", type="text")
+     */
+    public $faIcon;
 }

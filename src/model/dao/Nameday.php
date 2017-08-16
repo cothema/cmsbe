@@ -10,23 +10,23 @@ use Kdyby\Doctrine\Entities;
  * @ORM\Entity
  * @ORM\Table(name="nameday")
  */
-class Nameday extends StandardEntity {
+class Nameday extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	public $day;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $day;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	public $month;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $month;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $name;
-
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $name;
 }

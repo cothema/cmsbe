@@ -3,10 +3,11 @@
 namespace App;
 
 /**
- * 
+ *
  * @author     Milos Havlicek
  * @deprecated
  */
-class Passwords extends \Nette\Security\Passwords {
+class Passwords extends \Nette\Security\Passwords
+{
 
 }

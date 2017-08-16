@@ -3,12 +3,14 @@
 namespace App\Cothema\Admin;
 
 /**
- * 
+ *
  * @author Miloš Havlíček <miloshavlicek@gmail.com>
  */
-class LogActivityRepository {
+class LogActivityRepository
+{
 
-    public static function logActivity($em, $userId) {
+    public static function logActivity($em, $userId)
+    {
         $activity = self::getActivityIfExists($em, $userId);
 
         if (isset($activity[0])) {
@@ -25,7 +27,8 @@ class LogActivityRepository {
         $em->flush();
     }
 
-    private static function getActivityIfExists($em, $userId) {
+    private static function getActivityIfExists($em, $userId)
+    {
         $qb = $em->createQueryBuilder();
         $qb->select('a');
         $qb->from(LogActivity::class, 'a');
@@ -37,5 +40,4 @@ class LogActivityRepository {
 
         return $qb->getQuery()->getResult();
     }
-
 }

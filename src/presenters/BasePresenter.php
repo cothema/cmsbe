@@ -64,8 +64,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->flashMessage('Pro vstup do požadované sekce musíte být přihlášen/a s příslušným oprávněním.');
 
             if (!$this->user->isLoggedIn()) {
-                $this->redirect('Sign:in',
-                    ['backSignInUrl' => $this->getHttpRequest()->url->path]);
+                $this->redirect(
+                    'Sign:in',
+                    ['backSignInUrl' => $this->getHttpRequest()->url->path]
+                );
             } elseif (!$this->isLinkCurrent('Homepage:')) {
                 $this->redirect('Homepage:');
             } else {
@@ -91,8 +93,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         try {
             $pinned = (new PagePin($this, $this->em))->pinIt();
-            $this->flashMessage('Stránka "'.$pinned['title'].'" byla připnuta na Hlavní panel.',
-                'success');
+            $this->flashMessage(
+                'Stránka "'.$pinned['title'].'" byla připnuta na Hlavní panel.',
+                'success'
+            );
         } catch (\Exception $e) {
             $this->flashMessage('Došlo k chybě.', 'danger');
         }
@@ -108,8 +112,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         try {
             (new PagePin($this, $this->em))->unpinIt();
-            $this->flashMessage('Stránka byla odebrána z Hlavního panelu.',
-                'warning');
+            $this->flashMessage(
+                'Stránka byla odebrána z Hlavního panelu.',
+                'warning'
+            );
         } catch (\Exception $e) {
             $this->flashMessage('Došlo k chybě.', 'danger');
         }
@@ -126,7 +132,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         try {
             return (new PagePin($this, $this->em))->isPinned();
         } catch (\Eception $e) {
-            return NULL;
+            return null;
         }
     }
 
@@ -139,7 +145,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         try {
             return (new PagePin($this, $this->em))->isPinable();
         } catch (\Exception $e) {
-            return NULL;
+            return null;
         }
     }
 
@@ -148,7 +154,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @param string|NULL $class
      * @return Nette\Application\UI\ITemplate
      */
-    protected function createTemplate($class = NULL)
+    protected function createTemplate($class = null)
     {
         $template = parent::createTemplate($class);
 
@@ -166,8 +172,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     public function createComponentCssScreen()
     {
-        return $this->lessComponentWrapper(['screen.less'],
-                'screen,projection,tv');
+        return $this->lessComponentWrapper(
+            ['screen.less'],
+            'screen,projection,tv'
+        );
     }
 
     /**
@@ -185,8 +193,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     public function createComponentCssAdminLTE()
     {
-        return $this->lessComponentWrapper(['AdminLTE.css'], FALSE,
-                __DIR__.'/../../../admin-lte/css');
+        return $this->lessComponentWrapper(
+            ['AdminLTE.css'],
+            false,
+            __DIR__.'/../../../admin-lte/css'
+        );
     }
 
     /**
@@ -213,8 +224,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     public function createComponentJsAdminLTE()
     {
-        return $this->jsComponentWrapper(['app.js', '../plugins/iCheck/icheck.min.js'],
-                __DIR__.'/../../../admin-lte/js/AdminLTE');
+        return $this->jsComponentWrapper(
+            ['app.js', '../plugins/iCheck/icheck.min.js'],
+            __DIR__.'/../../../admin-lte/js/AdminLTE'
+        );
     }
 
     /**
@@ -245,9 +258,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /**
      * @param string $jsDir
      */
-    private function jsComponentWrapper(array $fileNames, $jsDir = NULL)
+    private function jsComponentWrapper(array $fileNames, $jsDir = null)
     {
-        if ($jsDir === NULL) {
+        if ($jsDir === null) {
             $jsDir = __DIR__.'/../scripts';
         }
 
@@ -261,11 +274,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $files->addFile($name);
         }
 
-        $compiler = WebLoader\Compiler::createJsCompiler($fileCollection,
-                $this->context->parameters['wwwDir'].$outputDirName);
+        $compiler = WebLoader\Compiler::createJsCompiler(
+            $fileCollection,
+            $this->context->parameters['wwwDir'].$outputDirName
+        );
 
-        $control = new WebLoader\Nette\JavaScriptLoader($compiler,
-            $this->template->basePath.$outputDirName);
+        $control = new WebLoader\Nette\JavaScriptLoader(
+            $compiler,
+            $this->template->basePath.$outputDirName
+        );
 
         return $control;
     }
@@ -275,14 +292,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @param string|FALSE $media
      * @param string $stylesDir
      */
-    private function lessComponentWrapper(array $fileNames, $media = NULL,
-                                          $stylesDir = NULL)
-    {
-        if ($media === NULL) {
+    private function lessComponentWrapper(
+        array $fileNames,
+        $media = null,
+        $stylesDir = null
+    ) {
+    
+        if ($media === null) {
             $media = 'screen,projection,tv';
         }
 
-        if ($stylesDir === NULL) {
+        if ($stylesDir === null) {
             $stylesDir = __DIR__.'/../styles';
         }
 
@@ -296,14 +316,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $files->addFile($name);
         }
 
-        $compiler = WebLoader\Compiler::createCssCompiler($fileCollection,
-                $this->context->parameters['wwwDir'].$outputDirName);
+        $compiler = WebLoader\Compiler::createCssCompiler(
+            $fileCollection,
+            $this->context->parameters['wwwDir'].$outputDirName
+        );
 
         $filter = new WebLoader\Filter\LessFilter;
         $compiler->addFileFilter($filter);
 
-        $control = new WebLoader\Nette\CssLoader($compiler,
-            $this->template->basePath.$outputDirName);
+        $control = new WebLoader\Nette\CssLoader(
+            $compiler,
+            $this->template->basePath.$outputDirName
+        );
 
         if (is_string($media)) {
             $control->setMedia($media);
@@ -331,7 +355,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $dao     = $this->em->getRepository(Admin\Nameday::class);
         $nameday = $dao->findBy(['day' => (int) $day, 'month' => (int) $month]);
 
-        return isset($nameday[0]) ? $nameday[0] : NULL;
+        return isset($nameday[0]) ? $nameday[0] : null;
     }
 
     public function beforeRender()
@@ -353,7 +377,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
         if (($this->getPresenter()->name == 'Sign' && $this->getAction() == 'in')
             || ($this->getPresenter()->name == 'AboutWebapp')) {
-
         } else {
             $this->permissions('admin');
         }
@@ -385,22 +408,26 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $cust      = $custDao->findAll();
             $customOut = [];
             foreach ($cust as $custOne) {
-
                 $customOut[$custOne->alias] = $custOne->defVal;
             }
             $this->template->custom = (object) $customOut;
 
-            $this->template->actualUser = NULL;
+            $this->template->actualUser = null;
         }
 
         $cacheStorage = new CacheFileStorage(DIR_ROOT.'/temp/cache');
         $beCache      = new Cache($cacheStorage, 'Cothema.BE');
 
-        $webinfo = $beCache->load('webInfo',
-            function() use ($beCache) {
-            return $beCache->save('webInfo', $this->getWebInfo(),
-                    [Cache::EXPIRE => '20 minutes']);
-        });
+        $webinfo = $beCache->load(
+            'webInfo',
+            function () use ($beCache) {
+                return $beCache->save(
+                    'webInfo',
+                    $this->getWebInfo(),
+                    [Cache::EXPIRE => '20 minutes']
+                );
+            }
+        );
 
         $this->template->companyName     = $webinfo->webName;
         $this->template->companyFullName = $webinfo->company;
@@ -410,17 +437,27 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->isPinned        = $this->isPinned();
         $this->template->isPinable       = $this->isPinable();
 
-        $this->template->menu = $beCache->load('items',
-            function() use ($beCache) {
-            return $beCache->save('items', $this->getBEMenuItems(),
-                    [Cache::EXPIRE => '20 minutes']);
-        });
+        $this->template->menu = $beCache->load(
+            'items',
+            function () use ($beCache) {
+                return $beCache->save(
+                    'items',
+                    $this->getBEMenuItems(),
+                    [Cache::EXPIRE => '20 minutes']
+                );
+            }
+        );
 
-        $this->template->otherWebsites = $beCache->load('otherWebsites',
-            function() use ($beCache) {
-            return $beCache->save('otherWebsites', $this->getOtherWebsites(),
-                    [Cache::EXPIRE => '20 minutes']);
-        });
+        $this->template->otherWebsites = $beCache->load(
+            'otherWebsites',
+            function () use ($beCache) {
+                return $beCache->save(
+                    'otherWebsites',
+                    $this->getOtherWebsites(),
+                    [Cache::EXPIRE => '20 minutes']
+                );
+            }
+        );
 
         $dirTemplates                   = __DIR__.'/templates';
         $this->template->mainLayoutPath = $dirTemplates.'/@layout.latte';
@@ -428,12 +465,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         if ($this->getUser()->id) {
             $idUser = $this->getUser()->id;
 
-            $profileUser = $beCache->load('activeUser_'.$idUser,
-                function() use ($beCache, $idUser) {
-                return $beCache->save('activeUser_'.$idUser,
+            $profileUser = $beCache->load(
+                'activeUser_'.$idUser,
+                function () use ($beCache, $idUser) {
+                    return $beCache->save(
+                        'activeUser_'.$idUser,
                         $this->getActualUserFromDb(),
-                        [Cache::EXPIRE => '20 minutes']);
-            });
+                        [Cache::EXPIRE => '20 minutes']
+                    );
+                }
+            );
 
             $this->template->profileUser = $profileUser;
         }
@@ -454,8 +495,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     private function getOtherWebsites()
     {
         $dao           = $this->em->getRepository(OtherWebsite::class);
-        $otherWebsites = $dao->findBy(['groupLine' => NULL],
-            ['orderLine' => 'ASC']);
+        $otherWebsites = $dao->findBy(
+            ['groupLine' => null],
+            ['orderLine' => 'ASC']
+        );
         unset($dao);
 
         $c = 0;
@@ -476,13 +519,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         $otherWebsitesGroupDao = $this->em->getRepository(App\OtherWebsiteGroup::class);
-        $otherWebsitesGroup    = $otherWebsitesGroupDao->findBy([],
-            ['orderLine' => 'ASC']);
+        $otherWebsitesGroup    = $otherWebsitesGroupDao->findBy(
+            [],
+            ['orderLine' => 'ASC']
+        );
 
         foreach ($otherWebsitesGroup as $otherWebsitesGroupOne) {
             $dao            = $this->em->getRepository(OtherWebsite::class);
-            $otherWebsitesB = $dao->findBy(['groupLine' => $otherWebsitesGroupOne->id],
-                ['orderLine' => 'ASC']);
+            $otherWebsitesB = $dao->findBy(
+                ['groupLine' => $otherWebsitesGroupOne->id],
+                ['orderLine' => 'ASC']
+            );
             unset($dao);
 
             $handleOtherWB              = [];
@@ -507,8 +554,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         $menu      = [];
         $beMenuDao = $this->em->getRepository(App\BEMenu::class);
-        $beMenu    = $beMenuDao->findBy(['parent' => NULL],
-            ['orderLine' => 'ASC']);
+        $beMenu    = $beMenuDao->findBy(
+            ['parent' => null],
+            ['orderLine' => 'ASC']
+        );
 
         // TODO: recursive - be careful - cycle!
 
@@ -524,8 +573,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
             // Find childs
             $beSubmenuDao = $this->em->getRepository(App\BEMenu::class);
-            $beSubmenu    = $beSubmenuDao->findBy(['parent' => $beMenuOne->id],
-                ['orderLine' => 'ASC']);
+            $beSubmenu    = $beSubmenuDao->findBy(
+                ['parent' => $beMenuOne->id],
+                ['orderLine' => 'ASC']
+            );
 
             $menuHandle['childs'] = $beSubmenu;
 
@@ -547,16 +598,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 throw new \Exception('You do not have sufficient permissions.');
             }
         } catch (\Exception $e) {
-
             if (is_array($role)) {
-                $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním ('.implode(' / ',
-                        $role).').');
+                $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním ('.implode(
+                    ' / ',
+                    $role
+                ).').');
             } else {
                 $this->flashMessage('Pro vstup do této sekce musíte být přihlášen/a s příslušným oprávněním ('.$role.').');
             }
 
-            $this->redirect('Sign:in',
-                ['backSignInUrl' => $this->getHttpRequest()->url->path]);
+            $this->redirect(
+                'Sign:in',
+                ['backSignInUrl' => $this->getHttpRequest()->url->path]
+            );
         }
     }
 
@@ -570,11 +624,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $ok = $this->permissionsRole($roleOne);
 
             if ($ok) {
-                return TRUE;
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -584,7 +638,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     private function permissionsRole($role)
     {
-        return ($this->user->isInRole($role)) ? TRUE : FALSE;
+        return ($this->user->isInRole($role)) ? true : false;
     }
 
     /**
@@ -603,8 +657,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             return $permissions[0];
         }
 
-        return (object) ['section' => (string) $section, 'allowRead' => FALSE, 'allowWrite' => FALSE,
-                'allowDelete' => FALSE];
+        return (object) ['section' => (string) $section, 'allowRead' => false, 'allowWrite' => false,
+                'allowDelete' => false];
     }
 
     /**
@@ -612,7 +666,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     protected function notYetImplemented()
     {
-        $this->flashMessage('POZOR! Tato funkce ještě není zcela implementována!',
-            'danger');
+        $this->flashMessage(
+            'POZOR! Tato funkce ještě není zcela implementována!',
+            'danger'
+        );
     }
 }

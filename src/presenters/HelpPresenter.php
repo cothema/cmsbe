@@ -7,18 +7,19 @@ namespace App\Presenters;
  * @Secured\User(loggedIn)
  * @Secured\Role(admin)
  * @author     Milos Havlicek <miloshavlicek@gmail.com>
- * 
+ *
  * Help Presenter
  */
-final class HelpPresenter extends BasePresenter {
+final class HelpPresenter extends BasePresenter
+{
 
-	public function renderDefault() {
+    public function renderDefault()
+    {
 
-		$navbar = [];
-		$navbar[] = (object) ['name' => 'Pomoc'];
+        $navbar = [];
+        $navbar[] = (object) ['name' => 'Pomoc'];
 
-		$this->template->navbar = $navbar;
-		$this->template->yourIp = $_SERVER['REMOTE_ADDR'];
-	}
-
+        $this->template->navbar = $navbar;
+        $this->template->yourIp = $_SERVER['REMOTE_ADDR'];
+    }
 }

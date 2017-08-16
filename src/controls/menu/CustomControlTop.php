@@ -2,10 +2,12 @@
 
 namespace DK\Menu\UI;
 
-class CustomTopControl extends Control {
+class CustomTopControl extends Control
+{
 
 }
 
-interface ICustomTopControlFactory extends IControlFactory {
+interface ICustomTopControlFactory extends IControlFactory
+{
 
 }

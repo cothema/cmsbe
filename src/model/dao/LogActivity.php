@@ -10,23 +10,23 @@ use Kdyby\Doctrine\Entities;
  * @ORM\Entity
  * @ORM\Table(name="log_activity")
  */
-class LogActivity extends StandardEntity {
+class LogActivity extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $user;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $user;
 
-	/**
-	 * @ORM\Column(name="time_from",type="datetime")
-	 */
-	public $timeFrom;
+    /**
+     * @ORM\Column(name="time_from",type="datetime")
+     */
+    public $timeFrom;
 
-	/**
-	 * @ORM\Column(name="time_to",type="datetime")
-	 */
-	public $timeTo;
-
+    /**
+     * @ORM\Column(name="time_to",type="datetime")
+     */
+    public $timeTo;
 }

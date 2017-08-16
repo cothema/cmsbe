@@ -10,33 +10,33 @@ use Kdyby\Doctrine\Entities;
  * @ORM\Entity
  * @ORM\Table(name="sys_pinned")
  */
-class Pinned extends StandardEntity {
+class Pinned extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	public $user;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $user;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $page;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $page;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $title;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $title;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $description;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $description;
 
-	/**
-	 * @ORM\Column(name="faIcon", type="text")
-	 */
-	public $faIcon;
-
+    /**
+     * @ORM\Column(name="faIcon", type="text")
+     */
+    public $faIcon;
 }

@@ -16,14 +16,16 @@ class RouterFactory
      */
     public function createRouter()
     {
-        !defined('SECURED') && define('SECURED', FALSE);
+        !defined('SECURED') && define('SECURED', false);
         $sslForce     = (SECURED && !LOCALHOST && !DEV_MODE);
         $scheme       = $sslForce ? 'https://' : '//';
         $urlFirstPart = $scheme.'%host%/%basePath%/';
 
         $router   = new RouteList();
-        $router[] = new Route($urlFirstPart.'<locale=cz>/<presenter>/<action>[/<id>]',
-            'Homepage:default');
+        $router[] = new Route(
+            $urlFirstPart.'<locale=cz>/<presenter>/<action>[/<id>]',
+            'Homepage:default'
+        );
         return $router;
     }
 }

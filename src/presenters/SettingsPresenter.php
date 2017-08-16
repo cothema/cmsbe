@@ -10,7 +10,7 @@ use Nette\Application\UI\Form;
  * @Secured\User(loggedIn)
  * @Secured\Role(superadmin)
  * @author     Milos Havlicek <miloshavlicek@gmail.com>
- * 
+ *
  * Settings Presenter
  */
 final class SettingsPresenter extends BasePresenter
@@ -40,8 +40,11 @@ final class SettingsPresenter extends BasePresenter
             ->setDefaultValue($res->company)
             ->getControlPrototype()
             ->class("form-control mediumwidth");
-        $form->addSelect('systype', 'Druh aplikace',
-                ['webapp' => 'Webové stránky', 'is' => 'Informační systém'])
+        $form->addSelect(
+            'systype',
+            'Druh aplikace',
+            ['webapp' => 'Webové stránky', 'is' => 'Informační systém']
+        )
             ->setDefaultValue($res->systype)
             ->getControlPrototype()
             ->class("form-control mediumwidth");
@@ -82,8 +85,10 @@ final class SettingsPresenter extends BasePresenter
         $this->em->persist($settings);
         $this->em->flush();
 
-        $this->flashMessage('Základní informace byly úspěšně uloženy.',
-            'success');
+        $this->flashMessage(
+            'Základní informace byly úspěšně uloženy.',
+            'success'
+        );
         $this->redirect('this');
     }
 }

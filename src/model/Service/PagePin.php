@@ -8,78 +8,83 @@ use App\BEMenu;
 /**
  * @author     Miloš Havlíček <miloshavlicek@gmail.com>
  */
-class PagePin extends \Nette\Object {
+class PagePin extends \Nette\Object
+{
 
-	private $em;
-	private $presenter;
+    private $em;
+    private $presenter;
 
-	/**
-	 *
-	 * @param object $presenter
-	 * @param \Kdyby\Doctrine\EntityManager $em
-	 */
-	public function __construct(& $presenter, \Kdyby\Doctrine\EntityManager $em) {
-		$this->presenter = $presenter;
-		$this->em = $em;
-	}
+    /**
+     *
+     * @param object $presenter
+     * @param \Kdyby\Doctrine\EntityManager $em
+     */
+    public function __construct(& $presenter, \Kdyby\Doctrine\EntityManager $em)
+    {
+        $this->presenter = $presenter;
+        $this->em = $em;
+    }
 
-	/**
-	 *
-	 * @return array
-	 */
-	public function pinIt() {
-		$pinned = new Pinned($this, $this->em);
-		$pinned->user = $this->presenter->user->id;
-		$pinned->page = $this->presenter->getAction(TRUE);
+    /**
+     *
+     * @return array
+     */
+    public function pinIt()
+    {
+        $pinned = new Pinned($this, $this->em);
+        $pinned->user = $this->presenter->user->id;
+        $pinned->page = $this->presenter->getAction(true);
 
-		$dao = $this->em->getRepository(BEMenu::class);
-		$menuItem = $dao->findBy(['nLink' => $this->presenter->getName() . ':' . $this->presenter->action]);
+        $dao = $this->em->getRepository(BEMenu::class);
+        $menuItem = $dao->findBy(['nLink' => $this->presenter->getName() . ':' . $this->presenter->action]);
 
-		$pinnedPageName = '';
-		if (isset($menuItem[0])) {
-			$pinnedPageName = $pinned->title = $menuItem[0]->name;
-			$pinned->faIcon = $menuItem[0]->faIcon;
-		}
+        $pinnedPageName = '';
+        if (isset($menuItem[0])) {
+            $pinnedPageName = $pinned->title = $menuItem[0]->name;
+            $pinned->faIcon = $menuItem[0]->faIcon;
+        }
 
-		$this->em->persist($pinned);
-		$this->em->flush();
+        $this->em->persist($pinned);
+        $this->em->flush();
 
-		return ['title' => $pinnedPageName];
-	}
+        return ['title' => $pinnedPageName];
+    }
 
-	/**
-	 * return void
-	 */
-	public function unpinIt() {
-		$pinnedDao = $this->em->getRepository(Pinned::class);
-		$pinned = $pinnedDao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
+    /**
+     * return void
+     */
+    public function unpinIt()
+    {
+        $pinnedDao = $this->em->getRepository(Pinned::class);
+        $pinned = $pinnedDao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(true)]);
 
-		foreach ($pinned as $pinnedOne) {
-			$this->em->remove($pinnedOne);
-		}
+        foreach ($pinned as $pinnedOne) {
+            $this->em->remove($pinnedOne);
+        }
 
-		$this->em->flush();
-	}
+        $this->em->flush();
+    }
 
-	/**
-	 *
-	 * @return boolean
-	 */
-	public function isPinned() {
-		$dao = $this->em->getRepository(Pinned::class);
-		$pinned = $dao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(TRUE)]);
+    /**
+     *
+     * @return boolean
+     */
+    public function isPinned()
+    {
+        $dao = $this->em->getRepository(Pinned::class);
+        $pinned = $dao->findBy(['user' => $this->presenter->user->id, 'page' => $this->presenter->getAction(true)]);
 
-		return isset($pinned[0]) ? TRUE : FALSE;
-	}
+        return isset($pinned[0]) ? true : false;
+    }
 
-	/**
-	 *
-	 * @return boolean
-	 */
-	public function isPinable() {
-		$params = $this->presenter->request->getParameters();
+    /**
+     *
+     * @return boolean
+     */
+    public function isPinable()
+    {
+        $params = $this->presenter->request->getParameters();
 
-		return ($this->presenter->getName() !== 'Homepage' && empty($params['id'])) ? TRUE : FALSE;
-	}
-
+        return ($this->presenter->getName() !== 'Homepage' && empty($params['id'])) ? true : false;
+    }
 }

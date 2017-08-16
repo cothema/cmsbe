@@ -37,8 +37,11 @@ final class CustomPresenter extends BasePresenter
             $custUser    = $custUserDao->findBy(['custom' => $customsOne->id, 'user' => $this->getUser()->id]);
 
             if ($customsOne->type == 'yn') {
-                $formIt = $form->addSelect('CUV'.$customsOne->alias,
-                    $customsOne->name.':', [1 => 'Ano', 0 => 'Ne']);
+                $formIt = $form->addSelect(
+                    'CUV'.$customsOne->alias,
+                    $customsOne->name.':',
+                    [1 => 'Ano', 0 => 'Ne']
+                );
             } else {
                 $formIt->addText('CUV'.$customsOne->alias, $customsOne->name.':');
             }
@@ -64,13 +67,14 @@ final class CustomPresenter extends BasePresenter
         $values = $form->getValues(true);
 
         foreach ($values as $valuesKey => $valuesOne) {
-
             $prefix = 'CUV';
 
             if ($this->startsWith($valuesKey, $prefix)) {
                 $customsOneDao = $this->em->getRepository(Admin\Custom::class);
-                $customsOne    = $customsOneDao->findBy(['alias' => substr($valuesKey,
-                        strlen($prefix))]);
+                $customsOne    = $customsOneDao->findBy(['alias' => substr(
+                    $valuesKey,
+                    strlen($prefix)
+                )]);
 
                 if (!isset($customsOne[0])) {
                     throw new \Exception('ID of user customization is not set!');
@@ -103,8 +107,10 @@ final class CustomPresenter extends BasePresenter
 
         $this->em->flush();
 
-        $this->flashMessage('Uživatelské nastavení bylo úspěšně uloženo.',
-            'success');
+        $this->flashMessage(
+            'Uživatelské nastavení bylo úspěšně uloženo.',
+            'success'
+        );
         $this->redirect('this');
     }
 

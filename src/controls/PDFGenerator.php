@@ -7,87 +7,98 @@ namespace Cothema\CMSBE\Service;
  *
  * @author Miloš Havlíček <miloshavlicek@gmail.com>
  */
-class PDFGenerator extends \Nette\Object {
+class PDFGenerator extends \Nette\Object
+{
 
-	/** @var \Kdyby\Doctrine\EntityManager @inject */
-	public $em;
+    /** @var \Kdyby\Doctrine\EntityManager @inject */
+    public $em;
 
-	/** @var \Latte\Engine	Template engine */
-	protected $template;
+    /** @var \Latte\Engine  Template engine */
+    protected $template;
 
-	/** @var \DOMPDF	DOMPDF object */
-	protected $domPDF = NULL;
+    /** @var \DOMPDF    DOMPDF object */
+    protected $domPDF = null;
 
-	/** @var array	List of images used for template creation */
-	protected $images = [];
+    /** @var array  List of images used for template creation */
+    protected $images = [];
 
-	/** @var string	String with HTML code for export to PDF */
-	protected $html = '';
+    /** @var string String with HTML code for export to PDF */
+    protected $html = '';
 
-	public function __construct() {
-		$this->prepareDomPDF();
-	}
+    public function __construct()
+    {
+        $this->prepareDomPDF();
+    }
 
-	public function download($fileName) {
-		return $this->getStream($fileName);
-	}
+    public function download($fileName)
+    {
+        return $this->getStream($fileName);
+    }
 
-	public function getHTML() {
-		if (empty($this->template)) {
-			throw new \Exception('Template is not defined!');
-		}
+    public function getHTML()
+    {
+        if (empty($this->template)) {
+            throw new \Exception('Template is not defined!');
+        }
 
-		return (string) $this->template;
-	}
+        return (string) $this->template;
+    }
 
-	public function getPDF() {
-		return $this->getDomPDF(TRUE)->output();
-	}
+    public function getPDF()
+    {
+        return $this->getDomPDF(true)->output();
+    }
 
-	public function setTemplate($template, $file) {
-		$template->setFile($file);
+    public function setTemplate($template, $file)
+    {
+        $template->setFile($file);
 
-		$this->template = $template;
-	}
+        $this->template = $template;
+    }
 
-	public function setImages($images) {
-		$this->images = $images;
-	}
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
 
-	private function getDomPDF($refresh = FALSE) {
-		if ($refresh) {
-			$this->loadHtml();
-		}
+    private function getDomPDF($refresh = false)
+    {
+        if ($refresh) {
+            $this->loadHtml();
+        }
 
-		$this->domPDF->render();
+        $this->domPDF->render();
 
-		return $this->domPDF;
-	}
+        return $this->domPDF;
+    }
 
-	private function loadHtml() {
-		$this->domPDF->load_html($this->getHTML());
-	}
+    private function loadHtml()
+    {
+        $this->domPDF->load_html($this->getHTML());
+    }
 
-	private function getStream($filename) {
-		return $this->getDomPDF(TRUE)->stream($filename);
-	}
+    private function getStream($filename)
+    {
+        return $this->getDomPDF(true)->stream($filename);
+    }
 
-	private function prepareDomPDF() {
-		if ($this->domPDF === null) {
-			$this->initializeDomPDF();
-		}
+    private function prepareDomPDF()
+    {
+        if ($this->domPDF === null) {
+            $this->initializeDomPDF();
+        }
 
-		$this->domPDF->set_paper('a4', 'portrait');
-	}
+        $this->domPDF->set_paper('a4', 'portrait');
+    }
 
-	private function initializeDomPDF() {
-		require_once DIR_VENDOR . '/dompdf/dompdf/dompdf_config.inc.php';
+    private function initializeDomPDF()
+    {
+        require_once DIR_VENDOR . '/dompdf/dompdf/dompdf_config.inc.php';
 
-		if (!defined('DOMPDF_UNICODE_ENABLED')) {
-			define('DOMPDF_UNICODE_ENABLED', TRUE);
-		}
+        if (!defined('DOMPDF_UNICODE_ENABLED')) {
+            define('DOMPDF_UNICODE_ENABLED', true);
+        }
 
-		$this->domPDF = new \DOMPDF;
-	}
-
+        $this->domPDF = new \DOMPDF;
+    }
 }

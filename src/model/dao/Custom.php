@@ -9,28 +9,28 @@ use Kdyby\Doctrine\Entities;
 /**
  * @ORM\Entity
  */
-class Custom extends StandardEntity {
+class Custom extends StandardEntity
+{
 
-	use Entities\Attributes\Identifier;
+    use Entities\Attributes\Identifier;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $name;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $name;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $alias;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $alias;
 
-	/**
-	 * @ORM\Column(type="text")
-	 */
-	public $type;
+    /**
+     * @ORM\Column(type="text")
+     */
+    public $type;
 
-	/**
-	 * @ORM\Column(name="def_val",type="text")
-	 */
-	public $defVal;
-
+    /**
+     * @ORM\Column(name="def_val",type="text")
+     */
+    public $defVal;
 }

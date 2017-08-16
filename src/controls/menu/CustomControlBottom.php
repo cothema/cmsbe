@@ -2,10 +2,12 @@
 
 namespace DK\Menu\UI;
 
-class CustomBottomControl extends Control {
+class CustomBottomControl extends Control
+{
 
 }
 
-interface ICustomBottomControlFactory extends IControlFactory {
+interface ICustomBottomControlFactory extends IControlFactory
+{
 
 }
