@@ -547,10 +547,30 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     }
 
     /**
+     * @param null|string $link
+     * @return bool
+     */
+    private function linkCheck(?string $link): bool {
+        $ok = true;
+        try {
+            empty($link) || $this->getPresenter()->createRequest($this, $link, [], 'link');
+        } catch (\Exception $e) {
+            if (DEV_MODE) {
+                $this->flashMessage(sprintf('%s: %s', 'linkCheck', $e->getMessage()), 'warning');
+            } else {
+                // TODO: log and send notification
+            }
+
+            $ok = false;
+        }
+        return $ok;
+    }
+
+    /**
      *
      * @return array
      */
-    private function getBEMenuItems()
+    private function getBEMenuItems(): array
     {
         $menu      = [];
         $beMenuDao = $this->em->getRepository(App\BEMenu::class);
@@ -564,8 +584,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         foreach ($beMenu as $beMenuOne) {
             $menuHandle              = [];
             $menuHandle['id']        = $beMenuOne->id;
-            $menuHandle['nLink']     = $beMenuOne->nLink;
-            $menuHandle['name']      = $beMenuOne->name;
+
+            $name = $beMenuOne->name;
+            if($this->linkCheck($beMenuOne->nLink)) {
+                $menuHandle['nLink'] = $beMenuOne->nLink;
+            } else {
+                $menuHandle['nLink'] = null;
+                $name .= ' X';
+            }
+            $menuHandle['name']      = $name;
             $menuHandle['orderLine'] = $beMenuOne->orderLine;
             $menuHandle['parent']    = $beMenuOne->parent;
             $menuHandle['module']    = $beMenuOne->module;
@@ -578,17 +605,28 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 ['orderLine' => 'ASC']
             );
 
-            $menuHandle['childs'] = $beSubmenu;
+            $beMenuChilds = [];
+
+            foreach($beSubmenu as $beSubmenuOne) {
+                if (!$this->linkCheck($beSubmenuOne->nLink)) {
+                    $beSubmenuOne->nLink = null;
+                    $beSubmenuOne->name .= ' X';
+                }
+
+                $beMenuChilds[] = $beSubmenuOne;
+            }
+
+            $menuHandle['childs'] = $beMenuChilds;
 
             $menu[] = (object) $menuHandle;
         }
 
         return $menu;
     }
+
     /*
      * @param mixed $role if array = OR (one of)
      */
-
     protected function permissions($role)
     {
         try {

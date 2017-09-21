@@ -12,7 +12,7 @@ if (!defined('DIR_ROOT')) {
 !defined('DIR_TEMP') && define('DIR_TEMP', DIR_ROOT . '/temp');
 !defined('DIR_LOG') && define('DIR_LOG', DIR_ROOT . '/log');
 !defined('LOCALHOST') && define('LOCALHOST', (isset($_SERVER['REMOTE_ADDR']) && !in_array($_SERVER['REMOTE_ADDR'], ['::1', '127.0.0.1'])) ? false : true);
-!defined('DEV_MODE') && define('DEV_MODE', is_file(DIR_CONFIG . '/DEV_MODE'));
+!defined('DEV_MODE') && define('DEV_MODE', is_file(DIR_CONFIG . '/DEV_MODE') || LOCALHOST);
 
 // CURL constants
 !defined('CURLOPT_CONNECTTIMEOUT') && define('CURLOPT_CONNECTTIMEOUT', '300');

@@ -20,9 +20,26 @@ final class HomepagePresenter extends BasePresenter
         $this->template->pins = $this->getAllPins();
     }
 
-    private function getAllPins()
+    private function getAllPins(): array
     {
-        $pinnedDao = $this->em->getRepository(Pinned::class);
-        return $pinnedDao->findBy(['user' => $this->user->id]);
+        $dao = $this->em->getRepository(Pinned::class);
+        $pinned = $dao->findBy(['user' => $this->user->id]);
+
+        $out = [];
+        foreach ($pinned as $pinnedOne) {
+            try {
+                $this->getPresenter()->createRequest($this, $pinnedOne->page, [], 'link');
+
+                $out[] = $pinnedOne;
+            } catch (\Exception $e) {
+                if (DEV_MODE) {
+                    $this->flashMessage(sprintf('%s: %s', 'getAllPins', $e->getMessage()), 'warning');
+                } else {
+                    // TODO: log and send notification
+                }
+            }
+        }
+
+        return $out;
     }
 }
