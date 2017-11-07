@@ -6,7 +6,7 @@ general:
     help: 'Nápověda'
     about_app: 'O aplikaci'
     homepage: 'Hlavní panel'
-    go_to_website: 'Přejít na web'
+    go_to_website: 'Web'
     login: 'Přihlášení'
     custom_settings: 'Přizpůsobení'
     actual_page: 'Aktuální stránka'

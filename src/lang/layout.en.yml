@@ -6,7 +6,7 @@ general:
     help: 'Help'
     about_app: 'About application'
     homepage: 'Homepage'
-    go_to_website: 'Go to website'
+    go_to_website: 'Website'
     login: 'Log in'
     custom_settings: 'Custom settings'
     actual_page: 'Actual page'

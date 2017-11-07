@@ -6,7 +6,7 @@ general:
     help: 'Helpen'
     about_app: 'Over de toepassing'
     homepage: 'Homepage'
-    go_to_website: 'Ga naar de website'
+    go_to_website: 'Website'
     login: 'Log in'
     custom_settings: 'Aangepaste instellingen'
     actual_page: 'Werkelijke pagina'
