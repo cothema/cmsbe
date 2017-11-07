@@ -35,7 +35,7 @@
         "ipub/gravatar": "@dev",
         "ipub/permissions": "*@stable",
         "Carrooi/Nette-Menu": "1.*@stable",
-        "doctrine/orm": "2.5.6@stable"
+        "doctrine/orm": ">=2.5.6@stable"
     },
     "require-dev": {
         "nette/tester": "1.*"
