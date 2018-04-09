@@ -4,22 +4,27 @@ namespace Cothema\CMSBE\Service;
 
 use App\ORM\Sys\Pinned;
 use App\BEMenu;
+use Doctrine\ORM\EntityManagerInterface;
+use Nette;
 
 /**
  * @author     Miloš Havlíček <miloshavlicek@gmail.com>
  */
-class PagePin extends \Nette\Object
+class PagePin
 {
 
+    /** @var EntityManagerInterface */
     private $em;
     private $presenter;
+
+    use Nette\SmartObject;
 
     /**
      *
      * @param object $presenter
-     * @param \Kdyby\Doctrine\EntityManager $em
+     * @param EntityManagerInterface $em
      */
-    public function __construct(& $presenter, \Kdyby\Doctrine\EntityManager $em)
+    public function __construct($presenter, EntityManagerInterface $em)
     {
         $this->presenter = $presenter;
         $this->em = $em;

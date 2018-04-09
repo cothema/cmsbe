@@ -46,15 +46,15 @@ if (DEV_MODE === true) {
     $configurator->setDebugMode($debugIPs);
 }
 
-$configurator->enableDebugger(DIR_ROOT . '/log', isset($debugMail) ? $debugMail : null);
+$configurator->enableDebugger(DIR_ROOT . '/var/log', isset($debugMail) ? $debugMail : null);
 
-$configurator->setTempDirectory(DIR_ROOT . '/temp');
+$configurator->setTempDirectory(DIR_ROOT . '/var/temp');
 
 if (!isset($robotLoaderDirs)) {
     $robotLoaderDirs = [];
 }
 $robotLoaderDirs[] = DIR_VENDOR . '/cothema/';
-$robotLoaderDirs[] = DIR_ROOT . '/app/';
+$robotLoaderDirs[] = DIR_ROOT . '/src/';
 
 $robotLoader = $configurator->createRobotLoader();
 
@@ -65,8 +65,8 @@ foreach ($robotLoaderDirs as $robotLoaderDirsOne) {
 $robotLoader->register();
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-is_file(DIR_ROOT . '/app/config/config.neon') && $configurator->addConfig(DIR_ROOT . '/app/config/config.neon');
-$configurator->addConfig(DIR_ROOT . '/app/config/config.local.neon');
+$configurator->addConfig(DIR_ROOT . '/config/config.neon');
+$configurator->addConfig(DIR_ROOT . '/config/config.local.neon');
 
 $container = $configurator->createContainer();
 

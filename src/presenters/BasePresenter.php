@@ -415,7 +415,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->template->actualUser = null;
         }
 
-        $cacheStorage = new CacheFileStorage(DIR_ROOT.'/temp/cache');
+        $cacheStorage = new CacheFileStorage(DIR_ROOT.'/var/temp/cache');
         $beCache      = new Cache($cacheStorage, 'Cothema.BE');
 
         $webinfo = $beCache->load(

@@ -9,8 +9,10 @@ use Nette\Utils\Strings;
  *
  * Users management.
  */
-class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
+class UserManager implements Nette\Security\IAuthenticator
 {
+
+    use Nette\SmartObject;
 
     const
             TABLE_NAME = 'users',

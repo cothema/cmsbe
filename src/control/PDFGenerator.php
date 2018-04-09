@@ -2,13 +2,17 @@
 
 namespace Cothema\CMSBE\Service;
 
+use Nette\SmartObject;
+
 /**
  * PDF Generator service - Wrapper for dompdf/dompdf
  *
  * @author Miloš Havlíček <miloshavlicek@gmail.com>
  */
-class PDFGenerator extends \Nette\Object
+class PDFGenerator
 {
+
+    use SmartObject;
 
     /** @var \Kdyby\Doctrine\EntityManager @inject */
     public $em;
@@ -17,7 +21,7 @@ class PDFGenerator extends \Nette\Object
     protected $template;
 
     /** @var \DOMPDF    DOMPDF object */
-    protected $domPDF = null;
+    protected $domPDF;
 
     /** @var array  List of images used for template creation */
     protected $images = [];
@@ -28,58 +32,6 @@ class PDFGenerator extends \Nette\Object
     public function __construct()
     {
         $this->prepareDomPDF();
-    }
-
-    public function download($fileName)
-    {
-        return $this->getStream($fileName);
-    }
-
-    public function getHTML()
-    {
-        if (empty($this->template)) {
-            throw new \Exception('Template is not defined!');
-        }
-
-        return (string) $this->template;
-    }
-
-    public function getPDF()
-    {
-        return $this->getDomPDF(true)->output();
-    }
-
-    public function setTemplate($template, $file)
-    {
-        $template->setFile($file);
-
-        $this->template = $template;
-    }
-
-    public function setImages($images)
-    {
-        $this->images = $images;
-    }
-
-    private function getDomPDF($refresh = false)
-    {
-        if ($refresh) {
-            $this->loadHtml();
-        }
-
-        $this->domPDF->render();
-
-        return $this->domPDF;
-    }
-
-    private function loadHtml()
-    {
-        $this->domPDF->load_html($this->getHTML());
-    }
-
-    private function getStream($filename)
-    {
-        return $this->getDomPDF(true)->stream($filename);
     }
 
     private function prepareDomPDF()
@@ -100,5 +52,57 @@ class PDFGenerator extends \Nette\Object
         }
 
         $this->domPDF = new \DOMPDF;
+    }
+
+    public function download(string $fileName)
+    {
+        return $this->getStream($fileName);
+    }
+
+    private function getStream($filename)
+    {
+        return $this->getDomPDF(true)->stream($filename);
+    }
+
+    private function getDomPDF($refresh = false)
+    {
+        if ($refresh) {
+            $this->loadHtml();
+        }
+
+        $this->domPDF->render();
+
+        return $this->domPDF;
+    }
+
+    private function loadHtml()
+    {
+        $this->domPDF->load_html($this->getHTML());
+    }
+
+    public function getHTML(): string
+    {
+        if (empty($this->template)) {
+            throw new \Exception('Template is not defined!');
+        }
+
+        return (string)$this->template;
+    }
+
+    public function getPDF()
+    {
+        return $this->getDomPDF(true)->output();
+    }
+
+    public function setTemplate($template, $file)
+    {
+        $template->setFile($file);
+
+        $this->template = $template;
+    }
+
+    public function setImages($images)
+    {
+        $this->images = $images;
     }
 }
