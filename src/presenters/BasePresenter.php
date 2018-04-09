@@ -371,10 +371,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
         $this->template->nameday = $this->getActualNameday();
 
-        if ($this->user->isLoggedIn()) {
-            Admin\LogActivityRepository::logActivity($this->em, $this->user->id);
-        }
-
         if (($this->getPresenter()->name == 'Sign' && $this->getAction() == 'in')
             || ($this->getPresenter()->name == 'AboutWebapp')) {
         } else {
