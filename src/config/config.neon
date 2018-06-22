@@ -41,16 +41,9 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     translation: Cothema\CMSBE\Translation\TranslationExtension
-    facebook: Kdyby\Facebook\DI\FacebookExtension
 
 includes:
-	- ./menu.neon
-
-facebook:
-    appId: "1234567890" # you have to change this key
-    appSecret: "e807f1fcf82d132f9bb018ca6738a19f" # you have to change this key
-    permissions: [public_profile, email]
-    graphVersion: v2.1
+    - ./menu.neon
 
 gravatar:
     defaultImage: mm
