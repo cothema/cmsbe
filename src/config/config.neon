@@ -25,7 +25,7 @@ doctrine:
     dbname: %database.database%
     metadata:
         App: '%appDir%/../../cmsbe/src/model'
-        Cothema: '%appDir%/../../cmsbe-user/src/model'
+        Cothema: '%appDir%/../../cmsbe/src/model'
 
 services:
     - App\UserManager
