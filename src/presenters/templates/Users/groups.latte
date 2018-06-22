@@ -1,0 +1,41 @@
+{* Latte template *}
+
+{block content}
+
+<h1 n:block=title><span class="fa fa-users"></span> Skupiny uživatelů</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Zkratka
+            </th>
+            <th>
+                Název
+            </th>
+            <th>
+                Popis oprávnění
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$userGroups as $userGroupsOne">
+            <td>
+                {$userGroupsOne->id}
+            </td>
+            <td>
+                {$userGroupsOne->abbrev}
+            </td>
+            <td>
+                {$userGroupsOne->fullname}
+            </td>
+            <td>
+                {$userGroupsOne->introd}
+            </td>
+        </tr>
+    </tbody>
+
+</table>

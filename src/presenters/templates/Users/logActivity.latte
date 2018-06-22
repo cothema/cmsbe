@@ -1,0 +1,26 @@
+{block content}
+
+<h1 n:block=title><span class="fa fa-eye"></span> Sledování přihlášení</h1>
+
+<div class="well">
+    Zobrazuje se pouze posledních 30 aktivit.
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Uživatel</th>
+            <th>Délka aktivity</th>
+            <th>Aktivita do</th>
+            <th>Aktivita do</th>
+        </tr>
+    </thead>
+    <tr n:foreach="$activity as $activityOne">
+        <td>{$activityOne->id}</td>
+        <td>{if $activityOne->user}<a n:href="Users:profile id => $activityOne->user->id"><span class="fa fa-user"></span> <b>{$activityOne->user->fullName}</b></a>{/if}</td>
+        <td><span class="fa fa-clock-o"></span> <b>{$activityOne->duration} hod.</b></td>
+        <td><span class="fa fa-play"></span> {$activityOne->timeFrom|date:'j. n. Y H:i:s'}</td>
+        <td><span class="fa fa-stop"></span> {$activityOne->timeTo|date:'j. n. Y H:i:s'}</td>
+    </tr>
+</table>

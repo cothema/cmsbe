@@ -1,0 +1,22 @@
+{block content}
+
+<h1 n:block=title><span class="fa fa-user"></span> Neaktivní uživatelé</h1>
+
+<a n:href="list" class="btn btn-info"><span class="fa fa-search"></span> Aktivní uživatelé</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Jméno</th>
+            <th>Email</th>
+            <th width="300"></th>
+        </tr>
+    </thead>
+    <tr n:foreach="$users as $usersOne">
+        <td>{$usersOne->id}</td>
+        <td><a n:href="Users:profile id => $usersOne->id"><span class="fa fa-user"></span> <b>{$usersOne->fullName}</b></a></td>
+        <td>{if $usersOne->email}<span class="fa fa-envelope"></span> <a href="mailto:{$usersOne->email}">{$usersOne->email}</a>{else}<i>neuvedeno</i>{/if}</td>
+        <td>{if $usersOne->id===$user->id || $user->isInRole('usermanager')}<a n:href="change id => $usersOne->id" class="btn btn-warning"><span class="fa fa-edit"></span> Upravit údaje</a> <a n:href="active! id => $usersOne->id" class="btn btn-success"><span class="fa fa-check"></span> Aktivovat</a>{/if}</td>
+    </tr>
+</table>

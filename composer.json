@@ -20,7 +20,6 @@
     "require": {
         "php": ">=7.1",
         "cothema/admin-lte": "*@dev",
-        "cothema/cmsbe-user": "@dev",
         "nette/nette": ">=2.4.0@stable",
         "kdyby/doctrine": ">=3.0.1",
         "kdyby/translation": "dev-master@dev",
@@ -39,8 +38,5 @@
     },
     "require-dev": {
         "nette/tester": "1.*"
-    },
-    "suggest": {
-        "cothema/cmsbe-updater": "Install CMSBE Updater for easy installation and maintenence of additional packages."
     }
 }
