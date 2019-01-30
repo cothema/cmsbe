@@ -36,12 +36,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var \Nette\Mail\IMailer @inject */
     public $mailer;
 
-    /** @var \DK\Menu\UI\ICustomTopControlFactory @inject */
-    public $menuLeftTopFactory;
-
-    /** @var \DK\Menu\UI\ICustomBottomControlFactory @inject */
-    public $menuLeftBottomFactory;
-
     /** @var \Kdyby\Translation\Translator @inject */
     public $translator;
 
@@ -237,22 +231,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function createComponentJsNetteForms()
     {
         return $this->jsComponentWrapper(['netteForms.js']);
-    }
-
-    /**
-     * @return \DK\Menu\UI\Control
-     */
-    protected function createComponentMenuLeftTop()
-    {
-        return $this->menuLeftTopFactory->create();
-    }
-
-    /**
-     * @return \DK\Menu\UI\Control
-     */
-    protected function createComponentMenuLeftBottom()
-    {
-        return $this->menuLeftBottomFactory->create();
     }
 
     /**

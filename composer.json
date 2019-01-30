@@ -20,7 +20,7 @@
     "require": {
         "php": ">=7.1",
         "cothema/admin-lte": "*@dev",
-        "nette/application": ">=2.4.0@stable",
+        "nette/nette": ">=2.4.0@stable",
         "kdyby/doctrine": ">=3.0.1",
         "kdyby/translation": "dev-master@dev",
         "mobiledetect/mobiledetectlib": ">=2.7.8@stable",
@@ -33,7 +33,6 @@
         "symfony/property-access": ">=2.6.0@stable",
         "ipub/gravatar": "@dev",
         "ipub/permissions": "*@stable",
-        "Carrooi/Nette-Menu": "1.*@stable",
         "doctrine/orm": ">=2.5.6@stable"
     },
     "require-dev": {
